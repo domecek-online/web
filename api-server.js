@@ -7,8 +7,8 @@ const authConfig = require("./src/auth_config.json");
 
 const app = express();
 
-const port = process.env.API_PORT || 4001;
-const appPort = process.env.SERVER_PORT || 4000;
+const port = 4001;
+const appPort = 4000;
 const appOrigin = authConfig.appOrigin || `http://localhost:${appPort}`;
 
 if (
