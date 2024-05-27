@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import logo from "../assets/logo.svg";
 
 import {
   Collapse,
@@ -41,7 +42,9 @@ const NavBar = () => {
     <div className="nav-container">
       <Navbar color="light" light expand="md" container={false}>
         <Container>
-          <NavbarBrand className="logo" />
+          <NavbarBrand href="/" className="brand-logo">
+            <img src={logo} width="64"/>
+          </NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
@@ -59,11 +62,11 @@ const NavBar = () => {
                 <NavItem>
                   <NavLink
                     tag={RouterNavLink}
-                    to="/external-api"
+                    to="/homes"
                     exact
                     activeClassName="router-link-exact-active"
                   >
-                    External API
+                    Moje domy
                   </NavLink>
                 </NavItem>
               )}
@@ -149,7 +152,7 @@ const NavBar = () => {
                     to="/profile"
                     activeClassName="router-link-exact-active"
                   >
-                    Profile
+                    Profil
                   </RouterNavLink>
                 </NavItem>
                 <NavItem>
@@ -159,7 +162,7 @@ const NavBar = () => {
                     id="qsLogoutBtn"
                     onClick={() => logoutWithRedirect()}
                   >
-                    Log out
+                    Odhlásit
                   </RouterNavLink>
                 </NavItem>
               </Nav>

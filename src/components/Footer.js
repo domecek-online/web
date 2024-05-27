@@ -1,10 +1,11 @@
 import React from "react";
+import logo from "../assets/logo.svg";
 
 const Footer = () => (
   <footer className="bg-light p-3 text-center">
-    <div className="logo" />
+    <img className="mb-3" src={logo} alt="Domecek.online logo" width="128" />
     <p>
-      Sample project provided by <a href="https://auth0.com">Auth0</a>
+      Domecek.online by Jan Kaluža
     </p>
   </footer>
 );

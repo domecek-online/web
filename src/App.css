@@ -33,3 +33,8 @@
 .result-block-container .result-block {
   opacity: 1;
 }
+
+.brand-logo {
+  display: inline-flex !important;
+  width: 64px;
+}

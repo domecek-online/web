@@ -1,27 +1,23 @@
 const contentData = [
   {
-    title: "Configure other identity providers",
-    link: "https://auth0.com/docs/connections",
+    title: "1. Registrace a přihlášení",
     description:
-      "Auth0 supports social providers as Facebook, Twitter, Instagram and 100+, Enterprise providers as Microsoft Office 365, Google Apps, Azure, and more. You can also use any OAuth2 Authorization Server."
+      "Po registraci a přihlášení můžete přidat nový Loxone Miniserver a nastavit v Loxone Configue odesílání dat na Domeček.online."
   },
   {
-    title: "Enable Multifactor Authentication",
-    link: "https://auth0.com/docs/multifactor-authentication",
+    title: "2. Statistiky v nástroji Grafana",
     description:
-      "Add an extra layer of security by enabling Multi-factor Authentication, requiring your users to provide more than one piece of identifying information. Push notifications, authenticator apps, SMS, and DUO Security are supported."
+      "Jakmile začne Váš Loxone Miniserver posílat data na Domeček.online, budete v Grafaně vidět veškeré dostupné informace. Budete moci vytvářet nové grafy a sdílet je s rodinnou nebo přáteli."
   },
   {
-    title: "Anomaly Detection",
-    link: "https://auth0.com/docs/anomaly-detection",
+    title: "3. Pravidelná hlášení a statistiky",
     description:
-      "Auth0 can detect anomalies and stop malicious attempts to access your application. Anomaly detection can alert you and your users of suspicious activity, as well as block further login attempts."
+      "Na Domeček.online lze také nastavit pravidelná hlášení o různých událostech a datech ve Vašem domě."
   },
   {
-    title: "Learn About Rules",
-    link: "https://auth0.com/docs/rules",
+    title: "4. Upozornení",
     description:
-      "Rules are JavaScript functions that execute when a user authenticates to your application. They run once the authentication process is complete, and you can use them to customize and extend Auth0's capabilities."
+      "Pokud některá z měřených hodnot dosáhne mezní hranice, lze zasílat upozornění různými komunikačními kanály."
   }
 ];
 
