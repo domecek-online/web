@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const { auth } = require("express-oauth2-jwt-bearer");
 const authConfig = require("./src/auth_config.json");
+const apiConfig = require("./api_config.json")
 const bodyParser = require('body-parser')
 const sqlite3 = require('sqlite3').verbose();
 const { exec } = require('child_process');
@@ -61,7 +62,7 @@ app.post("/api/1/homes", checkJwt, jsonParser, (req, res) => {
     return;
   }
 
-  var cmd = `influx bucket create --json -o grafana --name '${home_name}' --token ${authConfig.influx_token}`;
+  var cmd = `influx bucket create --json -o grafana --name '${home_name}' --token ${apiConfig.influx_token}`;
   exec(cmd, (err, stdout, stderr) => {
     if (err) {
       console.error(err);
@@ -70,7 +71,7 @@ app.post("/api/1/homes", checkJwt, jsonParser, (req, res) => {
     var data = JSON.parse(stdout);
     bucket_id = data.id;
 
-    cmd = `influx auth create --json -o grafana --read-bucket ${bucket_id} -d '${home_name}' --token ${authConfig.influx_token}`;
+    cmd = `influx auth create --json -o grafana --read-bucket ${bucket_id} -d '${home_name}' --token ${apiConfig.influx_token}`;
     exec(cmd, (err, stdout, stderr) => {
       if (err) {
         console.error(err);
@@ -111,14 +112,14 @@ app.delete("/api/1/homes/:home_name", checkJwt, jsonParser, (req, res) => {
       return
     }
 
-    var cmd = `influx bucket delete --json --id ${row.bucket_id} --token ${authConfig.influx_token}`;
+    var cmd = `influx bucket delete --json --id ${row.bucket_id} --token ${apiConfig.influx_token}`;
     exec(cmd, (err, stdout, stderr) => {
       if (err) {
         console.error(err);
         return;
       }
 
-      cmd = `influx auth delete --json -i ${row.bucket_auth_id} --token ${authConfig.influx_token}`;
+      cmd = `influx auth delete --json -i ${row.bucket_auth_id} --token ${apiConfig.influx_token}`;
       exec(cmd, (err, stdout, stderr) => {
 
         if (err) {
