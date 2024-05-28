@@ -28,8 +28,9 @@ class LoxoneContent extends Component {
           </p>
           <img className="rounded mx-auto d-block" src={loxone_2} width="800" />
           <p>
-            Nastavte adresu Loggeru v jeho Vlastnostech na <i>/dev/udp/89.221.219.92/2222</i>.
+            Nastavte adresu Loggeru v jeho Vlastnostech na <i>/dev/udp/domecek.online/2222</i>.
           </p>
+          <img className="rounded mx-auto d-block" src={loxone_3} width="480" />
         <h3 className="my-5 text-center">Výběr dat zasílaných na Domeček.online</h3>
           <p>
             Loxone posílá na Domeček.online pouze data z objektů, kterým nastavíte Logger vytvořený v předchozí sekci tohoto dokumentu. Můžete si tedy vybrat, jaká data chcete s Domeček.online sdílet.
@@ -37,7 +38,7 @@ class LoxoneContent extends Component {
           <p>
             Nejprve vyberte objekt, jehož data chcete posílat na Domeček.online a v jeho Vlastnostech najděte sekci Logger.
           </p>
-          <img className="rounded mx-auto d-block" src={loxone_3} width="480" />
+
           <p>
             Jako Logger vyberte Logger vytvořený v první části tohoto dokumentu. Pole "Zpráva při zapnutí/změně analogové hodnoty" a "Zpráva při vypnutí" nastavte následovně:
           </p>
