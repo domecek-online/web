@@ -11,6 +11,8 @@ export const HomesComponent = () => {
   const [name, setName] = useState("");
   const [homes, setHomes] = useState([])
   const [loading, setLoading] = useState(false)
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const [state, setState] = useState({
     showResult: false,
@@ -100,7 +102,11 @@ export const HomesComponent = () => {
           Authorization: `Bearer ${token}`,
           'Content-type': 'application/json',
         },
-        body: JSON.stringify({'name': name})
+        body: JSON.stringify({
+          'name': name,
+          'grafana_username': username,
+          'grafana_password': password
+        })
       });
 
       const responseData = await response.json();
@@ -230,22 +236,50 @@ export const HomesComponent = () => {
       <br/>
                 <h1>Přidat nový dům</h1>
                 <p>Povolené znaky jsou pouze malá a velká písmena, čísla, mezera a podtržítko.</p>
-      <form onSubmit={handleSubmit}>
-        <label>Jméno domu:
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
-          <Button
-            color="primary"
-            className="mt-5"
-            type="submit"
-          >
-            Přidat nový dům
-          </Button>
-      </form>
+
+
+              <form onSubmit={handleSubmit}>
+                <div class="form-group">
+                  <label>Jméno domu:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Jméno domu"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                  <small class="form-text text-muted">Toto jméno pak můžete sdílet s ostatními uživateli. Povolené znaky jsou pouze malá a velká písmena, čísla, mezera a podtržítko.</small>
+                </div>
+                <div class="form-group">
+                  <label>Uživatelské jméno do nástroje Grafana:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Uživatelské jméno"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                  <small class="form-text text-muted">Pomocí tohoto uživatelského jména se přihlásíte do administrace nástroje Grafana, kde uvidíte statistiky Vašeho domu</small>
+                </div>
+                <div class="form-group">
+                  <label>Uživatelské heslo do nástroje Grafana:</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Uživatelské Heslo"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <small class="form-text text-muted">Pomocí tohoto hesla se přihlásíte do administrace nástroje Grafana, kde uvidíte statistiky Vašeho domu.</small>
+                </div>
+                    <Button
+                    color="primary"
+                    className="mt-5"
+                    type="submit"
+                  >
+                    Přidat nový dům
+                  </Button>
+              </form>
 
 
 

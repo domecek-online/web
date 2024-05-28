@@ -7,8 +7,9 @@ const authConfig = require("./src/auth_config.json");
 const apiConfig = require("./api_config.json")
 const bodyParser = require('body-parser')
 const sqlite3 = require('sqlite3').verbose();
-const { exec } = require('child_process');
+const { execSync } = require('child_process');
 const crypto = require("crypto");
+var needle = require('needle');
 
 
 const app = express();
@@ -48,13 +49,31 @@ const checkJwt = auth({
   algorithms: ["RS256"],
 });
 
+function exec(cmd, res) {
+    try {
+      stdout = execSync(cmd);
+      return stdout;
+    }
+    catch (err){
+      console.log("output", err);
+      console.log("stderr",err.stderr.toString());
+      if (res) {
+        res.send('Internal server error');
+      }
+      return "";
+    }
+}
+
 app.post("/api/1/homes", checkJwt, jsonParser, (req, res) => {
   var username = req.auth.payload.sub;
   var home_name = req.body.name;
+  var grafana_username = req.body.grafana_username;
+  var grafana_password = req.body.grafana_password;
   var bucket_id = "";
   var bucket_token = "";
   var loxone_token = crypto.randomBytes(10).toString("base64url");
 
+  // Enable only letters, numbers, underscore and white-space.
   const regex = /^[\p{Letter}\p{Mark}0-9 _]*$/gu;
   const found = home_name.match(regex);
   if (!found) {
@@ -62,37 +81,93 @@ app.post("/api/1/homes", checkJwt, jsonParser, (req, res) => {
     return;
   }
 
-  var cmd = `influx bucket create --json -o grafana --name '${home_name}' --token ${apiConfig.influx_token}`;
-  exec(cmd, (err, stdout, stderr) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
-    var data = JSON.parse(stdout);
-    bucket_id = data.id;
+  // Create InfluxDB Bucket.
+  stdout = exec(
+    `influx bucket create --json -o grafana --name '${home_name}' --token ${apiConfig.influx_token}`,
+    res
+  );
+  if (!stdout) {
+    return;
+  }
+  var data = JSON.parse(stdout);
+  bucket_id = data.id;
 
-    cmd = `influx auth create --json -o grafana --read-bucket ${bucket_id} -d '${home_name}' --token ${apiConfig.influx_token}`;
-    exec(cmd, (err, stdout, stderr) => {
-      if (err) {
-        console.error(err);
-        res.send('Internal server error');
-        return;
-      }
-      var data = JSON.parse(stdout);
-      bucket_token = data.token;
-      bucket_auth_id = data.id
+  // Create InfluxDB auth token for reading the bucket.
+  stdout = exec(
+    `influx auth create --json -o grafana --read-bucket ${bucket_id} -d '${home_name}' --token ${apiConfig.influx_token}`,
+    res
+  );
+  if (!stdout) {
+    return;
+  }
+  var data = JSON.parse(stdout);
+  bucket_token = data.token;
+  bucket_auth_id = data.id
 
-      const sql = 'INSERT INTO homes(username, name, bucket_id, bucket_token, bucket_auth_id, loxone_token) VALUES (?, ?, ?, ?, ?, ?)';
-      db.run(sql, [username, home_name, bucket_id, bucket_token, bucket_auth_id, loxone_token], function(err) {
-        if (err) {
-          console.error(err.message);
-          res.send('Internal server error');
-          return;
+  // Create Grafana organization.
+  var options = {
+    json: true,
+    username: apiConfig.grafana_username,
+    password: apiConfig.grafana_password
+  }
+  needle.post('http://dum.kaluzovi.eu/api/orgs/', { name: home_name}, options, function(err, resp) {
+    console.log(err);
+    console.log(resp.body);
+    var orgId = resp.body.orgId;
+    var data = {
+      name: grafana_username,
+      email: grafana_username,
+      login: grafana_username,
+      password: grafana_password,
+      OrgId: orgId
+    };
+    needle.post('http://dum.kaluzovi.eu/api/admin/users', data, options, function(err, resp) {
+      console.log(err);
+      console.log(resp.body);
+      var userId = resp.body.id;
+      var data = {
+        loginOrEmail: grafana_username,
+        role: "Editor"
+      };
+      needle.post(`http://dum.kaluzovi.eu/api/orgs/${orgId}/users`, data, options, function(err, resp) {
+        console.log(err);
+        console.log(resp.body);
+
+        options.headers = {"X-Grafana-Org-Id": orgId};
+        var data = {
+          orgId: orgId,
+          name: `InfluxDB ${home_name}`,
+          type: "influxdb",
+          access: "proxy",
+          url: "http://localhost:8086",
+          jsonData: {
+            version: "Flux",
+            organization: "grafana",
+            defaultBucket: home_name,
+            tlsSkipVerify: true
+          },
+          secureJsonData: {
+            token: bucket_token
+          }
         }
-        res.send({
-          msg: "Home created.",
+        console.log(orgId);
+        needle.post(`http://dum.kaluzovi.eu/api/datasources`, data, options, function(err, resp) {
+          console.log(err);
+          console.log(resp.body);
         });
       });
+    });
+  });
+
+  const sql = 'INSERT INTO homes(username, name, bucket_id, bucket_token, bucket_auth_id, loxone_token) VALUES (?, ?, ?, ?, ?, ?)';
+  db.run(sql, [username, home_name, bucket_id, bucket_token, bucket_auth_id, loxone_token], function(err) {
+    if (err) {
+      console.error(err.message);
+      res.send('Internal server error');
+      return;
+    }
+    res.send({
+      msg: "Home created.",
     });
   });
 });
@@ -112,38 +187,27 @@ app.delete("/api/1/homes/:home_name", checkJwt, jsonParser, (req, res) => {
       return
     }
 
-    var cmd = `influx bucket delete --json --id ${row.bucket_id} --token ${apiConfig.influx_token}`;
-    exec(cmd, (err, stdout, stderr) => {
+    exec(
+      `influx bucket delete --json --id ${row.bucket_id} --token ${apiConfig.influx_token}`,
+      null
+    );
+    exec(
+      `influx auth delete --json -i ${row.bucket_auth_id} --token ${apiConfig.influx_token}`,
+      null
+    );
+
+    const sql = 'DELETE FROM homes WHERE name = ? AND username = ?';
+    db.run(sql, [home_name, username], function(err) {
       if (err) {
-        console.error(err);
+        console.error(err.message);
+        res.send('Internal server error');
         return;
       }
-
-      cmd = `influx auth delete --json -i ${row.bucket_auth_id} --token ${apiConfig.influx_token}`;
-      exec(cmd, (err, stdout, stderr) => {
-
-        if (err) {
-          console.error(err);
-          return;
-        }
-
-        const sql = 'DELETE FROM homes WHERE name = ? AND username = ?';
-        db.run(sql, [home_name, username], function(err) {
-          if (err) {
-            console.error(err.message);
-            res.send('Internal server error');
-            return;
-          }
-          res.send({
-            msg: "Home removed.",
-          });
-        });
+      res.send({
+        msg: "Home removed.",
       });
     });
-
   });
-
-
 });
 
 
