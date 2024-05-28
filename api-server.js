@@ -133,6 +133,14 @@ app.post("/api/1/homes", checkJwt, jsonParser, (req, res) => {
         console.log(err);
         console.log(resp.body);
 
+        var data = {
+          "role": "Editor"
+        }
+        needle.patch(`http://dum.kaluzovi.eu/api/orgs/${orgId}/users/${userId}`, data, options, function(err, resp) {
+          console.log(err);
+          console.log(resp.body);
+        });
+
         options.headers = {"X-Grafana-Org-Id": orgId};
         var data = {
           orgId: orgId,
