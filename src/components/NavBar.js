@@ -70,6 +70,18 @@ const NavBar = () => {
                   </NavLink>
                 </NavItem>
               )}
+              {isAuthenticated && (
+                <NavItem>
+                  <NavLink
+                    tag={RouterNavLink}
+                    to="/loxone"
+                    exact
+                    activeClassName="router-link-exact-active"
+                  >
+                    Konfigurace Loxone
+                  </NavLink>
+                </NavItem>
+              )}
             </Nav>
             <Nav className="d-none d-md-block" navbar>
               {!isAuthenticated && (

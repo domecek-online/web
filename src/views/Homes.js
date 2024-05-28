@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Alert } from "reactstrap";
 import Highlight from "../components/Highlight";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
@@ -7,6 +7,10 @@ import Loading from "../components/Loading";
 
 export const HomesComponent = () => {
   const { apiOrigin, audience } = getConfig();
+
+  const [name, setName] = useState("");
+  const [homes, setHomes] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const [state, setState] = useState({
     showResult: false,
@@ -18,6 +22,7 @@ export const HomesComponent = () => {
     getAccessTokenSilently,
     loginWithPopup,
     getAccessTokenWithPopup,
+    user
   } = useAuth0();
 
   const handleConsent = async () => {
@@ -84,6 +89,82 @@ export const HomesComponent = () => {
     fn();
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const token = await getAccessTokenSilently();
+
+      const response = await fetch(`${apiOrigin}/api/1/homes`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({'name': name})
+      });
+
+      const responseData = await response.json();
+
+      fetchHomes();
+    } catch (error) {
+      setState({
+        ...state,
+        error: error.error,
+      });
+    }
+  }
+
+  const removeHome = async (home_name) => {
+    try {
+      setLoading(true);
+      const token = await getAccessTokenSilently();
+
+      const response = await fetch(`${apiOrigin}/api/1/homes/${home_name}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const responseData = await response.json();
+
+      fetchHomes();
+    } catch (error) {
+      setState({
+        ...state,
+        error: error.error,
+      });
+    }
+  }
+
+  const fetchHomes = async () => {
+    try {
+      setLoading(true);
+      const token = await getAccessTokenSilently();
+
+      const response = await fetch(`${apiOrigin}/api/1/homes_by_username/${user.sub}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const responseData = await response.json();
+
+      setHomes(responseData)
+      setLoading(false);
+    } catch (error) {
+      setState({
+        ...state,
+        error: error.error,
+      });
+    }
+  }
+
+  useEffect(() => {
+    fetchHomes();
+  }, [])
+
   return (
     <>
       <div className="mb-5">
@@ -118,25 +199,59 @@ export const HomesComponent = () => {
           Zde můžete spravovat své domy zaregistrované na Domeček.online.
         </p>
 
-        <Button
-          color="primary"
-          className="mt-5"
-          onClick={callApi}
-        >
-          Ping API
-        </Button>
+      {loading ? (
+        <div>Nahrávám...</div>
+      ) : (
+        <>
+          <table border={1}>
+            <tr>
+              <th>Jméno domu</th>
+              <th>Loxone token</th>
+              <th>Odstranit</th>
+            </tr>
+            {homes.map(home => (
+              <tr key={home.id}>
+                <td>{home.name}</td>
+                <td>{home.loxone_token}</td>
+                <td>
+                  <Button
+                    color="primary"
+                    type="submit"
+                    onClick={() => removeHome(home.name)}
+                  >
+                    Odstranit
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </table>
+        </>
+      )}
+      <br/>
+                <h1>Přidat nový dům</h1>
+                <p>Povolené znaky jsou pouze malá a velká písmena, čísla, mezera a podtržítko.</p>
+      <form onSubmit={handleSubmit}>
+        <label>Jméno domu:
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
+          <Button
+            color="primary"
+            className="mt-5"
+            type="submit"
+          >
+            Přidat nový dům
+          </Button>
+      </form>
+
+
+
       </div>
 
-      <div className="result-block-container">
-        {state.showResult && (
-          <div className="result-block" data-testid="api-result">
-            <h6 className="muted">Result</h6>
-            <Highlight>
-              <span>{JSON.stringify(state.apiMessage, null, 2)}</span>
-            </Highlight>
-          </div>
-        )}
-      </div>
+
     </>
   );
 };
