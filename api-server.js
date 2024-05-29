@@ -109,7 +109,7 @@ app.post("/api/1/homes", checkJwt, jsonParser, (req, res) => {
     json: true,
     username: apiConfig.grafana_username,
     password: apiConfig.grafana_password,
-    rejectUnauthorized: False
+    rejectUnauthorized: false
   }
   needle.post('https://grafana.domecek.online/api/orgs/', { name: home_name}, options, function(err, resp) {
     console.log(err);
