@@ -50,16 +50,23 @@ const checkJwt = auth({
   algorithms: ["RS256"],
 });
 
-function exec(cmd, res) {
+function influx_api(cmd, res) {
     try {
       stdout = execSync(cmd);
       return stdout;
     }
     catch (err){
       console.log("output", err);
-      console.log("stderr",err.stderr.toString());
-      if (res) {
-        res.send('Internal server error');
+      console.log("stderr", err.stderr.toString());
+      if (!res) {
+        return ""
+      }
+
+      if (err.stderr.toString().includes("already exists")) {
+        res.send({msg: 'Dům s tímto jménem již existuje. Zvolte jiné jméno.'});
+      }
+      else {
+        res.send({msg: 'Internal server error'});
       }
       return "";
     }
@@ -93,12 +100,12 @@ app.post("/api/1/homes", checkJwt, jsonParser, async (req, res) => {
   const regex = /^[\p{Letter}\p{Mark}0-9 _]*$/gu;
   const found = home_name.match(regex);
   if (!found) {
-    res.send('Povolené znaky jsou pouze malá a velká písmena, čísla, mezera a podtržítko.');
+    res.send({msg:'Povolené znaky pro Jméno domu jsou pouze malá a velká písmena, čísla, mezera a podtržítko.'});
     return;
   }
 
   // Create InfluxDB Bucket.
-  stdout = exec(
+  stdout = influx_api(
     `influx bucket create --json -o grafana --name '${home_name}' --token ${apiConfig.influx_token}`,
     res
   );
@@ -109,7 +116,7 @@ app.post("/api/1/homes", checkJwt, jsonParser, async (req, res) => {
   bucket_id = data.id;
 
   // Create InfluxDB auth token for reading the bucket.
-  stdout = exec(
+  stdout = influx_api(
     `influx auth create --json -o grafana --read-bucket ${bucket_id} -d '${home_name}' --token ${apiConfig.influx_token}`,
     res
   );
@@ -122,6 +129,17 @@ app.post("/api/1/homes", checkJwt, jsonParser, async (req, res) => {
 
   // Create Grafana organization.
   var resp = await grafana_api('post', '/api/orgs/', {name: home_name});
+  if (resp.body.message == "Organization name taken") {
+    influx_api(
+      `influx bucket delete --json --id ${bucket_id} --token ${apiConfig.influx_token}`,
+      null
+    );
+    influx_api(
+      `influx auth delete --json -i ${bucket_auth_id} --token ${apiConfig.influx_token}`,
+      null
+    );
+  res.send({msg:'Dům s tímto jménem již existuje. Zvolte jiné jméno.'});
+  }
   var orgId = resp.body.orgId;
 
   // Create Grafana user.
@@ -133,6 +151,32 @@ app.post("/api/1/homes", checkJwt, jsonParser, async (req, res) => {
     OrgId: orgId
   };
   var resp = await grafana_api('post', `/api/admin/users`, data);
+  if (resp.body.message == "Password is missing or too short") {
+      influx_api(
+        `influx bucket delete --json --id ${bucket_id} --token ${apiConfig.influx_token}`,
+        null
+      );
+      influx_api(
+        `influx auth delete --json -i ${bucket_auth_id} --token ${apiConfig.influx_token}`,
+        null
+      );
+      await grafana_api('delete', `/api/orgs/${orgId}`);
+    res.send({msg:'Heslo je příliš krátké.'});
+    return;
+  }
+  else if (resp.body.message.includes("already exists")) {
+      influx_api(
+        `influx bucket delete --json --id ${bucket_id} --token ${apiConfig.influx_token}`,
+        null
+      );
+      influx_api(
+        `influx auth delete --json -i ${bucket_auth_id} --token ${apiConfig.influx_token}`,
+        null
+      );
+      await grafana_api('delete', `/api/orgs/${orgId}`);
+    res.send({msg:'Uživatel s tímto jménem již existuje. Zvolte jiné Uživatelské jméno.'});
+    return;
+  }
   var userId = resp.body.id;
 
   // Add Grafana user to organization.
@@ -179,7 +223,7 @@ app.post("/api/1/homes", checkJwt, jsonParser, async (req, res) => {
       return;
     }
     res.send({
-      msg: "Home created.",
+      msg: "",
     });
   });
 });
@@ -199,11 +243,11 @@ app.delete("/api/1/homes/:home_name", checkJwt, jsonParser, async (req, res) => 
       return
     }
 
-    exec(
+    influx_api(
       `influx bucket delete --json --id ${row.bucket_id} --token ${apiConfig.influx_token}`,
       null
     );
-    exec(
+    influx_api(
       `influx auth delete --json -i ${row.bucket_auth_id} --token ${apiConfig.influx_token}`,
       null
     );

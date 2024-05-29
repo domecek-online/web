@@ -13,6 +13,7 @@ export const HomesComponent = () => {
   const [loading, setLoading] = useState(false)
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const [state, setState] = useState({
     showResult: false,
@@ -110,6 +111,7 @@ export const HomesComponent = () => {
       });
 
       const responseData = await response.json();
+      setMessage(responseData.msg)
 
       fetchHomes();
     } catch (error) {
@@ -277,6 +279,15 @@ export const HomesComponent = () => {
                   />
                   <small class="form-text text-muted">Pomocí tohoto hesla se přihlásíte do administrace nástroje Grafana, kde uvidíte statistiky Vašeho domu.</small>
                 </div>
+
+                {!message ? (
+                  <div></div>
+                ): (
+                  <div class="alert alert-danger" role="alert">
+                  {message}
+                  </div>
+                )}
+
                     <Button
                     color="primary"
                     className="mt-5"
