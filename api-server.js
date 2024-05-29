@@ -65,6 +65,21 @@ function exec(cmd, res) {
     }
 }
 
+async function grafana_api(method, api, data=null, orgId=null) {
+  var options = {
+    json: true,
+    username: apiConfig.grafana_username,
+    password: apiConfig.grafana_password,
+    rejectUnauthorized: false
+  }
+  if (orgId) {
+    options.headers = {"X-Grafana-Org-Id": orgId};
+  }
+  var resp = await needle(method, `${grafana_url}${api}`, data, options);
+  console.log(resp.body);
+  return resp;
+}
+
 app.post("/api/1/homes", checkJwt, jsonParser, async (req, res) => {
   var username = req.auth.payload.sub;
   var home_name = req.body.name;
@@ -106,14 +121,7 @@ app.post("/api/1/homes", checkJwt, jsonParser, async (req, res) => {
   bucket_auth_id = data.id
 
   // Create Grafana organization.
-  var options = {
-    json: true,
-    username: apiConfig.grafana_username,
-    password: apiConfig.grafana_password,
-    rejectUnauthorized: false
-  }
-  var resp = await needle('post', `${grafana_url}/api/orgs/`, { name: home_name}, options);
-  console.log(resp.body);
+  var resp = await grafana_api('post', '/api/orgs/', {name: home_name});
   var orgId = resp.body.orgId;
 
   // Create Grafana user.
@@ -124,8 +132,7 @@ app.post("/api/1/homes", checkJwt, jsonParser, async (req, res) => {
     password: grafana_password,
     OrgId: orgId
   };
-  var resp = await needle('post', `${grafana_url}/api/admin/users`, data, options);
-  console.log(resp.body);
+  var resp = await grafana_api('post', `/api/admin/users`, data);
   var userId = resp.body.id;
 
   // Add Grafana user to organization.
@@ -133,19 +140,17 @@ app.post("/api/1/homes", checkJwt, jsonParser, async (req, res) => {
     loginOrEmail: grafana_username,
     role: "Editor"
   };
-  var resp = await needle('post', `${grafana_url}/api/orgs/${orgId}/users`, data, options);
-  console.log(resp.body);
+  var resp = await grafana_api('post', `/api/orgs/${orgId}/users`, data);
 
   // Set user's role to Editor. This in theory should not be needed,
   // but there is probably some bug in Grafana's user creation API.
   var data = {
     "role": "Editor"
   }
-  await needle('patch', `${grafana_url}/api/orgs/${orgId}/users/${userId}`, data, options);
+  var resp = await grafana_api('patch', `/api/orgs/${orgId}/users/${userId}`, data);
   console.log(resp.body);
 
   // Create influxdb Grafana datasource in the organization.
-  options.headers = {"X-Grafana-Org-Id": orgId};
   var data = {
     orgId: orgId,
     name: `InfluxDB ${home_name}`,
@@ -162,12 +167,12 @@ app.post("/api/1/homes", checkJwt, jsonParser, async (req, res) => {
       token: bucket_token
     }
   }
-  var resp = await needle('post', `https://grafana.domecek.online/api/datasources`, data, options);
+  var resp = await grafana_api('post', `/api/datasources`, data, orgId);
   console.log(resp.body);
 
   // Insert all the data to database.
-  const sql = 'INSERT INTO homes(username, name, bucket_id, bucket_token, bucket_auth_id, loxone_token, grafana_org_id) VALUES (?, ?, ?, ?, ?, ?, ?)';
-  db.run(sql, [username, home_name, bucket_id, bucket_token, bucket_auth_id, loxone_token, orgId], function(err) {
+  const sql = 'INSERT INTO homes(username, name, bucket_id, bucket_token, bucket_auth_id, loxone_token, grafana_org_id, grafana_user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+  db.run(sql, [username, home_name, bucket_id, bucket_token, bucket_auth_id, loxone_token, orgId, userId], function(err) {
     if (err) {
       console.error(err.message);
       res.send('Internal server error');
@@ -180,11 +185,11 @@ app.post("/api/1/homes", checkJwt, jsonParser, async (req, res) => {
 });
 
 
-app.delete("/api/1/homes/:home_name", checkJwt, jsonParser, (req, res) => {
+app.delete("/api/1/homes/:home_name", checkJwt, jsonParser, async (req, res) => {
   var username = req.auth.payload.sub;
   const { home_name } = req.params;
 
-  db.get('SELECT * FROM homes WHERE name = ? AND username = ?', [home_name, username], (err, row) => {
+  db.get('SELECT * FROM homes WHERE name = ? AND username = ?', [home_name, username], async (err, row) => {
     if (err) {
       console.error(err.message);
       res.status(500).send('Internal server error');
@@ -202,6 +207,9 @@ app.delete("/api/1/homes/:home_name", checkJwt, jsonParser, (req, res) => {
       `influx auth delete --json -i ${row.bucket_auth_id} --token ${apiConfig.influx_token}`,
       null
     );
+
+    await grafana_api('delete', `/api/admin/users/${row.grafana_user_id}`);
+    await grafana_api('delete', `/api/orgs/${row.grafana_org_id}`);
 
     const sql = 'DELETE FROM homes WHERE name = ? AND username = ?';
     db.run(sql, [home_name, username], function(err) {
