@@ -11,6 +11,7 @@ const { execSync } = require('child_process');
 const crypto = require("crypto");
 var needle = require('needle');
 
+const grafana_url = 'https://grafana.domecek.online'
 
 const app = express();
 
@@ -64,7 +65,7 @@ function exec(cmd, res) {
     }
 }
 
-app.post("/api/1/homes", checkJwt, jsonParser, (req, res) => {
+app.post("/api/1/homes", checkJwt, jsonParser, async (req, res) => {
   var username = req.auth.payload.sub;
   var home_name = req.body.name;
   var grafana_username = req.body.grafana_username;
@@ -111,65 +112,62 @@ app.post("/api/1/homes", checkJwt, jsonParser, (req, res) => {
     password: apiConfig.grafana_password,
     rejectUnauthorized: false
   }
-  needle.post('https://grafana.domecek.online/api/orgs/', { name: home_name}, options, function(err, resp) {
-    console.log(err);
-    console.log(resp.body);
-    var orgId = resp.body.orgId;
-    var data = {
-      name: grafana_username,
-      email: grafana_username,
-      login: grafana_username,
-      password: grafana_password,
-      OrgId: orgId
-    };
-    needle.post('https://grafana.domecek.online/api/admin/users', data, options, function(err, resp) {
-      console.log(err);
-      console.log(resp.body);
-      var userId = resp.body.id;
-      var data = {
-        loginOrEmail: grafana_username,
-        role: "Editor"
-      };
-      needle.post(`https://grafana.domecek.online/api/orgs/${orgId}/users`, data, options, function(err, resp) {
-        console.log(err);
-        console.log(resp.body);
+  var resp = await needle('post', `${grafana_url}/api/orgs/`, { name: home_name}, options);
+  console.log(resp.body);
+  var orgId = resp.body.orgId;
 
-        var data = {
-          "role": "Editor"
-        }
-        needle.patch(`https://grafana.domecek.online/api/orgs/${orgId}/users/${userId}`, data, options, function(err, resp) {
-          console.log(err);
-          console.log(resp.body);
-        });
+  // Create Grafana user.
+  var data = {
+    name: grafana_username,
+    email: grafana_username,
+    login: grafana_username,
+    password: grafana_password,
+    OrgId: orgId
+  };
+  var resp = await needle('post', `${grafana_url}/api/admin/users`, data, options);
+  console.log(resp.body);
+  var userId = resp.body.id;
 
-        options.headers = {"X-Grafana-Org-Id": orgId};
-        var data = {
-          orgId: orgId,
-          name: `InfluxDB ${home_name}`,
-          type: "influxdb",
-          access: "proxy",
-          url: "http://localhost:8086",
-          jsonData: {
-            version: "Flux",
-            organization: "grafana",
-            defaultBucket: home_name,
-            tlsSkipVerify: true
-          },
-          secureJsonData: {
-            token: bucket_token
-          }
-        }
-        console.log(orgId);
-        needle.post(`https://grafana.domecek.online/api/datasources`, data, options, function(err, resp) {
-          console.log(err);
-          console.log(resp.body);
-        });
-      });
-    });
-  });
+  // Add Grafana user to organization.
+  var data = {
+    loginOrEmail: grafana_username,
+    role: "Editor"
+  };
+  var resp = await needle('post', `${grafana_url}/api/orgs/${orgId}/users`, data, options);
+  console.log(resp.body);
 
-  const sql = 'INSERT INTO homes(username, name, bucket_id, bucket_token, bucket_auth_id, loxone_token) VALUES (?, ?, ?, ?, ?, ?)';
-  db.run(sql, [username, home_name, bucket_id, bucket_token, bucket_auth_id, loxone_token], function(err) {
+  // Set user's role to Editor. This in theory should not be needed,
+  // but there is probably some bug in Grafana's user creation API.
+  var data = {
+    "role": "Editor"
+  }
+  await needle('patch', `${grafana_url}/api/orgs/${orgId}/users/${userId}`, data, options);
+  console.log(resp.body);
+
+  // Create influxdb Grafana datasource in the organization.
+  options.headers = {"X-Grafana-Org-Id": orgId};
+  var data = {
+    orgId: orgId,
+    name: `InfluxDB ${home_name}`,
+    type: "influxdb",
+    access: "proxy",
+    url: "http://localhost:8086",
+    jsonData: {
+      version: "Flux",
+      organization: "grafana",
+      defaultBucket: home_name,
+      tlsSkipVerify: true
+    },
+    secureJsonData: {
+      token: bucket_token
+    }
+  }
+  var resp = await needle('post', `https://grafana.domecek.online/api/datasources`, data, options);
+  console.log(resp.body);
+
+  // Insert all the data to database.
+  const sql = 'INSERT INTO homes(username, name, bucket_id, bucket_token, bucket_auth_id, loxone_token, grafana_org_id) VALUES (?, ?, ?, ?, ?, ?, ?)';
+  db.run(sql, [username, home_name, bucket_id, bucket_token, bucket_auth_id, loxone_token, orgId], function(err) {
     if (err) {
       console.error(err.message);
       res.send('Internal server error');

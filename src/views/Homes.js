@@ -208,30 +208,35 @@ export const HomesComponent = () => {
       {loading ? (
         <div>Nahrávám...</div>
       ) : (
-        <>
-          <table border={1}>
-            <tr>
-              <th>Jméno domu</th>
-              <th>Loxone token</th>
-              <th>Odstranit</th>
-            </tr>
-            {homes.map(home => (
-              <tr key={home.id}>
-                <td>{home.name}</td>
-                <td>{home.loxone_token}</td>
-                <td>
-                  <Button
-                    color="primary"
-                    type="submit"
-                    onClick={() => removeHome(home.name)}
-                  >
-                    Odstranit
-                  </Button>
-                </td>
+        homes.length == 0 ? (<div>Nemáte vytvořené žádné domy.</div>)
+        : (
+          <>
+            <table border={1}>
+              <tr>
+                <th>Jméno domu</th>
+                <th>Loxone token</th>
+                <th>Grafana</th>
+                <th>Odstranit</th>
               </tr>
-            ))}
-          </table>
-        </>
+              {homes.map(home => (
+                <tr key={home.id}>
+                  <td>{home.name}</td>
+                  <td>{home.loxone_token}</td>
+                  <td><a href={`https://grafana.domecek.online/?orgId=${home.grafana_org_id}`}>Otevřít Grafanu</a></td>
+                  <td>
+                    <Button
+                      color="primary"
+                      type="submit"
+                      onClick={() => removeHome(home.name)}
+                    >
+                      Odstranit
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </table>
+          </>
+        )
       )}
       <br/>
                 <h1>Přidat nový dům</h1>
