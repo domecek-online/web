@@ -110,7 +110,7 @@ app.post("/api/1/homes", checkJwt, jsonParser, (req, res) => {
     username: apiConfig.grafana_username,
     password: apiConfig.grafana_password
   }
-  needle.post('http://dum.kaluzovi.eu/api/orgs/', { name: home_name}, options, function(err, resp) {
+  needle.post('http://grafana.domecek.online/api/orgs/', { name: home_name}, options, function(err, resp) {
     console.log(err);
     console.log(resp.body);
     var orgId = resp.body.orgId;
@@ -121,7 +121,7 @@ app.post("/api/1/homes", checkJwt, jsonParser, (req, res) => {
       password: grafana_password,
       OrgId: orgId
     };
-    needle.post('http://dum.kaluzovi.eu/api/admin/users', data, options, function(err, resp) {
+    needle.post('http://grafana.domecek.online/api/admin/users', data, options, function(err, resp) {
       console.log(err);
       console.log(resp.body);
       var userId = resp.body.id;
@@ -129,14 +129,14 @@ app.post("/api/1/homes", checkJwt, jsonParser, (req, res) => {
         loginOrEmail: grafana_username,
         role: "Editor"
       };
-      needle.post(`http://dum.kaluzovi.eu/api/orgs/${orgId}/users`, data, options, function(err, resp) {
+      needle.post(`http://grafana.domecek.online/api/orgs/${orgId}/users`, data, options, function(err, resp) {
         console.log(err);
         console.log(resp.body);
 
         var data = {
           "role": "Editor"
         }
-        needle.patch(`http://dum.kaluzovi.eu/api/orgs/${orgId}/users/${userId}`, data, options, function(err, resp) {
+        needle.patch(`http://grafana.domecek.online/api/orgs/${orgId}/users/${userId}`, data, options, function(err, resp) {
           console.log(err);
           console.log(resp.body);
         });
@@ -159,7 +159,7 @@ app.post("/api/1/homes", checkJwt, jsonParser, (req, res) => {
           }
         }
         console.log(orgId);
-        needle.post(`http://dum.kaluzovi.eu/api/datasources`, data, options, function(err, resp) {
+        needle.post(`http://grafana.domecek.online/api/datasources`, data, options, function(err, resp) {
           console.log(err);
           console.log(resp.body);
         });
