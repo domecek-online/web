@@ -1,0 +1,1788 @@
+{
+  "_comment": "The code is the source of truth for English phrases. They should be updated in the components directly, and additional plurals specified in this file.",
+  "access-control": {
+    "add-permission": {
+      "role-label": "Role",
+      "serviceaccount-label": "Servisní účet",
+      "team-label": "Tým",
+      "title": "Přidat oprávnění pro",
+      "user-label": "Uživatel"
+    },
+    "add-permissions": {
+      "save": "Uložit"
+    },
+    "permission-list": {
+      "permission": "Oprávnění"
+    },
+    "permissions": {
+      "add-label": "Přidat oprávnění",
+      "no-permissions": "Neexistují žádná oprávnění",
+      "permissions-change-warning": "This will change permissions for this folder and all its descendants. In total, this will affect:",
+      "role": "Role",
+      "serviceaccount": "Servisní účet",
+      "team": "Tým",
+      "title": "Oprávnění",
+      "user": "Uživatel"
+    }
+  },
+  "annotations": {
+    "empty-state": {
+      "button-title": "Přidat anotaci",
+      "info-box-content": "<0>Annotations provide a way to integrate event data into your graphs. They are visualized as vertical lines and icons on all graph panels. When you hover over an annotation icon you can get event text & tags for the event. You can add annotation events directly from grafana by holding CTRL or CMD + click on graph (or drag region). These will be stored in Grafana's annotation database.</0>",
+      "info-box-content-2": "Checkout the <2>Annotations documentation</2> for more information.",
+      "title": "K dotazu zatím neexistují žádné anotace."
+    }
+  },
+  "api-keys": {
+    "empty-state": {
+      "message": "Neexistují žádné API klíče"
+    }
+  },
+  "bouncing-loader": {
+    "label": "Načítám"
+  },
+  "browse-dashboards": {
+    "action": {
+      "cancel-button": "Zrušit",
+      "cannot-move-folders": "Složky nemohou být přesunuty",
+      "delete-button": "Smazat",
+      "delete-modal-invalid-text": "Jedna nebo více složek obsahuje panely z knihovny nebo pravidla pro upozornění. Nejprve je smažte.",
+      "delete-modal-invalid-title": "Nemohu smazat složku",
+      "delete-modal-text": "Tato akce smaže následující obsah:",
+      "delete-modal-title": "Smazat",
+      "deleting": "Mažu...",
+      "manage-permissions-button": "Upravit oprávnění",
+      "move-button": "Přesunout",
+      "move-modal-alert": "Přesunutí této položky může změnit její oprávnění.",
+      "move-modal-field-label": "Jméno složky",
+      "move-modal-text": "Tato akce přesune následující obsah:",
+      "move-modal-title": "Přesunout",
+      "moving": "Přesouvám...",
+      "new-folder-name-required-phrase": "Jméno složky je vyžadováno."
+    },
+    "counts": {
+      "alertRule_one": "{{count}} pravidlo upozornění",
+      "alertRule_other": "{{count}} pravidla upozornění",
+      "dashboard_one": "{{count}} nástěnka",
+      "dashboard_other": "{{count}} nástěnky",
+      "folder_one": "{{count}} složka",
+      "folder_other": "{{count}} složky",
+      "libraryPanel_one": "{{count}} panel v knihovně",
+      "libraryPanel_other": "{{count}} panely v knihovně",
+      "total_one": "{{count}} položka",
+      "total_other": "{{count}} položky"
+    },
+    "dashboards-tree": {
+      "collapse-folder-button": "Schovat složku {{title}}",
+      "expand-folder-button": "Zobrazit složku {{title}}",
+      "name-column": "Jméno",
+      "select-all-header-checkbox": "Vybrat vše",
+      "select-checkbox": "Vybrat",
+      "tags-column": "Tagy"
+    },
+    "empty-state": {
+      "button-title": "Vytvořit nástěnku",
+      "pro-tip": "Přidej nebo přesun nástěnky do tvé složky pomocí <2>Procházet Nástěnky</2>",
+      "title": "Zatím jsi nevytvořil žádnou nástěnku.",
+      "title-folder": "Tato složka zatím nemá žádné nástěnky."
+    },
+    "folder-actions-button": {
+      "delete": "Smazat",
+      "folder-actions": "Akce složky",
+      "manage-permissions": "Spravovat oprávnění",
+      "move": "Přesunout"
+    },
+    "folder-picker": {
+      "accessible-label": "Vyber složku: {{ label }} je nyní vybraná",
+      "button-label": "Vybrat složku",
+      "clear-selection": "Zrušit výběer",
+      "empty-message": "Žádné složky nenalezeny",
+      "error-title": "Chyba při načítání složek",
+      "search-placeholder": "Hledat složky",
+      "unknown-error": "Neočekávaná chyba"
+    },
+    "manage-folder-nav": {
+      "alert-rules": "Pravidla upornění",
+      "dashboards": "Nástěnky",
+      "panels": "Panely"
+    },
+    "new-folder-form": {
+      "cancel-label": "Zrušit",
+      "create-label": "Vytvořit",
+      "name-label": "Jméno složky"
+    },
+    "no-results": {
+      "clear": "Zrušit hledání a filtry",
+      "text": "Nenalezeny žádné výsledky"
+    }
+  },
+  "clipboard-button": {
+    "inline-toast": {
+      "success": "Zkopírováno"
+    }
+  },
+  "command-palette": {
+    "action": {
+      "change-theme": "Změnit téma...",
+      "dark-theme": "Tmavé",
+      "light-theme": "Světlé"
+    },
+    "empty-state": {
+      "message": "Nenalezeny žádné výsledky"
+    },
+    "search-box": {
+      "placeholder": "Hledat nebo skočit na..."
+    },
+    "section": {
+      "actions": "Akce",
+      "dashboard-search-results": "Nástěnky",
+      "folder-search-results": "Složky",
+      "pages": "Stránky",
+      "preferences": "Preference",
+      "recent-dashboards": "Nedávné nástěnky"
+    }
+  },
+  "common": {
+    "locale": {
+      "default": "Standardní"
+    },
+    "save": "Uložit"
+  },
+  "connections": {
+    "connect-data": {
+      "category-header-label": "Datové zdroje",
+      "empty-message": "Nenalezeny žádné výsledky"
+    },
+    "search": {
+      "placeholder": "Hledav všechny"
+    }
+  },
+  "correlations": {
+    "add-new": "Přidat nový",
+    "alert": {
+      "error-message": "Došlo k neočekávané chybě při stahování korelačních dat. Zkuste to znovu.",
+      "title": "Chyba při stahování korelačních dat"
+    },
+    "basic-info-form": {
+      "description-description": "Volitelný popisek s více informacemi o odkazu",
+      "description-label": "Popisek",
+      "label-description": "Toto jméno bude použito jako označení pro korelaci. Zobrazí se jako text tlačítka, položka v menu nebo jako popisek nad odkazem.",
+      "label-label": "Označení",
+      "label-placeholder": "např. Tempo stopy",
+      "label-required": "Toto pole je vyžadováno.",
+      "sub-text": "<0>Definuje text který popíše korelaci.</0>",
+      "title": "Definuj označení korelace (Krok 1 ze 3)"
+    },
+    "empty-state": {
+      "button-title": "Přidat korelaci",
+      "pro-tip": "Můžete také přidat korelaci v definici datového zdroje.",
+      "title": "Zatím jste nedefinovali žádnou korelaci"
+    },
+    "list": {
+      "delete": "odstranit korelaci",
+      "label": "označení",
+      "loading": "nahrávám...",
+      "read-only": "Pouze pro čtení",
+      "source": "Zdroj",
+      "target": "Cíl"
+    },
+    "navigation-form": {
+      "add-button": "Přidat",
+      "back-button": "Zpět",
+      "next-button": "Další",
+      "save-button": "Uložit"
+    },
+    "page-content": "Pro povolení korelací, přidejte následující do Grafana konfigurace:",
+    "page-heading": "Korelace jsou zakázané",
+    "query-editor": {
+      "control-rules": "The selected target datový zdroj must export a query editor.",
+      "data-source-text": "Please select a target datový zdroj first.",
+      "data-source-title": "No datový zdroj selected",
+      "error-text": "The selected datový zdroj could not be loaded.",
+      "error-title": "Error loading datový zdroj",
+      "loading": "Nahrávám query editor...",
+      "query-description": "Define the query that is run when the link is clicked. You can use <2>variables</2> to access specific field values.",
+      "query-editor-title": "Datový zdroj does not export a query editor.",
+      "query-label": "Query"
+    },
+    "source-form": {
+      "control-required": "This field is required.",
+      "description": "You have used following variables in the target query: <1></1><2></2>A data point needs to provide values to all variables as fields or as transformations output to make the correlation button appear in the visualization.<4></4>Note: Not every variable needs to be explicitly defined below. A transformation such as <7>logfmt</7> will create variables for every key/value pair.",
+      "heading": "Variables used in the target query",
+      "results-description": "The link will be shown next to the value of this field",
+      "results-label": "Results field",
+      "results-required": "This field is required.",
+      "source-description": "Results from selected source datový zdroj have links displayed in the panel",
+      "source-label": "Source",
+      "sub-text": "<0>Define what datový zdroj will display the correlation, and what data will replace previously defined variables.</0>",
+      "title": "Configure the datový zdroj that will link to {{dataSourceName}} (Step 3 of 3)"
+    },
+    "sub-title": "Define how data living in different datový zdrojs relates to each other. Read more in the <2>documentation<1></1></2>",
+    "target-form": {
+      "control-rules": "This field is required.",
+      "sub-text": "<0>Define what datový zdroj the correlation will link to, and what query will run when the correlation is clicked.</0>",
+      "target-description": "Specify which datový zdroj is queried when the link is clicked",
+      "target-label": "Target",
+      "title": "Setup the target for the correlation (Step 2 of 3)"
+    },
+    "trans-details": {
+      "logfmt-description": "Parse provided field with logfmt to get variables",
+      "logfmt-label": "Logfmt",
+      "regex-description": "Field will be parsed with regex. Use named capture groups to return multiple variables, or a single unnamed capture group to add variable to named map value. Regex is case insensitive.",
+      "regex-expression": "Use capture groups to extract a portion of the field.",
+      "regex-label": "Regular expression",
+      "regex-map-values": "Defines the name of the variable if the capture group is not named."
+    },
+    "transform": {
+      "add-button": "Přidat transformation",
+      "heading": "Transformations",
+      "no-transform": "No transformations defined."
+    },
+    "transform-row": {
+      "expression-label": "Expression",
+      "expression-required": "Please define an expression",
+      "expression-tooltip": "Required for regular expression. The expression the transformation will use. Logfmt does not use further specifications.",
+      "field-input": "field",
+      "field-label": "Field",
+      "field-tooltip": "Optional. The field to transform. If not specified, the transformation will be applied to the results field.",
+      "map-value-label": "Map value",
+      "map-value-tooltip": "Optional. Defines the name of the variable. This is currently only valid for regular expressions with a single, unnamed capture group.",
+      "remove-button": "Remove",
+      "remove-tooltip": "Remove transformation",
+      "transform-required": "Please select a transformation type",
+      "type-label": "Type",
+      "type-tooltip": "The type of transformation that will be applied to the source data."
+    }
+  },
+  "dashboard": {
+    "add-menu": {
+      "import": "Importovat z knihovny",
+      "paste-panel": "Vložit zkopírovaný panel",
+      "row": "Řádek",
+      "visualization": "Visualizace",
+      "widget": "Widget"
+    },
+    "alert-rules-drawer": {
+      "redirect-link": "Seznam v Grafana Upozorněních",
+      "subtitle": "Pravidla upozornění pro tuto nástěnku"
+    },
+    "empty": {
+      "add-library-panel-body": "Přidat vizualizace, které jsuo sdílené s ostatními nástěnkami.",
+      "add-library-panel-button": "Přidat panel z knihovny",
+      "add-library-panel-header": "Importovat panel",
+      "add-visualization-body": "Vyber datový zdroj a dotaz a vizualizuj svá data v grafu, statistikách, tabulkách nebo seznamech.",
+      "add-visualization-button": "Přidat vizualizaci",
+      "add-visualization-header": "Začněto Vaši novou nástěnku přidáním vizualizace",
+      "add-widget-body": "Vytvořit seznam, text nebo jiný objekt.",
+      "add-widget-button": "Přidat objekt",
+      "add-widget-header": "Přidat objekt",
+      "import-a-dashboard-body": "Importovat nástěnku ze souborů nebo z <1>grafana.com</1>.",
+      "import-a-dashboard-header": "Importovat nástěnku",
+      "import-dashboard-button": "Importovat nástěnku."
+    },
+    "inspect": {
+      "data-tab": "Data",
+      "error-tab": "Chyba",
+      "json-tab": "JSON",
+      "meta-tab": "Meta data",
+      "query-tab": "Dotaz",
+      "stats-tab": "Statistiky",
+      "subtitle": "{{queryCount}} dotazů s celkovým časem {{formatted}}",
+      "title": "Prozkoumat: {{panelTitle}}"
+    },
+    "inspect-data": {
+      "data-options": "Předvolby dat",
+      "dataframe-aria-label": "Vybrat dataframe",
+      "dataframe-label": "Zobrazi dataframe",
+      "download-csv": "Stáhnout CSV",
+      "download-excel-description": "Přidat záhlaví do CSV pro použití v Excelu",
+      "download-excel-label": "Stáhnout pro Excel",
+      "download-logs": "Stáhnout logy",
+      "download-service": "Stáhnout graf služeb",
+      "download-traces": "Stáhnout stopy",
+      "excel-header": "Záhlaví Excelu",
+      "formatted": "Formátovaná data",
+      "formatted-data-description": "Data jsu formátována pomocí voleb definovaných v záložce Pole a přepisy.",
+      "formatted-data-label": "Formátovaná data",
+      "panel-transforms": "Panel transformací",
+      "series-to-columns": "Řady spojené časem",
+      "transformation": "Řady spojené časem",
+      "transformations-description": "Data tabulky jsou zobrazené pomocí transformací definovaných v záložce Transformace.",
+      "transformations-label": "Použít transformace"
+    },
+    "inspect-json": {
+      "dataframe-description": "Původní data bez transformací a nastavení pole. ",
+      "dataframe-label": "DataFrame JSON (z Dotazu)",
+      "panel-data-description": "Původní model zaslaný do vizualizace panelu",
+      "panel-data-label": "Data panelu",
+      "panel-json-description": "Model uložený v JSON formátu nástěnky, který nastavuje jak vše funguje.",
+      "panel-json-label": "JSON panelu",
+      "select-source": "Vybrat zdroj",
+      "unknown": "Neznámy objekt: {{show}}"
+    },
+    "inspect-meta": {
+      "no-inspector": "Žádný Inspektor Metadat"
+    },
+    "inspect-stats": {
+      "data-title": "Statistiky Datového zdroje",
+      "data-traceids": "Trace IDs",
+      "processing-time": "Čas zpracování dat",
+      "queries": "Počet požadavků",
+      "request-time": "Celkový čas požadavku",
+      "rows": "Celkový počet řádků",
+      "table-title": "Statistiky"
+    },
+    "toolbar": {
+      "add": "Přidat",
+      "alert-rules": "Pravidla upozornění",
+      "mark-favorite": "Označit jako oblíbené",
+      "open-original": "Otevřít původní nástěnku",
+      "playlist-next": "Jít na další nástěnku",
+      "playlist-previous": "Jít na předchozí nástěnku",
+      "playlist-stop": "Zastavit playlist",
+      "refresh": "Obnovit nástěnku",
+      "save": "Uložit nástěnku",
+      "settings": "Nastavení nástěnky",
+      "share": "Sdílet nástěnku",
+      "share-button": "Sdílet",
+      "unmark-favorite": "Odstranit z oblíbených"
+    },
+    "validation": {
+      "invalid-dashboard-id": "Nemůžu najít platné Grafana.com ID",
+      "invalid-json": "Nevalidní JSON",
+      "tags-expected-array": "značky očekávají pole",
+      "tags-expected-strings": "značky očekávají pole řetězců"
+    }
+  },
+  "dashboard-import": {
+    "file-dropzone": {
+      "primary-text": "Nahrát JSON soubor nástěnky",
+      "secondary-text": "Přetáhni tady nebo klikni na Procházet"
+    },
+    "form-actions": {
+      "cancel": "Zrušit",
+      "load": "Nahrát"
+    },
+    "gcom-field": {
+      "label": "Najít nebo importovat nástěnku pro běžné účely na <1></1>",
+      "load-button": "Nahrát",
+      "placeholder": "Grafana.com URL nástěnky nebo její ID",
+      "validation-required": "URL nebo ID Grafana.com nástěnky je vyžadováno"
+    },
+    "json-field": {
+      "label": "Importovat pomocí JSON modelu nástěnky",
+      "validation-required": "Potřebuji JSON model nástěnky"
+    }
+  },
+  "dashboard-links": {
+    "empty-state": {
+      "button-title": "Přidat odkaz nástěnky",
+      "info-box-content": "Odkazy nástěnky umožňují vložid odkaz na jinou nástěnku nebo stránku přímo pod nadpis se jménem nástěnky. <2>Přečít více</2>",
+      "title": "Zatím neexistují zádné odkazy nástěnky"
+    }
+  },
+  "dashboard-settings": {
+    "annotations": {
+      "title": "Anotace"
+    },
+    "dashboard-delete-button": "Smazat nástěnku",
+    "general": {
+      "auto-refresh-description": "Nastav internal pro automatickou obnovu, které budou k dispozici v seznamu automatické obnovy. Použij formát '5s' pro sekundy, '1m' pro minuty, '1h' pro hodiny a '1d' pro dny (například: '5s,10s,30s,1m,5m,15m,30m,1h,2h,1d').",
+      "auto-refresh-label": "Automatická obnova",
+      "description-label": "Popis",
+      "editable-description": "Nastavit jen pro čtení - znemožní veškerou editaci. Obnov nástěnku pro aplikaci této změny.",
+      "editable-label": "Editovatelné",
+      "folder-label": "Složka",
+      "panel-options-graph-tooltip-description": "Nastav popisky a chování při najetí na různé panely. Obnov nástěnku pro aplikaci této změny.",
+      "panel-options-graph-tooltip-label": "Popisky grafu",
+      "panel-options-label": "Nastavení panelu",
+      "tags-label": "Značky",
+      "title": "Obecné",
+      "title-label": "Název"
+    },
+    "json-editor": {
+      "save-button": "Uložit změny",
+      "subtitle": "JSON model níže je datová struktura definující nástěnku. Obsahuje nastavené nástěnky, panelů a jejich umístěni, dotazů, atd.",
+      "title": "JSON Model"
+    },
+    "links": {
+      "title": "Odkazy"
+    },
+    "permissions": {
+      "title": "Oprávnění"
+    },
+    "settings": {
+      "title": "Nastavení"
+    },
+    "time-picker": {
+      "hide-time-picker": "Schovat vybírání času",
+      "now-delay-description": "Vyloučit nedávná data, která mohou být neúplná.",
+      "now-delay-label": "Now delay",
+      "refresh-live-dashboards-description": "Průběžně překreslovat panely, které ve svém časovém rozsahu zobrazují 'now'",
+      "refresh-live-dashboards-label": "Obnovit živé nástěnky",
+      "time-options-label": "Nastavení času",
+      "time-zone-label": "Časová zóna",
+      "week-start-label": "Začátek týdne"
+    },
+    "variables": {
+      "title": "Proměnné"
+    },
+    "versions": {
+      "title": "Verze"
+    }
+  },
+  "data-source-list": {
+    "empty-state": {
+      "button-title": "Přidat datový zdroj",
+      "pro-tip": "Můžete také definovat datový zdroj pomocí konfiguračních souborů. <2>Přečíst více</2>",
+      "title": "Žádný datový zdroj není definován"
+    }
+  },
+  "data-source-picker": {
+    "add-new-data-source": "Nastavit nový datový zdroj",
+    "built-in-list": {
+      "description-dashboard": "Využít výsledky dotazů z jiných vizualizací",
+      "description-grafana": "Objevit vizuazilace pomocí falešných dat",
+      "description-mixed": "Použít více datových zdrojů"
+    },
+    "list": {
+      "no-data-source-message": "Žádné datové zdoje nenalezeny"
+    },
+    "modal": {
+      "configure-new-data-source": "Otevčít novou záložku a nastavit datový zdroj",
+      "input-placeholder": "Vybrat datový zdroj",
+      "title": "Vybrat datový zdroj"
+    },
+    "open-advanced-button": "Otevřít pokročilý výběer datového zdroje "
+  },
+  "data-sources": {
+    "datasource-add-button": {
+      "label": "Přidat nový datový zdroj"
+    },
+    "empty-state": {
+      "message": "Žádné datové zdoje nenalezeny"
+    }
+  },
+  "explore": {
+    "add-to-dashboard": "Přidat do nástěnky",
+    "rich-history": {
+      "close-tooltip": "Zavřít historii dotazu",
+      "datasource-a-z": "Datový zdroj A-Z",
+      "datasource-z-a": "Datový zdroj Z-A",
+      "newest-first": "Nejnovější první",
+      "oldest-first": "Nejstarší první",
+      "query-history": "Historie dotazu",
+      "query-library": "Knihovna dotazů",
+      "settings": "Nastavení",
+      "starred": "Oblíbené"
+    },
+    "rich-history-card": {
+      "add-comment-form": "Přidat komentář",
+      "add-comment-tooltip": "Přidat komentář",
+      "add-to-library": "Přidat do knihovny",
+      "cancel": "Zrušit",
+      "confirm-delete": "Smazat",
+      "copy-query-tooltip": "Kopírovat dotaz do schránky",
+      "copy-shortened-link-tooltip": "Kopírovat zkrácený odkaz do schránky",
+      "datasource-icon-label": "Ikona datového zdroje",
+      "datasource-name-label": "Jméno datového zdroje",
+      "datasource-not-exist": "Datový zdroj již neexistuje",
+      "delete-query-confirmation-title": "Smazat",
+      "delete-query-title": "Smazat dotaz",
+      "delete-query-tooltip": "Smazat dotaz",
+      "delete-starred-query-confirmation-text": "Jste si jistí, že chcete smazat Váš oblíbený dotaz?",
+      "edit-comment-tooltip": "Editovat komentář",
+      "optional-description": "Dobrovolný popis toho co dotaz dělá",
+      "query-comment-label": "Komentář dotazu",
+      "query-template-added": "Šablona dotazu úspěšně přidána do knihovny",
+      "query-text-label": "Text dotazu",
+      "save-comment": "Uložit komentář",
+      "star-query-tooltip": "Přidat dotaz do oblíbených",
+      "unstar-query-tooltip": "Odebrat dotaz z oblíbených",
+      "update-comment-form": "Aktualizovat komentář"
+    },
+    "rich-history-container": {
+      "loading": "Nahrávám..."
+    },
+    "rich-history-notification": {
+      "query-copied": "Dotaz zkopírován do schránky",
+      "query-deleted": "Dotaz odstraněn"
+    },
+    "rich-history-queries-tab": {
+      "displaying-partial-queries": "Zobrazuji {{ count }} dotazů",
+      "displaying-queries": "{{ count }} dotazů",
+      "filter-aria-label": "Filtrovat dotazy pro datový zdroj",
+      "filter-history": "Filtrovat historii",
+      "filter-placeholder": "Filtrovat dotazy pro datový zdroj",
+      "history-local": "Historie existuje pouze ve Vašem prohlížeči a není sdílena s ostatními.",
+      "loading": "Nahrávám...",
+      "loading-results": "Nahrávám výsledky...",
+      "search-placeholder": "Hledat dotazy",
+      "showing-queries": "Zobrazuji {{ shown }} z {{ total }} <0>Nahrát více</0>",
+      "sort-aria-label": "Seřadit dotazy",
+      "sort-placeholder": "Seřadit dotatzy podle"
+    },
+    "rich-history-settings-tab": {
+      "alert-info": "Grafana will keep entries up to {{optionLabel}}.Starred entries won't be deleted.",
+      "change-default-tab": "Change the default active tab from “Query history” to “Starred”",
+      "clear-history-info": "Smazat all of your query history, permanently.",
+      "clear-query-history": "Clear query history",
+      "clear-query-history-button": "Clear query history",
+      "delete-confirm": "Smazat",
+      "delete-confirm-text": "Are you sure you want to permanently delete your query history?",
+      "delete-title": "Smazat",
+      "history-time-span": "History time span",
+      "history-time-span-description": "Select the period of time for which Grafana will save your query history. Up to {{MAX_HISTORY_ITEMS}} entries will be stored.",
+      "only-show-active-datasource": "Only show queries for datový zdroj currently active in Explore",
+      "query-history-deleted": "Query history deleted",
+      "retention-period": {
+        "1-week": "1 week",
+        "2-days": "2 days",
+        "2-weeks": "2 weeks",
+        "5-days": "5 days"
+      }
+    },
+    "rich-history-starred-tab": {
+      "filter-queries-aria-label": "Filter queries for datový zdrojs(s)",
+      "filter-queries-placeholder": "Filter queries for datový zdrojs(s)",
+      "loading": "Nahrávám...",
+      "loading-results": "Nahrávám results...",
+      "local-history-message": "The history is local to your browser and is not shared with others.",
+      "search-queries-placeholder": "Search queries",
+      "showing-queries": "Showing {{ shown }} of {{ total }} <0>Load more</0>",
+      "sort-queries-aria-label": "Sort queries",
+      "sort-queries-placeholder": "Sort queries by"
+    },
+    "rich-history-utils": {
+      "a-week-ago": "a week ago",
+      "days-ago": "{{num}} days ago",
+      "default-from": "now-1h",
+      "default-to": "now",
+      "today": "today",
+      "two-weeks-ago": "two weeks ago",
+      "yesterday": "yesterday"
+    },
+    "rich-history-utils-notification": {
+      "saving-failed": "Saving rich history failed",
+      "update-failed": "Rich History update failed"
+    },
+    "run-query": {
+      "left-pane": "Left pane",
+      "right-pane": "Right pane",
+      "run-query-button": "Run query",
+      "switch-datasource-button": "Switch datový zdroj and run query"
+    },
+    "secondary-actions": {
+      "query-add-button": "Přidat query",
+      "query-add-button-aria-label": "Přidat query",
+      "query-history-button": "Query history",
+      "query-history-button-aria-label": "Query history",
+      "query-inspector-button": "Query inspector",
+      "query-inspector-button-aria-label": "Query inspector"
+    },
+    "table": {
+      "no-data": "0 series returned",
+      "title": "Table",
+      "title-with-name": "Table - {{name}}"
+    },
+    "toolbar": {
+      "aria-label": "Explore toolbar",
+      "copy-link": "Copy URL",
+      "copy-link-abs-time": "Copy absolute URL",
+      "copy-links-absolute-category": "Time-sync URL links (share with time range intact)",
+      "copy-links-normal-category": "Normal URL links",
+      "copy-shortened-link": "Copy shortened URL",
+      "copy-shortened-link-abs-time": "Copy absolute shortened URL",
+      "copy-shortened-link-menu": "Open copy link options",
+      "refresh-picker-cancel": "Zrušit",
+      "refresh-picker-run": "Run query",
+      "split-close": " Close ",
+      "split-close-tooltip": "Close split pane",
+      "split-narrow": "Narrow pane",
+      "split-title": "Split",
+      "split-tooltip": "Split the pane",
+      "split-widen": "Widen pane"
+    }
+  },
+  "folder-picker": {
+    "loading": "Nahrávám folders..."
+  },
+  "grafana-ui": {
+    "drawer": {
+      "close": "Close"
+    },
+    "modal": {
+      "close-tooltip": "Close"
+    },
+    "segment-async": {
+      "error": "Failed to load options",
+      "loading": "Nahrávám options...",
+      "no-options": "No options found"
+    },
+    "select": {
+      "no-options-label": "No options found",
+      "placeholder": "Choose"
+    },
+    "spinner": {
+      "aria-label": "Nahrávám"
+    }
+  },
+  "graph": {
+    "container": {
+      "content": "Rendering too many series in a single panel may impact performance and make data harder to read. Consider refining your queries.",
+      "show-all-series": "Show all {{length}}",
+      "show-only-series": "Showing only {{MAX_NUMBER_OF_TIME_SERIES}} series",
+      "title": "Graph"
+    }
+  },
+  "help-modal": {
+    "shortcuts-category": {
+      "dashboard": "Dashboard",
+      "focused-panel": "Focused panel",
+      "global": "Global",
+      "time-range": "Time range"
+    },
+    "shortcuts-description": {
+      "change-theme": "Change theme",
+      "collapse-all-rows": "Collapse all rows",
+      "copy-time-range": "Copy time range",
+      "dashboard-settings": "Dashboard settings",
+      "duplicate-panel": "Duplicate Panel",
+      "exit-edit/setting-views": "Exit edit/setting views",
+      "expand-all-rows": "Expand all rows",
+      "go-to-dashboards": "Go to Nástěnky",
+      "go-to-explore": "Go to Explore",
+      "go-to-home-dashboard": "Go to Home Dashboard",
+      "go-to-profile": "Go to Profile",
+      "make-time-range-permanent": "Make time range absolute/permanent",
+      "move-time-range-back": "Přesunout time range back",
+      "move-time-range-forward": "Přesunout time range forward",
+      "open-search": "Open search",
+      "open-shared-modal": "Open Panel Share Modal",
+      "paste-time-range": "Paste time range",
+      "refresh-all-panels": "Refresh all panels",
+      "remove-panel": "Remove Panel",
+      "save-dashboard": "Uložit dashboard",
+      "show-all-shortcuts": "Show all keyboard shortcuts",
+      "toggle-active-mode": "Toggle in-active / view mode",
+      "toggle-all-panel-legends": "Toggle all panel legends",
+      "toggle-auto-fit": "Toggle auto fit panels (experimental feature)",
+      "toggle-exemplars": "Toggle exemplars in all panel",
+      "toggle-graph-crosshair": "Toggle shared graph crosshair",
+      "toggle-kiosk": "Toggle kiosk mode (hides top nav)",
+      "toggle-panel-edit": "Toggle panel edit view",
+      "toggle-panel-fullscreen": "Toggle panel fullscreen view",
+      "toggle-panel-legend": "Toggle panel legend",
+      "zoom-out-time-range": "Zoom out time range"
+    },
+    "title": "Shortcuts"
+  },
+  "inspector": {
+    "query": {
+      "collapse-all": "Collapse all",
+      "copy-to-clipboard": "Copy to clipboard",
+      "description": "Query inspector allows you to view raw request and response. To collect this data Grafana needs to issue a new query. Click refresh button below to trigger a new query.",
+      "expand-all": "Expand all",
+      "no-data": "No request and response collected yet. Hit refresh button",
+      "refresh": "Refresh"
+    }
+  },
+  "library-panel": {
+    "add-modal": {
+      "cancel": "Zrušit",
+      "create": "Vytvořit library panel",
+      "error": "Library panel with this name already exists",
+      "folder": "Uložit in folder",
+      "folder-description": "Library panel permissions are derived from the folder permissions",
+      "name": "Library panel name"
+    },
+    "add-widget": {
+      "title": "Přidat panel from panel library"
+    },
+    "empty-state": {
+      "message": "You haven't created any library panels yet",
+      "more-info": "Vytvořit a library panel from any existing dashboard panel through the panel context menu. <2>Learn more</2>"
+    }
+  },
+  "library-panels": {
+    "empty-state": {
+      "message": "No library panels found"
+    },
+    "modal": {
+      "body_one": "This panel is being used in {{count}} dashboard. Please choose which dashboard to view the panel in:",
+      "body_other": "This panel is being used in {{count}} dashboards. Please choose which dashboard to view the panel in:",
+      "button-cancel": "Zrušit",
+      "button-view-panel1": "View panel in {{label}}...",
+      "button-view-panel2": "View panel in dashboard...",
+      "panel-not-linked": "Panel is not linked to a dashboard. Přidat the panel to a dashboard and retry.",
+      "select-no-options-message": "No dashboards found",
+      "select-placeholder": "Start typing to search for dashboard",
+      "title": "View panel in dashboard"
+    },
+    "save": {
+      "error": "Error saving library panel: \"{{errorMsg}}\"",
+      "success": "Library panel saved"
+    }
+  },
+  "login": {
+    "error": {
+      "blocked": "You have exceeded the number of login attempts for this user. Please try again later.",
+      "invalid-user-or-password": "Invalid username or password",
+      "title": "Login failed",
+      "unknown": "Unknown error occurred"
+    },
+    "forgot-password": "Forgot your password?",
+    "form": {
+      "password-label": "Password",
+      "password-placeholder": "password",
+      "password-required": "Password is required",
+      "submit-label": "Log in",
+      "submit-loading-label": "Logging in...",
+      "username-label": "Email or username",
+      "username-placeholder": "email or username",
+      "username-required": "Email or username is required"
+    },
+    "services": {
+      "sing-in-with-prefix": "Sign in with {{serviceName}}"
+    },
+    "signup": {
+      "button-label": "Sign up",
+      "new-to-question": "New to Grafana?"
+    }
+  },
+  "migrate-to-cloud": {
+    "can-i-move": {
+      "body": "Once you connect this installation to a cloud stack, you'll be able to upload datový zdrojs and dashboards.",
+      "link-title": "Learn about migrating other settings",
+      "title": "Can I move this installation to Grafana Cloud?"
+    },
+    "connect-modal": {
+      "body-cloud-stack": "You'll also need a cloud stack. If you just signed up, we'll automatically create your first stack. If you have an account, you'll need to select or create a stack.",
+      "body-get-started": "To get started, you'll need a Grafana.com account.",
+      "body-sign-up": "Sign up for a Grafana.com account",
+      "body-token": "Your self-managed Grafana installation needs special access to securely migrate content. You'll need to create a migration token on your chosen cloud stack.",
+      "body-token-field": "Migration token",
+      "body-token-field-placeholder": "Paste token here",
+      "body-token-instructions": "Log into your cloud stack and navigate to Administration, General, Migrate to Grafana Cloud. Vytvořit a migration token on that screen and paste the token here.",
+      "body-view-stacks": "View my cloud stacks",
+      "cancel": "Zrušit",
+      "connect": "Connect to this stack",
+      "connecting": "Connecting to this stack...",
+      "title": "Connect to a cloud stack",
+      "token-error-description": "There was an error saving the token. See the Grafana server logs for more details.",
+      "token-error-title": "Error saving token",
+      "token-required-error": "Migration token is required"
+    },
+    "cta": {
+      "button": "Migrate this instance to Cloud",
+      "header": "Let us manage your Grafana stack"
+    },
+    "disconnect-modal": {
+      "body": "This will remove the migration token from this installation. If you wish to upload more resources in the future, you will need to enter a new migration token.",
+      "cancel": "Zrušit",
+      "disconnect": "Disconnect",
+      "disconnecting": "Disconnecting...",
+      "error": "There was an error disconnecting",
+      "title": "Disconnect from cloud stack"
+    },
+    "get-started": {
+      "body": "The migration process must be started from your self-managed Grafana instance.",
+      "configure-pdc-link": "Configure PDC for this stack",
+      "link-title": "Learn more about Private Data Source Connect",
+      "step-1": "Log in to your self-managed instance and navigate to Administration, General, Migrate to Grafana Cloud.",
+      "step-2": "Select \"Migrate this instance to Cloud\".",
+      "step-3": "You'll be prompted for a migration token. Generate one from this screen.",
+      "step-4": "In your self-managed instance, select \"Upload everything\" to upload datový zdrojs and dashboards to this cloud stack.",
+      "step-5": "If some of your datový zdrojs will not work over the public internet, you’ll need to install Private Data Source Connect in your self-managed environment.",
+      "title": "How to get started"
+    },
+    "is-it-secure": {
+      "body": "Grafana Labs is committed to maintaining the highest standards of data privacy and security. By implementing industry-standard security technologies and procedures, we help protect our customers' data from unauthorized access, use, or disclosure.",
+      "link-title": "Grafana Labs Trust Center",
+      "title": "Is it secure?"
+    },
+    "migrate-to-this-stack": {
+      "body": "Some configuration from your self-managed Grafana instance can be automatically copied to this cloud stack.",
+      "link-title": "View the full migration guide",
+      "title": "Migrate configuration to this stack"
+    },
+    "migration-token": {
+      "body": "Your self-managed Grafana instance will require a special authentication token to securely connect to this cloud stack.",
+      "delete-modal-body": "If you've already used this token with a self-managed installation, that installation will no longer be able to upload content.",
+      "delete-modal-cancel": "Zrušit",
+      "delete-modal-confirm": "Smazat",
+      "delete-modal-deleting": "Deleting...",
+      "delete-modal-title": "Smazat migration token",
+      "error-body": "Unable to generate a migration token. Please try again later.",
+      "error-title": "Something went wrong",
+      "generate-button": "Generate a migration token",
+      "generate-button-loading": "Generating a migration token...",
+      "modal-close": "Close",
+      "modal-copy-and-close": "Copy to clipboard and close",
+      "modal-copy-button": "Copy to clipboard",
+      "modal-field-description": "Copy the token now as you will not be able to see it again. Losing a token requires creating a new one.",
+      "modal-field-label": "Token",
+      "modal-title": "Migration token created",
+      "status": "Current status: <1></1>",
+      "title": "Migration token"
+    },
+    "pdc": {
+      "body": "Exposing your datový zdrojs to the internet can raise security concerns. Private datový zdroj connect (PDC) allows Grafana Cloud to access your existing datový zdrojs over a secure network tunnel.",
+      "link-title": "Learn about PDC",
+      "title": "Not all my datový zdrojs are on the public internet"
+    },
+    "pricing": {
+      "body": "Grafana Cloud has a generous free plan and a 14 day unlimited usage trial. After your trial expires, you'll be billed based on usage over the free plan limits.",
+      "link-title": "Grafana Cloud pricing",
+      "title": "How much does it cost?"
+    },
+    "resource-status": {
+      "error-details-button": "Details",
+      "failed": "Error",
+      "migrated": "Uploaded to cloud",
+      "migrating": "Uploading...",
+      "not-migrated": "Not yet uploaded",
+      "unknown": "Unknown"
+    },
+    "resource-table": {
+      "unknown-datasource-title": "Datový zdroj {{datasourceUID}}",
+      "unknown-datasource-type": "Unknown datový zdroj"
+    },
+    "resource-type": {
+      "dashboard": "Dashboard",
+      "datasource": "Datový zdroj",
+      "folder": "Folder",
+      "unknown": "Unknown"
+    },
+    "summary": {
+      "disconnect": "Disconnect",
+      "disconnect-error-description": "See the Grafana server logs for more details",
+      "disconnect-error-title": "There was an error disconnecting",
+      "run-migration-error-description": "See the Grafana server logs for more details",
+      "run-migration-error-title": "There was an error migrating your resources",
+      "start-migration": "Upload everything",
+      "target-stack-title": "Uploading to"
+    },
+    "token-status": {
+      "active": "Token created and active",
+      "no-active": "No active token"
+    },
+    "what-is-cloud": {
+      "body": "Grafana cloud is a fully managed cloud-hosted observability platform ideal for cloud native environments. It's everything you love about Grafana without the overhead of maintaining, upgrading, and supporting an installation.",
+      "link-title": "Learn about cloud features",
+      "title": "What is Grafana Cloud?"
+    },
+    "why-host": {
+      "body": "In addition to the convenience of managed hosting, Grafana Cloud includes many cloud-exclusive features like SLOs, incident management, machine learning, and powerful observability integrations.",
+      "link-title": "More questions? Talk to an expert",
+      "title": "Why host with Grafana?"
+    }
+  },
+  "nav": {
+    "add-new-connections": {
+      "title": "Přidat nový connection"
+    },
+    "admin": {
+      "subtitle": "Manage server-wide settings and access to resources such as organizations, users, and licenses",
+      "title": "Server admin"
+    },
+    "alert-list-legacy": {
+      "title": "Pravidla upozornění"
+    },
+    "alerting": {
+      "subtitle": "Learn about problems in your systems moments after they occur",
+      "title": "Alerting"
+    },
+    "alerting-admin": {
+      "subtitle": "Manage Alertmanager configurations",
+      "title": "Settings"
+    },
+    "alerting-am-routes": {
+      "subtitle": "Determine how alerts are routed to contact points",
+      "title": "Notification policies"
+    },
+    "alerting-channels": {
+      "title": "Notification channels"
+    },
+    "alerting-groups": {
+      "subtitle": "See grouped alerts from an Alertmanager instance",
+      "title": "Groups"
+    },
+    "alerting-home": {
+      "title": "Home"
+    },
+    "alerting-legacy": {
+      "title": "Alerting (legacy)"
+    },
+    "alerting-list": {
+      "subtitle": "Rules that determine whether an alert will fire",
+      "title": "Pravidla upozornění"
+    },
+    "alerting-receivers": {
+      "subtitle": "Choose how to notify your contact points when an alert instance fires",
+      "title": "Contact points"
+    },
+    "alerting-silences": {
+      "subtitle": "Stop notifications from one or more alerting rules",
+      "title": "Silences"
+    },
+    "alerting-upgrade": {
+      "subtitle": "Upgrade your existing legacy alerts and notification channels to the new Grafana Alerting",
+      "title": "Alerting upgrade"
+    },
+    "alerts-and-incidents": {
+      "subtitle": "Alerting and incident management apps",
+      "title": "Alerts & IRM"
+    },
+    "api-keys": {
+      "subtitle": "Manage and create API keys that are used to interact with Grafana HTTP APIs",
+      "title": "API keys"
+    },
+    "application": {
+      "title": "Application"
+    },
+    "apps": {
+      "subtitle": "App plugins that extend the Grafana experience",
+      "title": "Apps"
+    },
+    "authentication": {
+      "title": "Authentication"
+    },
+    "collector": {
+      "title": "Collector"
+    },
+    "config": {
+      "title": "Administration"
+    },
+    "config-access": {
+      "subtitle": "Configure access for individual users, teams, and service accounts",
+      "title": "Uživatels and access"
+    },
+    "config-general": {
+      "subtitle": "Manage default preferences and settings across Grafana",
+      "title": "General"
+    },
+    "config-plugins": {
+      "subtitle": "Install plugins and define the relationships between data",
+      "title": "Plugins and data"
+    },
+    "connect-data": {
+      "title": "Connect data"
+    },
+    "connections": {
+      "subtitle": "Browse and create new connections",
+      "title": "Connections"
+    },
+    "correlations": {
+      "subtitle": "Přidat and configure correlations",
+      "title": "Correlations"
+    },
+    "create": {
+      "title": "Vytvořit"
+    },
+    "create-alert": {
+      "title": "New alert rule"
+    },
+    "create-dashboard": {
+      "title": "Dashboard"
+    },
+    "create-folder": {
+      "title": "Folder"
+    },
+    "create-import": {
+      "title": "Import dashboard"
+    },
+    "dashboards": {
+      "subtitle": "Vytvořit and manage dashboards to visualize your data",
+      "title": "Nástěnky"
+    },
+    "data-sources": {
+      "subtitle": "View and manage your connected datový zdroj connections",
+      "title": "Datový zdrojs"
+    },
+    "datasources": {
+      "subtitle": "Přidat and configure datový zdrojs",
+      "title": "Datový zdrojs"
+    },
+    "detect": {
+      "title": "Detect"
+    },
+    "explore": {
+      "title": "Explore"
+    },
+    "frontend": {
+      "subtitle": "Gain real user monitoring insights",
+      "title": "Frontend"
+    },
+    "frontend-app": {
+      "title": "Frontend"
+    },
+    "global-orgs": {
+      "subtitle": "Isolated instances of Grafana running on the same server",
+      "title": "Organizations"
+    },
+    "global-users": {
+      "subtitle": "Manage users in Grafana",
+      "title": "Uživatels"
+    },
+    "grafana-quaderno": {
+      "title": "Grafana Quaderno"
+    },
+    "help": {
+      "title": "Help"
+    },
+    "help/community": "Community",
+    "help/documentation": "Documentation",
+    "help/keyboard-shortcuts": "Keyboard shortcuts",
+    "help/support": "Support",
+    "home": {
+      "title": "Home"
+    },
+    "incidents": {
+      "title": "Incidents"
+    },
+    "infrastructure": {
+      "subtitle": "Understand your infrastructure's health",
+      "title": "Infrastructure"
+    },
+    "integrations": {
+      "title": "Integrations"
+    },
+    "k6": {
+      "title": "Performance"
+    },
+    "kubernetes": {
+      "title": "Kubernetes"
+    },
+    "library-panels": {
+      "subtitle": "Reusable panels that can be added to multiple dashboards",
+      "title": "Library panels"
+    },
+    "machine-learning": {
+      "title": "Machine learning"
+    },
+    "manage-folder": {
+      "subtitle": "Manage folder dashboards and permissions"
+    },
+    "migrate-to-cloud": {
+      "subtitle": "Copy configuration from your self-managed installation to a cloud stack",
+      "title": "Migrate to Grafana Cloud"
+    },
+    "monitoring": {
+      "subtitle": "Out-of-the-box observability solutions",
+      "title": "Observability"
+    },
+    "new": {
+      "title": "New"
+    },
+    "new-dashboard": {
+      "title": "New dashboard"
+    },
+    "new-folder": {
+      "title": "New folder"
+    },
+    "observability": {
+      "title": "Observability"
+    },
+    "oncall": {
+      "title": "OnCall"
+    },
+    "org-settings": {
+      "subtitle": "Manage preferences across an organization",
+      "title": "Default preferences"
+    },
+    "playlists": {
+      "subtitle": "Groups of dashboards that are displayed in a sequence",
+      "title": "Playlists"
+    },
+    "plugins": {
+      "subtitle": "Extend the Grafana experience with plugins",
+      "title": "Plugins"
+    },
+    "private-data-source-connections": {
+      "subtitle": "Query data that lives within a secured network without opening the network to inbound traffic from Grafana Cloud. Learn more in our docs.",
+      "title": "Private datový zdroj connect"
+    },
+    "profile/notifications": {
+      "title": "Notification history"
+    },
+    "profile/password": {
+      "title": "Change password"
+    },
+    "profile/settings": {
+      "title": "Profile"
+    },
+    "profiles": {
+      "title": "Profiles"
+    },
+    "public": {
+      "title": "Public dashboards"
+    },
+    "recorded-queries": {
+      "title": "Recorded queries"
+    },
+    "reporting": {
+      "title": "Reporting"
+    },
+    "scenes": {
+      "title": "Scenes"
+    },
+    "search": {
+      "placeholderCommandPalette": "Search or jump to..."
+    },
+    "search-dashboards": {
+      "title": "Search dashboards"
+    },
+    "server-settings": {
+      "subtitle": "View the settings defined in your Grafana config",
+      "title": "Settings"
+    },
+    "service-accounts": {
+      "subtitle": "Use service accounts to run automated workloads in Grafana",
+      "title": "Service accounts"
+    },
+    "sign-out": {
+      "title": "Sign out"
+    },
+    "slo": {
+      "title": "SLO"
+    },
+    "snapshots": {
+      "subtitle": "Interactive, publically available, point-in-time representations of dashboards",
+      "title": "Snapshots"
+    },
+    "starred": {
+      "title": "Starred"
+    },
+    "starred-empty": {
+      "title": "Your starred dashboards will appear here"
+    },
+    "statistics-and-licensing": {
+      "title": "Statistics and licensing"
+    },
+    "storage": {
+      "subtitle": "Manage file storage",
+      "title": "Storage"
+    },
+    "support-bundles": {
+      "subtitle": "Download support bundles",
+      "title": "Support bundles"
+    },
+    "synthetics": {
+      "title": "Synthetics"
+    },
+    "teams": {
+      "subtitle": "Groups of users that have common dashboard and permission needs",
+      "title": "Týms"
+    },
+    "testing-and-synthetics": {
+      "subtitle": "Optimize performance with k6 and Synthetic Monitoring insights",
+      "title": "Testing & synthetics"
+    },
+    "trash": {
+      "subtitle": "Any items remaining in the Trash for more than 30 days will be automatically deleted",
+      "title": "Trash"
+    },
+    "upgrading": {
+      "title": "Stats and license"
+    },
+    "users": {
+      "subtitle": "Invite and assign roles to users",
+      "title": "Uživatels"
+    }
+  },
+  "navigation": {
+    "kiosk": {
+      "tv-alert": "Press ESC to exit kiosk mode"
+    },
+    "megamenu": {
+      "close": "Close menu",
+      "dock": "Dock menu",
+      "list-label": "Navigation",
+      "undock": "Undock menu"
+    },
+    "toolbar": {
+      "close-menu": "Close menu",
+      "enable-kiosk": "Enable kiosk mode",
+      "open-menu": "Open menu",
+      "toggle-search-bar": "Toggle top search bar"
+    }
+  },
+  "news": {
+    "drawer": {
+      "close": "Close Drawer"
+    },
+    "title": "Latest from the blog"
+  },
+  "notifications": {
+    "empty-state": {
+      "description": "Notifications you have received will appear here",
+      "title": "You're all caught up!"
+    },
+    "starred-dashboard": "Dashboard starred",
+    "unstarred-dashboard": "Dashboard unstarred"
+  },
+  "panel": {
+    "header-menu": {
+      "copy": "Copy",
+      "create-library-panel": "Vytvořit library panel",
+      "duplicate": "Duplicate",
+      "edit": "Edit",
+      "explore": "Explore",
+      "get-help": "Get help",
+      "hide-legend": "Hide legend",
+      "inspect": "Inspect",
+      "inspect-data": "Data",
+      "inspect-json": "Panel JSON",
+      "more": "More...",
+      "new-alert-rule": "New alert rule",
+      "query": "Query",
+      "remove": "Remove",
+      "share": "Share",
+      "show-legend": "Show legend",
+      "unlink-library-panel": "Unlink library panel",
+      "view": "View"
+    }
+  },
+  "playlist-edit": {
+    "error-prefix": "Error loading playlist:",
+    "form": {
+      "add-tag-label": "Přidat by tag",
+      "add-tag-placeholder": "Select a tag",
+      "add-title-label": "Přidat by title",
+      "cancel": "Zrušit",
+      "heading": "Přidat dashboards",
+      "interval-label": "Interval",
+      "interval-placeholder": "5m",
+      "interval-required": "Interval is required",
+      "name-label": "Name",
+      "name-placeholder": "Name",
+      "name-required": "Name is required",
+      "save": "Uložit",
+      "table-delete": "Smazat playlist item",
+      "table-drag": "Drag and drop to reorder",
+      "table-empty": "Playlist is empty. Přidat dashboards below.",
+      "table-heading": "Nástěnky"
+    },
+    "sub-title": "A playlist rotates through a pre-selected list of dashboards. A playlist can be a great way to build situational awareness, or just show off your metrics to your team or visitors.",
+    "title": "Edit playlist"
+  },
+  "playlist-page": {
+    "card": {
+      "delete": "Smazat playlist",
+      "edit": "Edit playlist",
+      "start": "Start playlist",
+      "tooltip": "Share playlist"
+    },
+    "create-button": {
+      "title": "New playlist"
+    },
+    "delete-modal": {
+      "body": "Are you sure you want to delete {{name}} playlist?",
+      "confirm-text": "Smazat"
+    },
+    "empty": {
+      "button": "Vytvořit playlist",
+      "pro-tip": "You can use playlists to cycle dashboards on TVs without user control. <2>Learn more</2>",
+      "title": "There are no playlists created yet"
+    }
+  },
+  "playlists": {
+    "empty-state": {
+      "message": "No playlists found"
+    }
+  },
+  "plugins": {
+    "empty-state": {
+      "message": "No plugins found"
+    }
+  },
+  "profile": {
+    "change-password": {
+      "cancel-button": "Zrušit",
+      "cannot-change-password-message": "Password cannot be changed here.",
+      "change-password-button": "Change Password",
+      "confirm-password-label": "Confirm password",
+      "confirm-password-required": "New password confirmation is required",
+      "ldap-auth-proxy-message": "You cannot change password when signed in with LDAP or auth proxy.",
+      "new-password-label": "New password",
+      "new-password-required": "New password is required",
+      "new-password-same-as-old": "New password can't be the same as the old one.",
+      "old-password-label": "Old password",
+      "old-password-required": "Old password is required",
+      "passwords-must-match": "Passwords must match",
+      "strong-password-validation-register": "Password does not comply with the strong password policy"
+    }
+  },
+  "public-dashboard": {
+    "acknowledgment-checkboxes": {
+      "ack-title": "Before you make the dashboard public, acknowledge the following:",
+      "data-src-ack-desc": "Publishing currently only works with a subset of datový zdrojs*",
+      "data-src-ack-tooltip": "Learn more about public datasources",
+      "public-ack-desc": "Your entire dashboard will be public*",
+      "public-ack-tooltip": "Learn more about public dashboards",
+      "usage-ack-desc": "Making a dashboard public will cause queries to run each time it is viewed, which may increase costs*",
+      "usage-ack-desc-tooltip": "Learn more about query caching"
+    },
+    "config": {
+      "can-view-dashboard-radio-button-label": "Can view dashboard",
+      "copy-button": "Copy",
+      "dashboard-url-field-label": "Dashboard URL",
+      "email-share-type-option-label": "Only specified people",
+      "pause-sharing-dashboard-label": "Pause sharing dashboard",
+      "public-share-type-option-label": "Anyone with a link",
+      "revoke-public-URL-button": "Revoke public URL",
+      "revoke-public-URL-button-title": "Revoke public URL",
+      "settings-title": "Settings"
+    },
+    "create-page": {
+      "generate-public-url-button": "Generate public URL",
+      "unsupported-features-desc": "Currently, we don’t support template variables or frontend datový zdrojs",
+      "welcome-title": "Welcome to public dashboards!"
+    },
+    "delete-modal": {
+      "revoke-nonorphaned-body-text": "Are you sure you want to revoke this URL? The dashboard will no longer be public.",
+      "revoke-orphaned-body-text": "Orphaned public dashboard will no longer be public.",
+      "revoke-title": "Revoke public URL"
+    },
+    "email-sharing": {
+      "input-invalid-email-text": "Invalid email",
+      "input-required-email-text": "Email is required",
+      "invite-button": "Invite",
+      "invite-field-desc": "Invite people by email",
+      "invite-field-label": "Invite",
+      "resend-button": "Resend",
+      "resend-button-title": "Resend",
+      "revoke-button": "Revoke",
+      "revoke-button-title": "Revoke"
+    },
+    "modal-alerts": {
+      "no-upsert-perm-alert-desc": "Contact your admin to get permission to {{mode}} public dashboards",
+      "no-upsert-perm-alert-title": "You don’t have permission to {{ mode }} a public dashboard",
+      "save-dashboard-changes-alert-title": "Please save your dashboard changes before updating the public configuration",
+      "unsupport-data-source-alert-readmore-link": "Read more about supported datový zdrojs",
+      "unsupported-data-source-alert-desc": "There are datový zdrojs in this dashboard that are unsupported for public dashboards. Panely that use these datový zdrojs may not function properly: {{unsupportedDataSources}}.",
+      "unsupported-data-source-alert-title": "Unsupported datový zdrojs",
+      "unsupported-template-variable-alert-desc": "This public dashboard may not work since it uses template variables",
+      "unsupported-template-variable-alert-title": "Template variables are not supported"
+    },
+    "settings-bar-header": {
+      "collapse-settings-tooltip": "Collapse settings",
+      "expand-settings-tooltip": "Expand settings"
+    },
+    "settings-configuration": {
+      "default-time-range-label": "Default time range",
+      "default-time-range-label-desc": "The public dashboard uses the default time range settings of the dashboard",
+      "show-annotations-label": "Show annotations",
+      "show-annotations-label-desc": "Show annotations on public dashboard",
+      "time-range-picker-label": "Time range picker enabled",
+      "time-range-picker-label-desc": "Allow viewers to change time range"
+    },
+    "settings-summary": {
+      "annotations-hide-text": "Annotations = hide",
+      "annotations-show-text": "Annotations = show",
+      "time-range-picker-disabled-text": "Time range picker = disabled",
+      "time-range-picker-enabled-text": "Time range picker = enabled",
+      "time-range-text": "Time range = "
+    }
+  },
+  "public-dashboard-list": {
+    "button": {
+      "config-button-tooltip": "Configure public dashboard",
+      "revoke-button-text": "Revoke public URL",
+      "revoke-button-tooltip": "Revoke public dashboard URL",
+      "view-button-tooltip": "View public dashboard"
+    },
+    "dashboard-title": {
+      "orphaned-title": "<0>Orphaned public dashboard</0>",
+      "orphaned-tooltip": "The linked dashboard has already been deleted"
+    },
+    "empty-state": {
+      "message": "You haven't created any public dashboards yet",
+      "more-info": "Vytvořit a public dashboard from any existing dashboard through the <1>Share</1> modal. <4>Learn more</4>"
+    },
+    "toggle": {
+      "pause-sharing-toggle-text": "Pause sharing"
+    }
+  },
+  "public-dashboard-users-access-list": {
+    "dashboard-modal": {
+      "loading-text": "Nahrávám...",
+      "open-dashboard-list-text": "Open dashboards list",
+      "public-dashboard-link": "Public dashboard URL",
+      "public-dashboard-setting": "Public dashboard settings"
+    },
+    "delete-user-modal": {
+      "delete-user-button-text": "Smazat user",
+      "delete-user-cancel-button": "Zrušit",
+      "delete-user-revoke-access-button": "Revoke access",
+      "revoke-access-title": "Revoke access",
+      "revoke-user-access-modal-desc-line1": "Are you sure you want to revoke access for {{email}}?",
+      "revoke-user-access-modal-desc-line2": "This action will immediately revoke {{email}}&apos;s access to all public dashboards."
+    },
+    "modal": {
+      "dashboard-modal-title": "Public dashboards"
+    },
+    "table-header": {
+      "activated-label": "Activated",
+      "activated-tooltip": "Earliest time user has been an active user to a dashboard",
+      "email-label": "Email",
+      "last-active-label": "Last active",
+      "origin-label": "Origin",
+      "role-label": "Role"
+    }
+  },
+  "query-operation": {
+    "header": {
+      "collapse-row": "Collapse query row",
+      "datasource-help": "Show datový zdroj help",
+      "drag-and-drop": "Drag and drop to reorder",
+      "duplicate-query": "Duplicate query",
+      "expand-row": "Expand query row",
+      "hide-response": "Hide response",
+      "remove-query": "Remove query",
+      "show-response": "Show response",
+      "toggle-edit-mode": "Toggle text edit mode"
+    },
+    "query-editor-not-exported": "Datový zdroj plugin does not export any Query Editor component"
+  },
+  "refresh-picker": {
+    "aria-label": {
+      "choose-interval": "Auto refresh turned off. Choose refresh time interval",
+      "duration-selected": "Choose refresh time interval with current interval {{durationAriaLabel}} selected"
+    },
+    "auto-option": {
+      "aria-label": "",
+      "label": ""
+    },
+    "live-option": {
+      "aria-label": "Turn on live streaming",
+      "label": "Live"
+    },
+    "off-option": {
+      "aria-label": "Turn off auto refresh",
+      "label": "Off"
+    },
+    "tooltip": {
+      "interval-selected": "Set auto refresh interval",
+      "turned-off": "Auto refresh off"
+    }
+  },
+  "return-to-previous": {
+    "button": {
+      "label": "Back to {{title}}"
+    },
+    "dismissable-button": "Close"
+  },
+  "search": {
+    "actions": {
+      "include-panels": "Include panels",
+      "remove-datasource-filter": "Datasource: {{datasource}}",
+      "sort-placeholder": "Sort",
+      "starred": "Starred",
+      "view-as-folders": "View by folders",
+      "view-as-list": "View as list"
+    },
+    "dashboard-actions": {
+      "import": "Import",
+      "new": "New",
+      "new-dashboard": "New dashboard",
+      "new-folder": "New folder"
+    },
+    "results-table": {
+      "datasource-header": "Datový zdroj",
+      "location-header": "Location",
+      "name-header": "Name",
+      "tags-header": "Tags",
+      "type-dashboard": "Dashboard",
+      "type-folder": "Folder",
+      "type-header": "Type"
+    },
+    "search-input": {
+      "include-panels-placeholder": "Search for dashboards, folders, and panels",
+      "placeholder": "Search for dashboards and folders"
+    }
+  },
+  "service-accounts": {
+    "empty-state": {
+      "button-title": "Přidat service account",
+      "message": "No services accounts found",
+      "more-info": "Remember, you can provide specific permissions for API access to other applications",
+      "title": "You haven't created any service accounts yet"
+    }
+  },
+  "share-modal": {
+    "dashboard": {
+      "title": "Share"
+    },
+    "embed": {
+      "copy": "Copy to clipboard",
+      "html": "Embed HTML",
+      "html-description": "The HTML code below can be pasted and included in another web page. Unless anonymous access is enabled, the user viewing that page need to be signed into Grafana for the graph to load.",
+      "info": "Generate HTML for embedding an iframe with this panel.",
+      "time-range": "Current time range",
+      "time-range-description": "Transforms the current relative time range to an absolute time range"
+    },
+    "export": {
+      "back-button": "Back to export config",
+      "cancel-button": "Zrušit",
+      "info-text": "Export this dashboard.",
+      "save-button": "Uložit to file",
+      "share-externally-label": "Export for sharing externally",
+      "view-button": "View JSON"
+    },
+    "library": {
+      "info": "Vytvořit library panel."
+    },
+    "link": {
+      "copy-link-button": "Copy",
+      "info-text": "Vytvořit a direct link to this dashboard or panel, customized with the options below.",
+      "link-url": "Link URL",
+      "render-alert": "Image renderer plugin not installed",
+      "render-instructions": "To render a panel image, you must install the <2>Grafana image renderer plugin</2>. Please contact your Grafana administrator to install the plugin.",
+      "rendered-image": "Direct link rendered image",
+      "save-alert": "Dashboard is not saved",
+      "save-dashboard": "To render a panel image, you must save the dashboard first.",
+      "shorten-url": "Shorten URL",
+      "time-range-description": "Transforms the current relative time range to an absolute time range",
+      "time-range-label": "Lock time range"
+    },
+    "panel": {
+      "title": "Share Panel"
+    },
+    "snapshot": {
+      "cancel-button": "Zrušit",
+      "copy-link-button": "Copy",
+      "delete-button": "Smazat snapshot.",
+      "deleted-message": "The snapshot has been deleted. If you have already accessed it once, then it might take up to an hour before before it is removed from browser caches or CDN caches.",
+      "expire": "Expire",
+      "expire-day": "1 Day",
+      "expire-hour": "1 Hour",
+      "expire-never": "Never",
+      "expire-week": "1 Week",
+      "info-text-1": "A snapshot is an instant way to share an interactive dashboard publicly. When created, we strip sensitive data like queries (metric, template, and annotation) and panel links, leaving only the visible metric data and series names embedded in your dashboard.",
+      "info-text-2": "Keep in mind, your snapshot <1>can be viewed by anyone</1> that has the link and can access the URL. Share wisely.",
+      "local-button": "Publish Snapshot",
+      "mistake-message": "Did you make a mistake? ",
+      "name": "Snapshot name",
+      "timeout": "Timeout (seconds)",
+      "timeout-description": "You might need to configure the timeout value if it takes a long time to collect your dashboard metrics.",
+      "url-label": "Snapshot URL"
+    },
+    "tab-title": {
+      "embed": "Embed",
+      "export": "Export",
+      "library-panel": "Library panel",
+      "link": "Link",
+      "panel-embed": "Embed",
+      "public-dashboard": "Public Dashboard",
+      "public-dashboard-title": "Public dashboard",
+      "snapshot": "Snapshot"
+    },
+    "theme-picker": {
+      "current": "Current",
+      "dark": "Dark",
+      "field-name": "Theme",
+      "light": "Light"
+    },
+    "view-json": {
+      "copy-button": "Copy to Clipboard"
+    }
+  },
+  "share-playlist": {
+    "checkbox-description": "Panel heights will be adjusted to fit screen size",
+    "checkbox-label": "Autofit",
+    "copy-link-button": "Copy",
+    "link-url-label": "Link URL",
+    "mode": "Mode",
+    "mode-kiosk": "Kiosk",
+    "mode-normal": "Normal",
+    "mode-tv": "TV",
+    "title": "Share playlist"
+  },
+  "shared": {
+    "preferences": {
+      "theme": {
+        "dark-label": "Dark",
+        "light-label": "Light",
+        "system-label": "System preference"
+      }
+    }
+  },
+  "shared-dashboard": {
+    "fields": {
+      "timezone-label": "Timezone"
+    }
+  },
+  "shared-preferences": {
+    "fields": {
+      "home-dashboard-label": "Home Dashboard",
+      "home-dashboard-placeholder": "Default dashboard",
+      "locale-label": "Language",
+      "locale-placeholder": "Choose language",
+      "theme-label": "Interface theme",
+      "week-start-label": "Week start"
+    },
+    "theme": {
+      "default-label": "Default"
+    },
+    "title": "Preference"
+  },
+  "silences": {
+    "empty-state": {
+      "button-title": "Vytvořit silence",
+      "title": "You haven't created any silences yet"
+    }
+  },
+  "snapshot": {
+    "empty-state": {
+      "message": "You haven't created any snapshots yet",
+      "more-info": "You can create a snapshot of any dashboard through the <1>Share</1> modal. <4>Learn more</4>"
+    },
+    "external-badge": "External",
+    "name-column-header": "Name",
+    "url-column-header": "Snapshot url",
+    "view-button": "View"
+  },
+  "tag-filter": {
+    "loading": "Nahrávám...",
+    "no-tags": "No tags found",
+    "placeholder": "Filter by tag"
+  },
+  "teams": {
+    "empty-state": {
+      "button-title": "New team",
+      "message": "No teams found",
+      "pro-tip": "Assign folder and dashboard permissions to teams instead of users to ease administration. <2>Learn more</2>",
+      "title": "You haven't created any teams yet"
+    }
+  },
+  "time-picker": {
+    "absolute": {
+      "recent-title": "Recently used absolute ranges",
+      "title": "Absolute time range"
+    },
+    "calendar": {
+      "apply-button": "Apply time range",
+      "cancel-button": "Zrušit",
+      "close": "Close calendar",
+      "select-time": "Select a time range"
+    },
+    "content": {
+      "empty-recent-list-docs": "<0><0>Read the documentation</0><1> to find out more about how to enter custom time ranges.</1></0>",
+      "empty-recent-list-info": "It looks like you haven't used this time picker before. As soon as you enter some time intervals, recently used intervals will appear here.",
+      "filter-placeholder": "Search quick ranges"
+    },
+    "copy-paste": {
+      "copy-success-message": "Time range copied to clipboard",
+      "default-error-message": "{{error}} is not a valid time range",
+      "default-error-title": "Invalid time range",
+      "tooltip-copy": "Copy time range to clipboard",
+      "tooltip-paste": "Paste time range"
+    },
+    "footer": {
+      "change-settings-button": "Change time settings",
+      "fiscal-year-option": "Fiscal year",
+      "fiscal-year-start": "Fiscal year start month",
+      "time-zone-option": "Time zone",
+      "time-zone-selection": "Time zone selection"
+    },
+    "range-content": {
+      "apply-button": "Apply time range",
+      "default-error": "Please enter a past date or \"now\"",
+      "fiscal-year": "Fiscal year",
+      "from-input": "From",
+      "open-input-calendar": "Open calendar",
+      "range-error": "\"From\" can't be after \"To\"",
+      "to-input": "To"
+    },
+    "range-picker": {
+      "backwards-time-aria-label": "Přesunout time range backwards",
+      "current-time-selected": "Time range selected: {{currentTimeRange}}",
+      "forwards-time-aria-label": "Přesunout time range forwards",
+      "to": "to",
+      "zoom-out-button": "Zoom out time range",
+      "zoom-out-tooltip": "Time range zoom out <1></1> CTRL+Z"
+    },
+    "time-range": {
+      "aria-role": "Time range selection",
+      "default-title": "Time ranges",
+      "example-title": "Example time ranges",
+      "specify": "Specify time range <1></1>"
+    },
+    "zone": {
+      "select-aria-label": "Time zone picker",
+      "select-search-input": "Type to search (country, city, abbreviation)"
+    }
+  },
+  "transformations": {
+    "empty": {
+      "add-transformation-body": "Transformations allow data to be changed in various ways before your visualization is shown.<1></1>This includes joining data together, renaming fields, making calculations, formatting data for display, and more.",
+      "add-transformation-header": "Start transforming data"
+    }
+  },
+  "user-orgs": {
+    "current-org-button": "Current",
+    "name-column": "Name",
+    "role-column": "Role",
+    "select-org-button": "Select organisation",
+    "title": "Organizations"
+  },
+  "user-profile": {
+    "fields": {
+      "email-error": "Email is required",
+      "email-label": "Email",
+      "name-error": "Name is required",
+      "name-label": "Name",
+      "username-label": "Uživatelname"
+    },
+    "tabs": {
+      "general": "General"
+    }
+  },
+  "user-session": {
+    "browser-column": "Browser & OS",
+    "created-at-column": "Logged on",
+    "ip-column": "IP address",
+    "revoke": "Revoke user session",
+    "seen-at-column": "Last seen"
+  },
+  "user-sessions": {
+    "loading": "Nahrávám sessions..."
+  },
+  "users": {
+    "empty-state": {
+      "message": "No users found"
+    }
+  },
+  "users-access-list": {
+    "tabs": {
+      "public-dashboard-users-tab-title": "Public dashboard users"
+    }
+  },
+  "variable": {
+    "adhoc": {
+      "placeholder": "Select value"
+    },
+    "dropdown": {
+      "placeholder": "Enter variable value"
+    },
+    "picker": {
+      "link-all": "All",
+      "option-all": "All",
+      "option-selected-values": "Selected",
+      "option-tooltip": "Clear selections"
+    },
+    "textbox": {
+      "placeholder": "Enter variable value"
+    }
+  },
+  "variables": {
+    "empty-state": {
+      "button-title": "Přidat variable",
+      "info-box-content": "Variables enable more interactive and dynamic dashboards. Instead of hard-coding things like server or sensor names in your metric queries you can use variables in their place. Variables are shown as list boxes at the top of the dashboard. These drop-down lists make it easy to change the data being displayed in your dashboard.",
+      "info-box-content-2": "Check out the <2>Templates and variables documentation</2> for more information.",
+      "title": "There are no variables added yet"
+    }
+  }
+}
