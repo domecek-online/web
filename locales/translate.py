@@ -1,6 +1,7 @@
 import sys
 import os
 import json
+import codecs
 
 global new
 
@@ -23,6 +24,6 @@ def iterate_nested_json_for_loop(obj1, obj2):
             new = new.replace(':"' + obj2[key], ':"' + value)
 
 iterate_nested_json_for_loop(translated, original)
-with open(sys.argv[2], "w") as f:
+with codecs.open(sys.argv[2], "w", "utf-8") as f:
     f.write(new)
 
