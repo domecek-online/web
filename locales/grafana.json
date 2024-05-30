@@ -520,10 +520,10 @@
       "search-placeholder": "Hledat dotazy",
       "showing-queries": "Zobrazuji {{ shown }} z {{ total }} <0>Nahrát více</0>",
       "sort-aria-label": "Seřadit dotazy",
-      "sort-placeholder": "Seřadit dotatzy podle"
+      "sort-placeholder": "Seřadit dotazy podle"
     },
     "rich-history-settings-tab": {
-      "alert-info": "Grafana will keep entries up to {{optionLabel}}.Starred entries won't be deleted.",
+      "alert-info": "Grafana will keep entries up to {{optionLabel}}. Starred entries won't be deleted.",
       "change-default-tab": "Change the default active tab from “Query history” to “Starred”",
       "clear-history-info": "Smazat all of your query history, permanently.",
       "clear-query-history": "Clear query history",
@@ -546,7 +546,7 @@
       "filter-queries-aria-label": "Filter queries for datový zdrojs(s)",
       "filter-queries-placeholder": "Filter queries for datový zdrojs(s)",
       "loading": "Nahrávám...",
-      "loading-results": "Nahrávám results...",
+      "loading-results": "Nahrávám výsledky...",
       "local-history-message": "The history is local to your browser and is not shared with others.",
       "search-queries-placeholder": "Search queries",
       "showing-queries": "Showing {{ shown }} of {{ total }} <0>Load more</0>",
@@ -596,8 +596,8 @@
       "copy-shortened-link-menu": "Open copy link options",
       "refresh-picker-cancel": "Zrušit",
       "refresh-picker-run": "Run query",
-      "split-close": " Close ",
-      "split-close-tooltip": "Close split pane",
+      "split-close": " Zavřít ",
+      "split-close-tooltip": "Zavřít split pane",
       "split-narrow": "Narrow pane",
       "split-title": "Split",
       "split-tooltip": "Split the pane",
@@ -605,23 +605,23 @@
     }
   },
   "folder-picker": {
-    "loading": "Nahrávám folders..."
+    "loading": "Nahrávám složky..."
   },
   "grafana-ui": {
     "drawer": {
-      "close": "Close"
+      "close": "Zavřít"
     },
     "modal": {
-      "close-tooltip": "Close"
+      "close-tooltip": "Zavřít"
     },
     "segment-async": {
-      "error": "Failed to load options",
-      "loading": "Nahrávám options...",
-      "no-options": "No options found"
+      "error": "Chyba při nahrávání nastavení",
+      "loading": "Nahrávám nastavení...",
+      "no-options": "Žádná nastavení nenalezena"
     },
     "select": {
-      "no-options-label": "No options found",
-      "placeholder": "Choose"
+      "no-options-label": "Žádná nastavení nenalezena",
+      "placeholder": "Vybrat"
     },
     "spinner": {
       "aria-label": "Nahrávám"
@@ -629,84 +629,84 @@
   },
   "graph": {
     "container": {
-      "content": "Rendering too many series in a single panel may impact performance and make data harder to read. Consider refining your queries.",
-      "show-all-series": "Show all {{length}}",
-      "show-only-series": "Showing only {{MAX_NUMBER_OF_TIME_SERIES}} series",
-      "title": "Graph"
+      "content": "Zobrazení příliš mnoha řad v jednom panelu může snížit výkon a učinit data nečitelná. Zkuste optimalizovat Vaše dotazy.",
+      "show-all-series": "Zobrazit všech {{length}}",
+      "show-only-series": "Zobrazuji pouze {{MAX_NUMBER_OF_TIME_SERIES}} řad",
+      "title": "Graf"
     }
   },
   "help-modal": {
     "shortcuts-category": {
-      "dashboard": "Dashboard",
-      "focused-panel": "Focused panel",
-      "global": "Global",
-      "time-range": "Time range"
+      "dashboard": "Nástěnka",
+      "focused-panel": "Vybraný panel",
+      "global": "Globální",
+      "time-range": "Časový rozsah"
     },
     "shortcuts-description": {
-      "change-theme": "Change theme",
-      "collapse-all-rows": "Collapse all rows",
-      "copy-time-range": "Copy time range",
-      "dashboard-settings": "Dashboard settings",
-      "duplicate-panel": "Duplicate Panel",
-      "exit-edit/setting-views": "Exit edit/setting views",
-      "expand-all-rows": "Expand all rows",
-      "go-to-dashboards": "Go to Nástěnky",
-      "go-to-explore": "Go to Explore",
-      "go-to-home-dashboard": "Go to Home Dashboard",
-      "go-to-profile": "Go to Profile",
-      "make-time-range-permanent": "Make time range absolute/permanent",
-      "move-time-range-back": "Přesunout time range back",
-      "move-time-range-forward": "Přesunout time range forward",
-      "open-search": "Open search",
-      "open-shared-modal": "Open Panel Share Modal",
-      "paste-time-range": "Paste time range",
-      "refresh-all-panels": "Refresh all panels",
-      "remove-panel": "Remove Panel",
-      "save-dashboard": "Uložit dashboard",
-      "show-all-shortcuts": "Show all keyboard shortcuts",
-      "toggle-active-mode": "Toggle in-active / view mode",
-      "toggle-all-panel-legends": "Toggle all panel legends",
-      "toggle-auto-fit": "Toggle auto fit panels (experimental feature)",
+      "change-theme": "Změnit vzhled",
+      "collapse-all-rows": "Schovat všechny řádky",
+      "copy-time-range": "Zkopírovat časový rozsah",
+      "dashboard-settings": "Nastavení nástěnky",
+      "duplicate-panel": "Duplikovat panel",
+      "exit-edit/setting-views": "Zavřít editaci/nastavení",
+      "expand-all-rows": "Zobraziv všechny řádky",
+      "go-to-dashboards": "Jít na Nástěnky",
+      "go-to-explore": "Jít na Prozkoumat",
+      "go-to-home-dashboard": "Jít na Domovskou Nástěnku",
+      "go-to-profile": "Jít na Profile",
+      "make-time-range-permanent": "Nastavit časový rozsah jako permanentní",
+      "move-time-range-back": "Přesunout časový rozsah zpět",
+      "move-time-range-forward": "Přesunout časový rozsah dopředu",
+      "open-search": "Otevřít vyhledávání",
+      "open-shared-modal": "Otevřít Panel Share Modal",
+      "paste-time-range": "Vložit časový rozsah",
+      "refresh-all-panels": "Obnovit všechny panely",
+      "remove-panel": "Odstranit Panel",
+      "save-dashboard": "Uložit nástěnku",
+      "show-all-shortcuts": "Zobrazit všechny klávesové zkratky",
+      "toggle-active-mode": "Přepnout in-active / view mód",
+      "toggle-all-panel-legends": "Přepnout zobrazení všech legend panelů",
+      "toggle-auto-fit": "Přepnout automatické zvětšení panelů",
       "toggle-exemplars": "Toggle exemplars in all panel",
       "toggle-graph-crosshair": "Toggle shared graph crosshair",
-      "toggle-kiosk": "Toggle kiosk mode (hides top nav)",
-      "toggle-panel-edit": "Toggle panel edit view",
-      "toggle-panel-fullscreen": "Toggle panel fullscreen view",
-      "toggle-panel-legend": "Toggle panel legend",
-      "zoom-out-time-range": "Zoom out time range"
+      "toggle-kiosk": "Přepnout kiosk mód",
+      "toggle-panel-edit": "Přepnout editaci panelu",
+      "toggle-panel-fullscreen": "Přepnout zobrazení panelu na celou obrazovku",
+      "toggle-panel-legend": "Přepnout zobrazení legendy panelu",
+      "zoom-out-time-range": "Zvětšit časový rozsah"
     },
-    "title": "Shortcuts"
+    "title": "Klávesové Zkratky"
   },
   "inspector": {
     "query": {
-      "collapse-all": "Collapse all",
-      "copy-to-clipboard": "Copy to clipboard",
-      "description": "Query inspector allows you to view raw request and response. To collect this data Grafana needs to issue a new query. Click refresh button below to trigger a new query.",
-      "expand-all": "Expand all",
-      "no-data": "No request and response collected yet. Hit refresh button",
-      "refresh": "Refresh"
+      "collapse-all": "Schovat všechny",
+      "copy-to-clipboard": "Kopírovat do schránky",
+      "description": "Inspektor dotazů Vám umožňuje sledovat dotazy a odpovedí. Aby mohla Grafana tyto informace zobrati, potřebuje poslat nový dotaz. Kliknete na tlačítko Obnovit pro poslání nového dotazu.",
+      "expand-all": "Zobrazit všechny",
+      "no-data": "Žádný požadavek a žádná odpoveď nezaznemanána. Klikněte na tlačítko obnovit.",
+      "refresh": "Obnovit"
     }
   },
   "library-panel": {
     "add-modal": {
       "cancel": "Zrušit",
-      "create": "Vytvořit library panel",
-      "error": "Library panel with this name already exists",
-      "folder": "Uložit in folder",
-      "folder-description": "Library panel permissions are derived from the folder permissions",
-      "name": "Library panel name"
+      "create": "Vytvořit panel v knihovně",
+      "error": "Panel v knihovně s tímto jménem již existuje",
+      "folder": "Uložit ve složce",
+      "folder-description": "Oprávnění k panelu je nastaveno podle složky.",
+      "name": "Název panelu v knihovně"
     },
     "add-widget": {
-      "title": "Přidat panel from panel library"
+      "title": "Přidat panel z knihovny panelů"
     },
     "empty-state": {
-      "message": "You haven't created any library panels yet",
-      "more-info": "Vytvořit a library panel from any existing dashboard panel through the panel context menu. <2>Learn more</2>"
+      "message": "Zatím jste nevytvořil žádný panel v knihovně",
+      "more-info": "Vytvořte panel v knihovně z existujícího panelu v nástěnce pomocí menu panelu v nástěnce. <2>Learn more</2>"
     }
   },
   "library-panels": {
     "empty-state": {
-      "message": "No library panels found"
+      "message": "Neexistují žádné panely v knihovně"
     },
     "modal": {
       "body_one": "This panel is being used in {{count}} dashboard. Please choose which dashboard to view the panel in:",
@@ -726,28 +726,28 @@
   },
   "login": {
     "error": {
-      "blocked": "You have exceeded the number of login attempts for this user. Please try again later.",
-      "invalid-user-or-password": "Invalid username or password",
-      "title": "Login failed",
-      "unknown": "Unknown error occurred"
+      "blocked": "Překročil jste počet povolených pokusů přihlášní. Zkuste to později.",
+      "invalid-user-or-password": "Špatné jméno nebo heslo",
+      "title": "Přihlášení selhalo",
+      "unknown": "Nastala neznámá chyba"
     },
-    "forgot-password": "Forgot your password?",
+    "forgot-password": "Zapomněli jste heslo?",
     "form": {
-      "password-label": "Password",
-      "password-placeholder": "password",
-      "password-required": "Password is required",
-      "submit-label": "Log in",
-      "submit-loading-label": "Logging in...",
-      "username-label": "Email or username",
-      "username-placeholder": "email or username",
-      "username-required": "Email or username is required"
+      "password-label": "Heslo",
+      "password-placeholder": "heslo",
+      "password-required": "Je nutné zadat heslo",
+      "submit-label": "Přihlásit",
+      "submit-loading-label": "Přihlašování...",
+      "username-label": "Uživatelské jméno",
+      "username-placeholder": "Uživatelské jméno",
+      "username-required": "Je nutné zadata uživatelské jméno"
     },
     "services": {
-      "sing-in-with-prefix": "Sign in with {{serviceName}}"
+      "sing-in-with-prefix": "Přihlásit pomocí {{serviceName}}"
     },
     "signup": {
-      "button-label": "Sign up",
-      "new-to-question": "New to Grafana?"
+      "button-label": "Zaregistrovat se",
+      "new-to-question": "Používáte grafanu poprvé?"
     }
   },
   "migrate-to-cloud": {
@@ -817,9 +817,9 @@
       "error-title": "Something went wrong",
       "generate-button": "Generate a migration token",
       "generate-button-loading": "Generating a migration token...",
-      "modal-close": "Close",
-      "modal-copy-and-close": "Copy to clipboard and close",
-      "modal-copy-button": "Copy to clipboard",
+      "modal-close": "Zavřít",
+      "modal-copy-and-close": "Kopírovat do schránky and close",
+      "modal-copy-button": "Kopírovat do schránky",
       "modal-field-description": "Copy the token now as you will not be able to see it again. Losing a token requires creating a new one.",
       "modal-field-label": "Token",
       "modal-title": "Migration token created",
@@ -849,7 +849,7 @@
       "unknown-datasource-type": "Unknown datový zdroj"
     },
     "resource-type": {
-      "dashboard": "Dashboard",
+      "dashboard": "Nástěnka",
       "datasource": "Datový zdroj",
       "folder": "Folder",
       "unknown": "Unknown"
@@ -880,7 +880,7 @@
   },
   "nav": {
     "add-new-connections": {
-      "title": "Přidat nový connection"
+      "title": "Přidat nová spojení"
     },
     "admin": {
       "subtitle": "Manage server-wide settings and access to resources such as organizations, users, and licenses",
@@ -890,41 +890,41 @@
       "title": "Pravidla upozornění"
     },
     "alerting": {
-      "subtitle": "Learn about problems in your systems moments after they occur",
-      "title": "Alerting"
+      "subtitle": "Zjistěte, že se něco děje s Vaším domem",
+      "title": "Upozornění"
     },
     "alerting-admin": {
-      "subtitle": "Manage Alertmanager configurations",
-      "title": "Settings"
+      "subtitle": "Spravujte nastavení Upozornění",
+      "title": "Nastavení"
     },
     "alerting-am-routes": {
-      "subtitle": "Determine how alerts are routed to contact points",
-      "title": "Notification policies"
+      "subtitle": "Nastavte jak jsou upozornění posílána",
+      "title": "Notifikační pravidla"
     },
     "alerting-channels": {
-      "title": "Notification channels"
+      "title": "Notifikační kanály"
     },
     "alerting-groups": {
-      "subtitle": "See grouped alerts from an Alertmanager instance",
-      "title": "Groups"
+      "subtitle": "Seskupte upožornění",
+      "title": "Skupiny"
     },
     "alerting-home": {
-      "title": "Home"
+      "title": "Domů"
     },
     "alerting-legacy": {
-      "title": "Alerting (legacy)"
+      "title": "Upozornění (legacy)"
     },
     "alerting-list": {
-      "subtitle": "Rules that determine whether an alert will fire",
+      "subtitle": "Pravidla definující, jestli se upozornění odešle",
       "title": "Pravidla upozornění"
     },
     "alerting-receivers": {
-      "subtitle": "Choose how to notify your contact points when an alert instance fires",
-      "title": "Contact points"
+      "subtitle": "Vyberte, jak budou kontakty notifikovány o upozornění",
+      "title": "Kontakty"
     },
     "alerting-silences": {
-      "subtitle": "Stop notifications from one or more alerting rules",
-      "title": "Silences"
+      "subtitle": "Zastavte upozorňování na určité události",
+      "title": "Umlčení upozornení"
     },
     "alerting-upgrade": {
       "subtitle": "Upgrade your existing legacy alerts and notification channels to the new Grafana Alerting",
@@ -936,79 +936,79 @@
     },
     "api-keys": {
       "subtitle": "Manage and create API keys that are used to interact with Grafana HTTP APIs",
-      "title": "API keys"
+      "title": "API klíče"
     },
     "application": {
-      "title": "Application"
+      "title": "Aplikace"
     },
     "apps": {
       "subtitle": "App plugins that extend the Grafana experience",
-      "title": "Apps"
+      "title": "Aplikace"
     },
     "authentication": {
-      "title": "Authentication"
+      "title": "Přihlašování"
     },
     "collector": {
       "title": "Collector"
     },
     "config": {
-      "title": "Administration"
+      "title": "Administrace"
     },
     "config-access": {
       "subtitle": "Configure access for individual users, teams, and service accounts",
-      "title": "Uživatels and access"
+      "title": "Uživatelé a přístupy"
     },
     "config-general": {
       "subtitle": "Manage default preferences and settings across Grafana",
-      "title": "General"
+      "title": "Obecné"
     },
     "config-plugins": {
       "subtitle": "Install plugins and define the relationships between data",
-      "title": "Plugins and data"
+      "title": "Pluginy a data"
     },
     "connect-data": {
-      "title": "Connect data"
+      "title": "Připojit data"
     },
     "connections": {
       "subtitle": "Browse and create new connections",
-      "title": "Connections"
+      "title": "Připojení"
     },
     "correlations": {
       "subtitle": "Přidat and configure correlations",
-      "title": "Correlations"
+      "title": "Korelace"
     },
     "create": {
       "title": "Vytvořit"
     },
     "create-alert": {
-      "title": "New alert rule"
+      "title": "Nové pravidlo upozornění"
     },
     "create-dashboard": {
-      "title": "Dashboard"
+      "title": "Nástěnka"
     },
     "create-folder": {
-      "title": "Folder"
+      "title": "Složka"
     },
     "create-import": {
-      "title": "Import dashboard"
+      "title": "Importovat nástěnku"
     },
     "dashboards": {
-      "subtitle": "Vytvořit and manage dashboards to visualize your data",
+      "subtitle": "Vytvořte a spravujte nástěnky",
       "title": "Nástěnky"
     },
     "data-sources": {
-      "subtitle": "View and manage your connected datový zdroj connections",
-      "title": "Datový zdrojs"
+      "subtitle": "Vytvořte a spravujte datové zdroje",
+      "title": "Datové zdroje"
     },
     "datasources": {
-      "subtitle": "Přidat and configure datový zdrojs",
-      "title": "Datový zdrojs"
+      "subtitle": "Přidat a konfigurovat datové zdroje",
+      "title": "Datové zdroje"
     },
     "detect": {
-      "title": "Detect"
+      "title": "Detekce"
     },
     "explore": {
-      "title": "Explore"
+      "title": "Prozkoumat"
     },
     "frontend": {
       "subtitle": "Gain real user monitoring insights",
@@ -1019,27 +1019,27 @@
     },
     "global-orgs": {
       "subtitle": "Isolated instances of Grafana running on the same server",
-      "title": "Organizations"
+      "title": "Organizace"
     },
     "global-users": {
       "subtitle": "Manage users in Grafana",
-      "title": "Uživatels"
+      "title": "Uživatelé"
     },
     "grafana-quaderno": {
       "title": "Grafana Quaderno"
     },
     "help": {
-      "title": "Help"
+      "title": "Nápověda"
     },
-    "help/community": "Community",
-    "help/documentation": "Documentation",
-    "help/keyboard-shortcuts": "Keyboard shortcuts",
-    "help/support": "Support",
+    "help/community": "Komunita",
+    "help/documentation": "Dokumentace",
+    "help/keyboard-shortcuts": "Klávesové zkratky",
+    "help/support": "Podpora",
     "home": {
-      "title": "Home"
+      "title": "Domů"
     },
     "incidents": {
-      "title": "Incidents"
+      "title": "Incidenty"
     },
     "infrastructure": {
       "subtitle": "Understand your infrastructure's health",
@@ -1073,13 +1073,13 @@
       "title": "Observability"
     },
     "new": {
-      "title": "New"
+      "title": "Nový"
     },
     "new-dashboard": {
-      "title": "New dashboard"
+      "title": "Nová nástěnka"
     },
     "new-folder": {
-      "title": "New folder"
+      "title": "Nová složka"
     },
     "observability": {
       "title": "Observability"
@@ -1089,80 +1089,80 @@
     },
     "org-settings": {
       "subtitle": "Manage preferences across an organization",
-      "title": "Default preferences"
+      "title": "Standardní nastavení"
     },
     "playlists": {
       "subtitle": "Groups of dashboards that are displayed in a sequence",
-      "title": "Playlists"
+      "title": "Playlisty"
     },
     "plugins": {
       "subtitle": "Extend the Grafana experience with plugins",
-      "title": "Plugins"
+      "title": "Pluginy"
     },
     "private-data-source-connections": {
       "subtitle": "Query data that lives within a secured network without opening the network to inbound traffic from Grafana Cloud. Learn more in our docs.",
       "title": "Private datový zdroj connect"
     },
     "profile/notifications": {
-      "title": "Notification history"
+      "title": "Historie upozornění"
     },
     "profile/password": {
-      "title": "Change password"
+      "title": "Změna hesla"
     },
     "profile/settings": {
-      "title": "Profile"
+      "title": "Profil"
     },
     "profiles": {
-      "title": "Profiles"
+      "title": "Profily"
     },
     "public": {
-      "title": "Public dashboards"
+      "title": "Veřejné nástěnky"
     },
     "recorded-queries": {
-      "title": "Recorded queries"
+      "title": "Uložené dotazy"
     },
     "reporting": {
-      "title": "Reporting"
+      "title": "Hlášení"
     },
     "scenes": {
-      "title": "Scenes"
+      "title": "Scény"
     },
     "search": {
-      "placeholderCommandPalette": "Search or jump to..."
+      "placeholderCommandPalette": "Hledat nebo přejít na..."
     },
     "search-dashboards": {
-      "title": "Search dashboards"
+      "title": "Hledat nástěnky"
     },
     "server-settings": {
       "subtitle": "View the settings defined in your Grafana config",
-      "title": "Settings"
+      "title": "Nastavení"
     },
     "service-accounts": {
       "subtitle": "Use service accounts to run automated workloads in Grafana",
-      "title": "Service accounts"
+      "title": "Servisní účty"
     },
     "sign-out": {
-      "title": "Sign out"
+      "title": "Odhlásit"
     },
     "slo": {
       "title": "SLO"
     },
     "snapshots": {
       "subtitle": "Interactive, publically available, point-in-time representations of dashboards",
-      "title": "Snapshots"
+      "title": "Snapshoty"
     },
     "starred": {
-      "title": "Starred"
+      "title": "Oblíbené"
     },
     "starred-empty": {
-      "title": "Your starred dashboards will appear here"
+      "title": "Vaše oblíbené nástěnky se zobrazí zde"
     },
     "statistics-and-licensing": {
-      "title": "Statistics and licensing"
+      "title": "Statistiky a licence"
     },
     "storage": {
       "subtitle": "Manage file storage",
-      "title": "Storage"
+      "title": "Úložiště"
     },
     "support-bundles": {
       "subtitle": "Download support bundles",
@@ -1173,7 +1173,7 @@
     },
     "teams": {
       "subtitle": "Groups of users that have common dashboard and permission needs",
-      "title": "Týms"
+      "title": "Týmy"
     },
     "testing-and-synthetics": {
       "subtitle": "Optimize performance with k6 and Synthetic Monitoring insights",
@@ -1181,67 +1181,67 @@
     },
     "trash": {
       "subtitle": "Any items remaining in the Trash for more than 30 days will be automatically deleted",
-      "title": "Trash"
+      "title": "Koš"
     },
     "upgrading": {
-      "title": "Stats and license"
+      "title": "Statistiky a licence"
     },
     "users": {
       "subtitle": "Invite and assign roles to users",
-      "title": "Uživatels"
+      "title": "Uživatelé"
     }
   },
   "navigation": {
     "kiosk": {
-      "tv-alert": "Press ESC to exit kiosk mode"
+      "tv-alert": "Stiskněte ESC pro zrušení kios módu"
     },
     "megamenu": {
-      "close": "Close menu",
-      "dock": "Dock menu",
-      "list-label": "Navigation",
-      "undock": "Undock menu"
+      "close": "Zavřít menu",
+      "dock": "Připnout menu",
+      "list-label": "Navigace",
+      "undock": "Odepnout menu"
     },
     "toolbar": {
-      "close-menu": "Close menu",
-      "enable-kiosk": "Enable kiosk mode",
-      "open-menu": "Open menu",
-      "toggle-search-bar": "Toggle top search bar"
+      "close-menu": "Zavřít menu",
+      "enable-kiosk": "Otevřít kiosk mód",
+      "open-menu": "Otevřít menu",
+      "toggle-search-bar": "Zobrazit/skrýt vyhledávání"
     }
   },
   "news": {
     "drawer": {
-      "close": "Close Drawer"
+      "close": "Zavřít šuplík"
     },
-    "title": "Latest from the blog"
+    "title": "Novinky z blogu"
   },
   "notifications": {
     "empty-state": {
       "description": "Notifications you have received will appear here",
       "title": "You're all caught up!"
     },
-    "starred-dashboard": "Dashboard starred",
-    "unstarred-dashboard": "Dashboard unstarred"
+    "starred-dashboard": "Nástěnka starred",
+    "unstarred-dashboard": "Nástěnka unstarred"
   },
   "panel": {
     "header-menu": {
-      "copy": "Copy",
-      "create-library-panel": "Vytvořit library panel",
-      "duplicate": "Duplicate",
-      "edit": "Edit",
-      "explore": "Explore",
-      "get-help": "Get help",
-      "hide-legend": "Hide legend",
-      "inspect": "Inspect",
+      "copy": "Kopírovat",
+      "create-library-panel": "Vytvořit panel v knihovně",
+      "duplicate": "Duplikovat",
+      "edit": "Editovat",
+      "explore": "Prozkoumat",
+      "get-help": "Získat pomoc",
+      "hide-legend": "Skrýt legendu",
+      "inspect": "Inspekce",
       "inspect-data": "Data",
-      "inspect-json": "Panel JSON",
-      "more": "More...",
-      "new-alert-rule": "New alert rule",
-      "query": "Query",
-      "remove": "Remove",
-      "share": "Share",
-      "show-legend": "Show legend",
-      "unlink-library-panel": "Unlink library panel",
-      "view": "View"
+      "inspect-json": "JSON panelu",
+      "more": "Více...",
+      "new-alert-rule": "Nové pravidlo upozornění",
+      "query": "Dotay",
+      "remove": "Odstranit",
+      "share": "Sdílet",
+      "show-legend": "Zobrazit legendu",
+      "unlink-library-panel": "Odpoutat od panelu v knihovně",
+      "view": "Zobrazit"
     }
   },
   "playlist-edit": {
@@ -1300,18 +1300,18 @@
   "profile": {
     "change-password": {
       "cancel-button": "Zrušit",
-      "cannot-change-password-message": "Password cannot be changed here.",
-      "change-password-button": "Change Password",
-      "confirm-password-label": "Confirm password",
-      "confirm-password-required": "New password confirmation is required",
+      "cannot-change-password-message": "Heslo nemůže být změněno.",
+      "change-password-button": "Změnit Heslo",
+      "confirm-password-label": "Potvrdit heslo",
+      "confirm-password-required": "Potvrzení nového heslo je vyžadováno",
       "ldap-auth-proxy-message": "You cannot change password when signed in with LDAP or auth proxy.",
-      "new-password-label": "New password",
-      "new-password-required": "New password is required",
-      "new-password-same-as-old": "New password can't be the same as the old one.",
-      "old-password-label": "Old password",
-      "old-password-required": "Old password is required",
-      "passwords-must-match": "Passwords must match",
-      "strong-password-validation-register": "Password does not comply with the strong password policy"
+      "new-password-label": "Nové heslo",
+      "new-password-required": "Nové heslo je vyžadováno",
+      "new-password-same-as-old": "Nové heslo nemůže být stejné jako staré.",
+      "old-password-label": "Staré heslo",
+      "old-password-required": "Staré heslo je vyžadováno",
+      "passwords-must-match": "Hesla se musí shodovat",
+      "strong-password-validation-register": "Heslo není dostatečně silné"
     }
   },
   "public-dashboard": {
@@ -1327,13 +1327,13 @@
     "config": {
       "can-view-dashboard-radio-button-label": "Can view dashboard",
       "copy-button": "Copy",
-      "dashboard-url-field-label": "Dashboard URL",
+      "dashboard-url-field-label": "Nástěnka URL",
       "email-share-type-option-label": "Only specified people",
       "pause-sharing-dashboard-label": "Pause sharing dashboard",
       "public-share-type-option-label": "Anyone with a link",
       "revoke-public-URL-button": "Revoke public URL",
       "revoke-public-URL-button-title": "Revoke public URL",
-      "settings-title": "Settings"
+      "settings-title": "Nastavení"
     },
     "create-page": {
       "generate-public-url-button": "Generate public URL",
@@ -1413,15 +1413,15 @@
       "public-dashboard-setting": "Public dashboard settings"
     },
     "delete-user-modal": {
-      "delete-user-button-text": "Smazat user",
+      "delete-user-button-text": "Smazat uživaele",
       "delete-user-cancel-button": "Zrušit",
-      "delete-user-revoke-access-button": "Revoke access",
-      "revoke-access-title": "Revoke access",
+      "delete-user-revoke-access-button": "Zakázat přístup",
+      "revoke-access-title": "Zakázat přístup",
       "revoke-user-access-modal-desc-line1": "Are you sure you want to revoke access for {{email}}?",
       "revoke-user-access-modal-desc-line2": "This action will immediately revoke {{email}}&apos;s access to all public dashboards."
     },
     "modal": {
-      "dashboard-modal-title": "Public dashboards"
+      "dashboard-modal-title": "Veřejní nástěnky"
     },
     "table-header": {
       "activated-label": "Activated",
@@ -1448,7 +1448,7 @@
   },
   "refresh-picker": {
     "aria-label": {
-      "choose-interval": "Auto refresh turned off. Choose refresh time interval",
+      "choose-interval": "Automatické obnovonání vypnute. Vyberte časový interval pro obnovování",
       "duration-selected": "Choose refresh time interval with current interval {{durationAriaLabel}} selected"
     },
     "auto-option": {
@@ -1470,9 +1470,9 @@
   },
   "return-to-previous": {
     "button": {
-      "label": "Back to {{title}}"
+      "label": "Zpátky na {{title}}"
     },
-    "dismissable-button": "Close"
+    "dismissable-button": "Zavřít"
   },
   "search": {
     "actions": {
@@ -1494,7 +1494,7 @@
       "location-header": "Location",
       "name-header": "Name",
       "tags-header": "Tags",
-      "type-dashboard": "Dashboard",
+      "type-dashboard": "Nástěnka",
       "type-folder": "Folder",
       "type-header": "Type"
     },
@@ -1516,7 +1516,7 @@
       "title": "Share"
     },
     "embed": {
-      "copy": "Copy to clipboard",
+      "copy": "Kopírovat do schránky",
       "html": "Embed HTML",
       "html-description": "The HTML code below can be pasted and included in another web page. Unless anonymous access is enabled, the user viewing that page need to be signed into Grafana for the graph to load.",
       "info": "Generate HTML for embedding an iframe with this panel.",
@@ -1541,7 +1541,7 @@
       "render-alert": "Image renderer plugin not installed",
       "render-instructions": "To render a panel image, you must install the <2>Grafana image renderer plugin</2>. Please contact your Grafana administrator to install the plugin.",
       "rendered-image": "Direct link rendered image",
-      "save-alert": "Dashboard is not saved",
+      "save-alert": "Nástěnka is not saved",
       "save-dashboard": "To render a panel image, you must save the dashboard first.",
       "shorten-url": "Shorten URL",
       "time-range-description": "Transforms the current relative time range to an absolute time range",
@@ -1575,7 +1575,7 @@
       "library-panel": "Library panel",
       "link": "Link",
       "panel-embed": "Embed",
-      "public-dashboard": "Public Dashboard",
+      "public-dashboard": "Public Nástěnka",
       "public-dashboard-title": "Public dashboard",
       "snapshot": "Snapshot"
     },
@@ -1616,7 +1616,7 @@
   },
   "shared-preferences": {
     "fields": {
-      "home-dashboard-label": "Home Dashboard",
+      "home-dashboard-label": "Home Nástěnka",
       "home-dashboard-placeholder": "Default dashboard",
       "locale-label": "Language",
       "locale-placeholder": "Choose language",
@@ -1659,56 +1659,56 @@
   },
   "time-picker": {
     "absolute": {
-      "recent-title": "Recently used absolute ranges",
-      "title": "Absolute time range"
+      "recent-title": "Nedávno použité absolutní intervaly",
+      "title": "Absolutní časové intervaly"
     },
     "calendar": {
-      "apply-button": "Apply time range",
+      "apply-button": "Aplikovat časový interval",
       "cancel-button": "Zrušit",
-      "close": "Close calendar",
-      "select-time": "Select a time range"
+      "close": "Zavřít kalendář",
+      "select-time": "Vybrat časový interval"
     },
     "content": {
-      "empty-recent-list-docs": "<0><0>Read the documentation</0><1> to find out more about how to enter custom time ranges.</1></0>",
-      "empty-recent-list-info": "It looks like you haven't used this time picker before. As soon as you enter some time intervals, recently used intervals will appear here.",
-      "filter-placeholder": "Search quick ranges"
+      "empty-recent-list-docs": "<0><0>Přečtěte si doumentaci</0><1> pro více informaci o časových intervalech.</1></0>",
+      "empty-recent-list-info": "Ještě jste nepoužili výber časového intervalu. Jakmile nějaký časový interval vyberete, nedávno použité intervaly se zobrazí zde.",
+      "filter-placeholder": "Vyhledat intervaly"
     },
     "copy-paste": {
-      "copy-success-message": "Time range copied to clipboard",
-      "default-error-message": "{{error}} is not a valid time range",
-      "default-error-title": "Invalid time range",
-      "tooltip-copy": "Copy time range to clipboard",
-      "tooltip-paste": "Paste time range"
+      "copy-success-message": "Časový interval zkopírován do schránky",
+      "default-error-message": "{{error}} není platný časový interval",
+      "default-error-title": "Neplatný časový interval",
+      "tooltip-copy": "Kopírovat časový interval do schránky",
+      "tooltip-paste": "Vložit časový interval"
     },
     "footer": {
-      "change-settings-button": "Change time settings",
-      "fiscal-year-option": "Fiscal year",
-      "fiscal-year-start": "Fiscal year start month",
-      "time-zone-option": "Time zone",
-      "time-zone-selection": "Time zone selection"
+      "change-settings-button": "Změnit nastavení času",
+      "fiscal-year-option": "Fiskální rok",
+      "fiscal-year-start": "Fiskální rok začína datem",
+      "time-zone-option": "Časová zóna",
+      "time-zone-selection": "Výběr časové zóny"
     },
     "range-content": {
-      "apply-button": "Apply time range",
-      "default-error": "Please enter a past date or \"now\"",
-      "fiscal-year": "Fiscal year",
-      "from-input": "From",
-      "open-input-calendar": "Open calendar",
-      "range-error": "\"From\" can't be after \"To\"",
-      "to-input": "To"
+      "apply-button": "Aplikovat časový interval",
+      "default-error": "Zadejte datum v minulosti nebo \"now\"",
+      "fiscal-year": "Fiskální rok",
+      "from-input": "Od",
+      "open-input-calendar": "Otevřít kalendář",
+      "range-error": "\"Od\" nesmí být po \"Do\"",
+      "to-input": "Do"
     },
     "range-picker": {
-      "backwards-time-aria-label": "Přesunout time range backwards",
-      "current-time-selected": "Time range selected: {{currentTimeRange}}",
-      "forwards-time-aria-label": "Přesunout time range forwards",
+      "backwards-time-aria-label": "Přesunout časový interval zpátky",
+      "current-time-selected": "Vybraný časový interval: {{currentTimeRange}}",
+      "forwards-time-aria-label": "Přesunout časový interval dopředu",
       "to": "to",
-      "zoom-out-button": "Zoom out time range",
-      "zoom-out-tooltip": "Time range zoom out <1></1> CTRL+Z"
+      "zoom-out-button": "Oddálit časový interval",
+      "zoom-out-tooltip": "Oddálit časový interval <1></1> CTRL+Z"
     },
     "time-range": {
-      "aria-role": "Time range selection",
-      "default-title": "Time ranges",
-      "example-title": "Example time ranges",
-      "specify": "Specify time range <1></1>"
+      "aria-role": "Výběr časového intervalu",
+      "default-title": "Časové intervaly",
+      "example-title": "Ukázky časových intervalů",
+      "specify": "Nastavte časový interval <1></1>"
     },
     "zone": {
       "select-aria-label": "Time zone picker",
@@ -1730,14 +1730,14 @@
   },
   "user-profile": {
     "fields": {
-      "email-error": "Email is required",
+      "email-error": "Email je vyžadován",
       "email-label": "Email",
-      "name-error": "Name is required",
-      "name-label": "Name",
-      "username-label": "Uživatelname"
+      "name-error": "Jméno je vyžadováno",
+      "name-label": "Jméno",
+      "username-label": "Uživatelské jméno"
     },
     "tabs": {
-      "general": "General"
+      "general": "Obecné"
     }
   },
   "user-session": {
