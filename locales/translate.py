@@ -23,5 +23,6 @@ def iterate_nested_json_for_loop(obj1, obj2):
             new = new.replace(':"' + obj2[key], ':"' + value)
 
 iterate_nested_json_for_loop(translated, original)
-print(new)
+with open(sys.argv[2], "w") as f:
+    f.write(new)
 
