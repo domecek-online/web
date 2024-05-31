@@ -11,7 +11,7 @@ const { execSync } = require('child_process');
 const crypto = require("crypto");
 var needle = require('needle');
 
-const grafana_url = 'https://grafana.domecek.online'
+const grafana_url = 'http://localhost:3000'
 
 const app = express();
 
@@ -68,6 +68,23 @@ function influx_api(cmd, res) {
       else {
         res.send({msg: 'Internal server error'});
       }
+      return "";
+    }
+}
+
+function import_dashboards(res) {
+    try {
+      stdout = execSync("cd dashboard; python import.py");
+      return stdout;
+    }
+    catch (err){
+      console.log("output", err);
+      console.log("stderr", err.stderr.toString());
+      if (!res) {
+        return ""
+      }
+
+      res.send({msg: 'Internal server error'});
       return "";
     }
 }
@@ -213,6 +230,11 @@ app.post("/api/1/homes", checkJwt, jsonParser, async (req, res) => {
   }
   var resp = await grafana_api('post', `/api/datasources`, data, orgId);
   console.log(resp.body);
+
+  var stdout = import_dashboards(res)
+  if (!stdout) {
+    return;
+  }
 
   // Insert all the data to database.
   const sql = 'INSERT INTO homes(username, name, bucket_id, bucket_token, bucket_auth_id, loxone_token, grafana_org_id, grafana_user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';

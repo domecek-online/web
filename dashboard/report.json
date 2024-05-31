@@ -1,0 +1,341 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 14,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fdn5d77g8x1xcf"
+      },
+      "description": "Vypočteno z pravidelného hlášení měřičů. Tento údaj je tak přesný jak přesná jsou hlášení měřičů.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatt"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "_time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 168
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Spotřeba rekuperace {Source=\"Loxone\", _field=\"value\", _start=\"2024-04-30 12:48:46.713792387 +0000 UTC\", _stop=\"2024-05-30 12:48:46.713792387 +0000 UTC\"}"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 846
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*vody.*/"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "litre"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Datum"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "time:DD. MM. YYYY"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 1,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Datum"
+          }
+        ]
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdn5d77g8x1xcf"
+          },
+          "query": "import \"timezone\"\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Doma\")\n  |> range(start: -30d, stop:today())\n  |> filter(fn: (r) => (r[\"_measurement\"] =~ /Spotřeba.*/))\n  |> aggregateWindow(\n    every: 1h,\n    fn: (tables=<-, column) =>\n      tables\n        |> integral(unit: 1h)\n        |> map(fn: (r) => ({ r with _value: r._value})))\n  |> aggregateWindow(fn: sum, every: 1d)\n  |> pivot(rowKey: [\"_time\"], columnKey: [\"_measurement\"], valueColumn: \"_value\")\n  \n  \n",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": "30d",
+      "title": "Denní report",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {
+            "mode": "columns"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Source": true,
+              "_field": true,
+              "_start": true,
+              "_stop": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "_time": "Datum"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fdn5d77g8x1xcf"
+      },
+      "description": "Vypočteno z pravidelného hlášení měřičů. Tento údaj je tak přesný jak přesná jsou hlášení měřičů.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatt"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "_time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 168
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Spotřeba rekuperace {Source=\"Loxone\", _field=\"value\", _start=\"2024-04-30 12:48:46.713792387 +0000 UTC\", _stop=\"2024-05-30 12:48:46.713792387 +0000 UTC\"}"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 846
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*vody.*/"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "litre"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Datum"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "time:DD. MM. YYYY"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 2,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 1,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Datum"
+          }
+        ]
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdn5d77g8x1xcf"
+          },
+          "query": "import \"timezone\"\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Doma\")\n  |> range(start: -180d)\n  |> filter(fn: (r) => (r[\"_measurement\"] =~ /Spotřeba.*/))\n  |> aggregateWindow(\n    every: 1h,\n    fn: (tables=<-, column) =>\n      tables\n        |> integral(unit: 1h)\n        |> map(fn: (r) => ({ r with _value: r._value})))\n  |> aggregateWindow(fn: sum, every: 1mo)\n  |> pivot(rowKey: [\"_time\"], columnKey: [\"_measurement\"], valueColumn: \"_value\")\n  \n  \n",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": "30d",
+      "title": "Měsíční report",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {
+            "mode": "columns"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Source": true,
+              "_field": true,
+              "_start": true,
+              "_stop": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "_time": "Datum"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Report",
+  "uid": "cdn9p5urrcv7kf",
+  "version": 6,
+  "weekStart": ""
+}
