@@ -38,3 +38,24 @@
   display: inline-flex !important;
   width: 64px;
 }
+
+.toc {
+  position: sticky;
+  position: -webkit-sticky; /* For Safari */
+  top: 24px; /* How far down the page you want your ToC to live */
+
+  /* Give table of contents a scrollbar */
+  max-height: calc(100vh - 40px);
+  overflow: auto;
+  float:right;
+  background-color:#f8f9fa;
+  border: solid;
+  border-color:#e9ebf2;
+  border-width: 2px;
+  border-radius:10px;
+  padding:5px;
+}
+
+li.active > a {
+  font-weight: bold;
+}
