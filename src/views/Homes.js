@@ -175,6 +175,7 @@ export const HomesComponent = () => {
 
   return (
     <>
+        <div className="mensi">
       <div className="mb-5">
         {state.error === "consent_required" && (
           <Alert color="warning">
@@ -299,6 +300,7 @@ export const HomesComponent = () => {
 
 
 
+      </div>
       </div>
 
 

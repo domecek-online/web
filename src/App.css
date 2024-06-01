@@ -17,6 +17,15 @@
   }
 }
 
+.container {
+  max-width: '100%';
+  width: 100%;
+}
+
+#root {
+    width: 100%;
+}
+
 .spinner {
   position: absolute;
   display: flex;
@@ -42,7 +51,7 @@
 .toc {
   position: sticky;
   position: -webkit-sticky; /* For Safari */
-  top: 24px; /* How far down the page you want your ToC to live */
+  top: 120px; /* How far down the page you want your ToC to live */
 
   /* Give table of contents a scrollbar */
   max-height: calc(100vh - 40px);
@@ -58,4 +67,9 @@
 
 li.active > a {
   font-weight: bold;
+}
+
+.mensi {
+  max-width:1100px;
+  margin: auto;
 }

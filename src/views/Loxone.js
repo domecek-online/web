@@ -7,7 +7,9 @@ import TableOfContents from '../components/TableOfContents';
 const Loxone = () => (
   <Fragment>
     <TableOfContents />
+      <div className="mensi">
     <LoxoneContent />
+    </div>
   </Fragment>
 );
 

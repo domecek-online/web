@@ -5,9 +5,11 @@ import Content from "../components/Content";
 
 const Home = () => (
   <Fragment>
+    <div className="mensi">
     <Hero />
     <hr />
     <Content />
+    </div>
   </Fragment>
 );
 
