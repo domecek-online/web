@@ -8,7 +8,7 @@ const Loxone = () => (
   <Fragment>
     <TableOfContents />
       <div className="mensi">
-    <LoxoneContent />
+    <LoxoneContent/>
     </div>
   </Fragment>
 );

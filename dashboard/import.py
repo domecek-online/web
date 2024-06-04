@@ -57,6 +57,7 @@ for org in r.json():
         continue
     datasource_uid = r.json()[0]["uid"]
 
+    # Dashboards
     for f_uid in [folder_uid, folder_custom_uid]:
         for template in os.listdir("."):
             if not template.endswith(".json"):
@@ -96,3 +97,49 @@ for org in r.json():
                 r = requests.put(f'http://localhost:3000/api/org/preferences', auth=grafana_auth, headers=headers, json=data)
                 pprint(r.json())
 
+
+    # Alert Rules
+    r = requests.get(f'http://localhost:3000/api/v1/provisioning/alert-rules', auth=grafana_auth, headers=headers)
+    title2uid = {}
+    pprint(r.json())
+    for data in r.json():
+        title2uid[data["title"]] = data["uid"]
+    for template in os.listdir("./alerts"):
+        template = "./alerts/" + template
+        if not template.endswith(".json"):
+            continue
+        with open(template) as f:
+            alerts = json.loads(f.read().replace("bucket: \\\"Doma\\\"", f"bucket: \\\"{org['name']}\\\""))
+            for group in alerts["groups"]:
+                for rule in group["rules"]:
+                    for model in rule["data"]:
+                        if model["datasourceUid"] != "__expr__":
+                            model["datasourceUid"] = datasource_uid
+                            model["model"]["datasource"]["uid"] = datasource_uid
+                    rule["folderUID"] = folder_uid
+                    rule["ruleGroup"] = "Upozornění"
+                    if rule["title"] in title2uid:
+                        r = requests.put(f'http://localhost:3000/api/v1/provisioning/alert-rules/{title2uid[rule["title"]]}', auth=grafana_auth, headers=headers, json=rule)
+                    else:
+                        r = requests.post(f'http://localhost:3000/api/v1/provisioning/alert-rules', auth=grafana_auth, headers=headers, json=rule)
+                    pprint(r.json())
+
+    # Contact Points
+    r = requests.get(f'http://localhost:3000/api/v1/provisioning/contact-points', auth=grafana_auth, headers=headers)
+    name2uid = {}
+    pprint(r.json())
+    for data in r.json():
+        name2uid[data["name"]] = data["uid"]
+    pprint(name2uid)
+    if "Webhook" not in name2uid:
+        data = {
+            "settings": {
+                "httpMethod": "POST",
+                "url": "http://localhost:3002"
+            },
+            'type': 'webhook',
+            'name': "Webhook",
+        }
+        r = requests.post(f'http://localhost:3000/api/v1/provisioning/contact-points', auth=grafana_auth, headers=headers, json=data)
+        print(r.content)
+        pprint(r.json())

@@ -9,3 +9,10 @@ CREATE TABLE homes (
   grafana_org_id TEXT NOT NULL,
   grafana_user_id TEXT NOT NULL
 );
+
+CREATE TABLE notifications (
+  id INTEGER PRIMARY KEY,
+  grafana_org_id TEXT NOT NULL,
+  type TEXT NOT NULL,
+  value TEXT NOT NULL
+);

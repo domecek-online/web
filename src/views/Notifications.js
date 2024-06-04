@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Alert } from "reactstrap";
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 
 import Highlight from "../components/Highlight";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
@@ -9,11 +9,13 @@ import Loading from "../components/Loading";
 
 export const HomesComponent = () => {
   const { apiOrigin, audience } = getConfig();
+  const {homeId} = useParams();
+  const [homeName, setHomeName] = useState("");
 
-  const [name, setName] = useState("");
-  const [homes, setHomes] = useState([])
+  const [type, setType] = useState("email");
+  const [notifications, setNotifications] = useState([])
   const [loading, setLoading] = useState(false)
-  const [username, setUsername] = useState("");
+  const [value, setValue] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
@@ -99,23 +101,22 @@ export const HomesComponent = () => {
     try {
       const token = await getAccessTokenSilently();
 
-      const response = await fetch(`${apiOrigin}/api/1/homes`, {
+      const response = await fetch(`${apiOrigin}/api/1/homes/${homeId}/notifications`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-type': 'application/json',
         },
         body: JSON.stringify({
-          'name': name,
-          'grafana_username': username,
-          'grafana_password': password
+          'type': type,
+          'value': value,
         })
       });
 
       const responseData = await response.json();
       setMessage(responseData.msg)
 
-      fetchHomes();
+      fetchNotifications();
     } catch (error) {
       setState({
         ...state,
@@ -124,12 +125,12 @@ export const HomesComponent = () => {
     }
   }
 
-  const removeHome = async (home_name) => {
+  const removeNotification = async (n_id) => {
     try {
       setLoading(true);
       const token = await getAccessTokenSilently();
 
-      const response = await fetch(`${apiOrigin}/api/1/homes/${home_name}`, {
+      const response = await fetch(`${apiOrigin}/api/1/homes/${homeId}/notifications/${n_id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -138,7 +139,7 @@ export const HomesComponent = () => {
 
       const responseData = await response.json();
 
-      fetchHomes();
+      fetchNotifications();
     } catch (error) {
       setState({
         ...state,
@@ -147,12 +148,36 @@ export const HomesComponent = () => {
     }
   }
 
-  const fetchHomes = async () => {
+  const fetchHome = async () => {
+    try {
+      const token = await getAccessTokenSilently();
+
+      const response = await fetch(`${apiOrigin}/api/1/homes/${homeId}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const responseData = await response.json();
+      if (responseData.length == 0) {
+        setHomeName("");
+        return;
+      }
+
+      setHomeName(responseData[0].name);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const fetchNotifications = async () => {
     try {
       setLoading(true);
       const token = await getAccessTokenSilently();
 
-      const response = await fetch(`${apiOrigin}/api/1/homes_by_username/${user.sub}`, {
+      const response = await fetch(`${apiOrigin}/api/1/homes/${homeId}/notifications`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -161,7 +186,7 @@ export const HomesComponent = () => {
 
       const responseData = await response.json();
 
-      setHomes(responseData)
+      setNotifications(responseData)
       setLoading(false);
     } catch (error) {
       setState({
@@ -172,7 +197,8 @@ export const HomesComponent = () => {
   }
 
   useEffect(() => {
-    fetchHomes();
+    fetchHome();
+    fetchNotifications();
   }, [])
 
   return (
@@ -205,38 +231,34 @@ export const HomesComponent = () => {
           </Alert>
         )}
 
-        <h1>Moje domy</h1>
+        <h1 className="my-5 text-center" id="konfigurace">
+          Konfigurace upozornění {homeName ? (<>pro dům: {homeName}</>) : (<></>)}
+        </h1>
         <p className="lead">
-          Zde můžete spravovat své domy zaregistrované na Domeček.online.
+          Zde můžete nastavit, kam bude Domeček.online zasílat upozornění na nenadálé situace a poruchy.
         </p>
 
       {loading ? (
         <div>Nahrávám...</div>
       ) : (
-        homes.length == 0 ? (<div>Nemáte vytvořené žádné domy.</div>)
+        notifications.length == 0 ? (<div>Nemáte nastavená žádná upozornění.</div>)
         : (
           <>
             <table border={1}>
               <tr>
-                <th>Jméno domu</th>
-                <th>Loxone token</th>
-                <th>Konfigurace Loxone</th>
-                <th>Konfigurace Upozornění</th>
-                <th>Grafana</th>
+                <th>Typ upozornění</th>
+                <th>Hodnota</th>
                 <th>Odstranit</th>
               </tr>
-              {homes.map(home => (
-                <tr key={home.id}>
-                  <td>{home.name}</td>
-                  <td>{home.loxone_token}</td>
-                  <td><Link to={{pathname: `/loxone/${home.id}`}}>Konfigurace Loxone</Link></td>
-                  <td><Link to={{pathname: `/notifications/${home.id}`}}>Konfigurace Upozornění</Link></td>
-                  <td><a href={`https://grafana.domecek.online/?orgId=${home.grafana_org_id}`}>Otevřít Grafanu</a></td>
+              {notifications.map(n => (
+                <tr key={n.id}>
+                  <td>{n.type}</td>
+                  <td>{n.value}</td>
                   <td>
                     <Button
                       color="primary"
                       type="submit"
-                      onClick={() => removeHome(home.name)}
+                      onClick={() => removeNotification(n.id)}
                     >
                       Odstranit
                     </Button>
@@ -248,44 +270,46 @@ export const HomesComponent = () => {
         )
       )}
       <br/>
-                <h1>Přidat nový dům</h1>
-                <p>Povolené znaky jsou pouze malá a velká písmena, čísla, mezera a podtržítko.</p>
+                <h1>Přidat nový typ upozornění</h1>
 
 
               <form onSubmit={handleSubmit}>
                 <div class="form-group">
-                  <label>Jméno domu:</label>
+                  <label>Zasílat upozornění na:</label>
+                  <select class="form-control" onChange={(e) => setType(e.target.value)}>
+                    <option value="email">Email</option>
+                    <option value="sms">SMS</option>
+                  </select>
+                  <small class="form-text text-muted">Vyberte kam chcete upozornění zasílat.</small>
+                </div>
+
+            {type === "email" &&
+                <div class="form-group">
+                  <label>Emailová adresa:</label>
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Jméno domu"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Emailová adresa"
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
                   />
-                  <small class="form-text text-muted">Toto jméno pak můžete sdílet s ostatními uživateli. Povolené znaky jsou pouze malá a velká písmena, čísla, mezera a podtržítko.</small>
+                  <small class="form-text text-muted">Upozornění Vám budeme posílat na tuto emailovou adresu.</small>
                 </div>
+            }
+            {type === "sms" &&
                 <div class="form-group">
-                  <label>Uživatelské jméno do nástroje Grafana:</label>
+                  <label>Telefonní číslo:</label>
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Uživatelské jméno"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Telefonní číslo"
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
                   />
-                  <small class="form-text text-muted">Pomocí tohoto uživatelského jména se přihlásíte do administrace nástroje Grafana, kde uvidíte statistiky Vašeho domu</small>
+                  <small class="form-text text-muted">Upozornění Vám budeme posílat na pomocí SMS na toto telefonní číslo.</small>
                 </div>
-                <div class="form-group">
-                  <label>Uživatelské heslo do nástroje Grafana:</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    placeholder="Uživatelské Heslo"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                  <small class="form-text text-muted">Pomocí tohoto hesla se přihlásíte do administrace nástroje Grafana, kde uvidíte statistiky Vašeho domu.</small>
-                </div>
+            }
+
 
                 {!message ? (
                   <div></div>
@@ -300,7 +324,7 @@ export const HomesComponent = () => {
                     className="mt-5"
                     type="submit"
                   >
-                    Přidat nový dům
+                    Přidat nový typ upozornění
                   </Button>
               </form>
 

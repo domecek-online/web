@@ -73,3 +73,15 @@ li.active > a {
   max-width:1100px;
   margin: auto;
 }
+
+.right {
+  float:right;
+  padding-right:40px;
+}
+
+
+.left {
+  float:left;
+  width:40%;
+  padding-left:40px;
+}

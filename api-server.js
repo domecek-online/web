@@ -74,7 +74,7 @@ function influx_api(cmd, res) {
 
 function import_dashboards(res) {
     try {
-      stdout = execSync("cd dashboard; python import.py");
+      stdout = execSync("cd dashboard; python3 import.py");
       return stdout;
     }
     catch (err){
@@ -307,5 +307,128 @@ app.get("/api/1/homes_by_username/:username", checkJwt, jsonParser, (req, res) =
   });
 });
 
+
+
+app.get("/api/1/homes/:homeId", checkJwt, jsonParser, (req, res) => {
+  const { homeId } = req.params;
+  var username = req.auth.payload.sub;
+
+  db.all('SELECT * FROM homes WHERE id = ? AND username = ?', [homeId, username], (err, rows) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send('Internal server error');
+    } else if (!rows) {
+      res.status(404).send('Homes not found');
+    } else {
+      res.send(rows);
+    }
+  });
+});
+
+
+app.post("/api/1/homes/:homeId/notifications/", checkJwt, jsonParser, async (req, res) => {
+  var username = req.auth.payload.sub;
+  const { homeId } = req.params;
+
+  db.all('SELECT * FROM homes WHERE id = ? AND username = ?', [homeId, username], (err, rows) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send({msg: 'Internal Server Error'});
+      return;
+    } else if (!rows) {
+      res.status(404).send({msg: 'Dům neexituje'})
+      return;
+    }
+
+    var type = req.body.type;
+    var value = req.body.value;
+
+    if (type == "sms"){
+      const regex = /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/gu;
+      const found = value.match(regex);
+      if (!found) {
+        res.send({msg:'Telefonní číslo je neplatné nebo není v mezinárodním formátu.'});
+        return;
+      }
+
+    }
+    else if (type == "email") {
+
+    }
+    else {
+      res.send({msg:'Notifikace lze zasílat jen pomocí SMS nebo emailu.'});
+      return;
+    }
+
+    const sql = 'INSERT INTO notifications(grafana_org_id, type, value) VALUES (?, ?, ?)';
+    db.run(sql, [rows[0].grafana_org_id, type, value], function(err) {
+      if (err) {
+        console.error(err.message);
+        res.send('Internal server error');
+        return;
+      }
+      res.send({
+        msg: "",
+      });
+    });
+  });
+});
+
+
+app.get("/api/1/homes/:homeId/notifications", checkJwt, jsonParser, (req, res) => {
+  const { homeId } = req.params;
+  var username = req.auth.payload.sub;
+
+  db.all('SELECT * FROM homes WHERE id = ? AND username = ?', [homeId, username], (err, rows) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send({msg: 'Internal Server Error'});
+      return;
+    } else if (!rows) {
+      res.status(404).send({msg: 'Dům neexituje'})
+      return;
+    }
+
+    db.all('SELECT * FROM notifications WHERE grafana_org_id = ?', [rows[0].grafana_org_id], (err, rows) => {
+      if (err) {
+        console.error(err.message);
+        res.status(500).send('Internal server error');
+      } else if (!rows) {
+        res.status(404).send('Homes not found');
+      } else {
+        res.send(rows);
+      }
+    });
+  });
+});
+
+
+app.delete("/api/1/homes/:homeId/notifications/:n_id", checkJwt, jsonParser, (req, res) => {
+  const { homeId, n_id } = req.params;
+  var username = req.auth.payload.sub;
+
+  db.all('SELECT * FROM homes WHERE id = ? AND username = ?', [homeId, username], (err, rows) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send({msg: 'Internal Server Error'});
+      return;
+    } else if (!rows) {
+      res.status(404).send({msg: 'Dům neexituje'})
+      return;
+    }
+
+    const sql = 'DELETE FROM notifications WHERE id = ?';
+    db.run(sql, [n_id], function(err) {
+      if (err) {
+        console.error(err.message);
+        res.send('Internal server error');
+        return;
+      }
+      res.send({
+        msg: "Home removed.",
+      });
+    });
+  });
+});
 
 app.listen(port, () => console.log(`API Server listening on port ${port}`));
