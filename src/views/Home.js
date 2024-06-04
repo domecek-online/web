@@ -4,7 +4,7 @@ import Hero from "../components/Hero";
 import Content from "../components/Content";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 
 
 // Import Swiper styles
@@ -23,14 +23,15 @@ const Home = () => (
     <hr />
     <Swiper
       // install Swiper modules
-      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
       spaceBetween={50}
       slidesPerView={1}
       navigation
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log('slide change')}
+      autoplay={{
+        delay: 5000,
+      }}
     >
       <SwiperSlide><Hero /></SwiperSlide>
 
