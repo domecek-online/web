@@ -97,6 +97,7 @@ export const HomesComponent = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      setLoading(true);
       const token = await getAccessTokenSilently();
 
       const response = await fetch(`${apiOrigin}/api/1/homes`, {
@@ -116,11 +117,13 @@ export const HomesComponent = () => {
       setMessage(responseData.msg)
 
       fetchHomes();
+      setLoading(false);
     } catch (error) {
       setState({
         ...state,
         error: error.error,
       });
+      setLoading(false);
     }
   }
 
@@ -174,6 +177,10 @@ export const HomesComponent = () => {
   useEffect(() => {
     fetchHomes();
   }, [])
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <>
