@@ -127,7 +127,8 @@ for org in r.json():
     # Contact Points
     r = requests.get(f'http://localhost:3000/api/v1/provisioning/contact-points', auth=grafana_auth, headers=headers)
     name2uid = {}
-    pprint(r.json())
+    pprint(r.content, stream=sys.stderr)
+    pprint(r.json(), stream=sys.stderr)
     for data in r.json():
         name2uid[data["name"]] = data["uid"]
     pprint(name2uid)
