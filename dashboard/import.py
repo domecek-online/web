@@ -4,6 +4,7 @@ import json
 import requests
 from requests.auth import HTTPBasicAuth
 from pprint import pprint
+import time
 
 with open("../api_config.json") as f:
     cfg = json.loads(f.read())
@@ -125,22 +126,27 @@ for org in r.json():
                     pprint(r.json())
 
     # Contact Points
-    r = requests.get(f'http://localhost:3000/api/v1/provisioning/contact-points', auth=grafana_auth, headers=headers)
-    name2uid = {}
-    pprint(r.content, stream=sys.stderr)
-    pprint(r.json(), stream=sys.stderr)
-    for data in r.json():
-        name2uid[data["name"]] = data["uid"]
-    pprint(name2uid)
-    if "Webhook" not in name2uid:
-        data = {
-            "settings": {
-                "httpMethod": "POST",
-                "url": "http://localhost:3002"
-            },
-            'type': 'webhook',
-            'name': "Webhook",
-        }
-        r = requests.post(f'http://localhost:3000/api/v1/provisioning/contact-points', auth=grafana_auth, headers=headers, json=data)
-        print(r.content)
-        pprint(r.json())
+    for i in range(10):
+        r = requests.get(f'http://localhost:3000/api/v1/provisioning/contact-points', auth=grafana_auth, headers=headers)
+        name2uid = {}
+        pprint(r.content, stream=sys.stderr)
+        pprint(r.json(), stream=sys.stderr)
+        try:
+            for data in r.json():
+                name2uid[data["name"]] = data["uid"]
+        except:
+            time.sleep(2)
+            continue
+        pprint(name2uid)
+        if "Webhook" not in name2uid:
+            data = {
+                "settings": {
+                    "httpMethod": "POST",
+                    "url": "http://localhost:3002"
+                },
+                'type': 'webhook',
+                'name': "Webhook",
+            }
+            r = requests.post(f'http://localhost:3000/api/v1/provisioning/contact-points', auth=grafana_auth, headers=headers, json=data)
+            print(r.content)
+            pprint(r.json())
