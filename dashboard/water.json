@@ -222,6 +222,266 @@
       "timeFrom": "30d",
       "title": "Vypočtená spotřeba vody za den za posledních 30 dní",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "uid": "fdns6aanef1moa",
+        "type": "influxdb"
+      },
+      "type": "timeseries",
+      "title": "Bojler",
+      "gridPos": {
+        "x": 0,
+        "y": 7,
+        "w": 24,
+        "h": 7
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "barAlignment": 0,
+            "lineWidth": 1,
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "spanNulls": false,
+            "insertNulls": false,
+            "showPoints": "auto",
+            "pointSize": 5,
+            "stacking": {
+              "mode": "none",
+              "group": "A"
+            },
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "axisColorMode": "text",
+            "axisBorderShow": false,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "axisCenteredZero": false,
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "hidden"
+              },
+              {
+                "id": "unit",
+                "value": "none"
+              }
+            ]
+          }
+        ]
+      },
+      "id": 3,
+      "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none",
+          "maxHeight": 600
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "eac86481-cbe7-4042-bd50-91724d24f6c2"
+          },
+          "query": "import \"date\"\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => (r[\"_measurement\"] == \"Teplota bojler\"))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> fill(column: \"_value\", usePrevious: true)\n  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r._measurement }))  \n",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "eac86481-cbe7-4042-bd50-91724d24f6c2"
+          },
+          "hide": false,
+          "query": "import \"date\"\r\n\r\nfrom(bucket: \"Kalužovi\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => (r[\"_measurement\"] == \"Ventil bojler\"))\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\r\n  |> fill(column: \"_value\", usePrevious: true)\r\n  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r._measurement }))  \r\n",
+          "refId": "B"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "147 Self Use Min Soc",
+            "renamePattern": "Minimální kapacita baterie"
+          }
+        }
+      ]
+    },
+    {
+      "datasource": {
+        "uid": "fdns6aanef1moa",
+        "type": "influxdb"
+      },
+      "type": "timeseries",
+      "title": "Dešťové nádrže",
+      "gridPos": {
+        "x": 0,
+        "y": 14,
+        "w": 24,
+        "h": 7
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "barAlignment": 0,
+            "lineWidth": 1,
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "spanNulls": false,
+            "insertNulls": false,
+            "showPoints": "auto",
+            "pointSize": 5,
+            "stacking": {
+              "mode": "none",
+              "group": "A"
+            },
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "axisColorMode": "text",
+            "axisBorderShow": false,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "axisCenteredZero": false,
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "hidden"
+              },
+              {
+                "id": "unit",
+                "value": "none"
+              }
+            ]
+          }
+        ]
+      },
+      "id": 4,
+      "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none",
+          "maxHeight": 600
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": [
+            "last"
+          ]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "eac86481-cbe7-4042-bd50-91724d24f6c2"
+          },
+          "query": "import \"date\"\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => (r[\"_measurement\"] == \"Dešťové nádrže\"))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> fill(column: \"_value\", usePrevious: true)\n  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r._measurement }))  \n",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "eac86481-cbe7-4042-bd50-91724d24f6c2"
+          },
+          "hide": false,
+          "query": "import \"date\"\r\n\r\nfrom(bucket: \"Kalužovi\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => (r[\"_measurement\"] == \"Nádrže ventil\" or r[\"_measurement\"] == \"Nádrže ventil\"))\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\r\n  |> fill(column: \"_value\", usePrevious: true)\r\n  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r._measurement }))  \r\n",
+          "refId": "B"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "147 Self Use Min Soc",
+            "renamePattern": "Minimální kapacita baterie"
+          }
+        }
+      ]
     }
   ],
   "refresh": "",
