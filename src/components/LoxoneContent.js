@@ -27,6 +27,7 @@ const LoxoneContent = () => {
   const [token, setToken] = useState();
   const [homeName, setHomeName] = useState();
   const {homeId} = useParams();
+  const port = 2221 + Number(homeId);
   const { apiOrigin, audience } = getConfig();
   const {
     getAccessTokenSilently,
@@ -86,7 +87,7 @@ const LoxoneContent = () => {
         </p>
         <img className="rounded mx-auto d-block" src={loxone_2} width="800" />
         <p>
-          Nastavte adresu Loggeru v jeho Vlastnostech na <i>/dev/udp/domecek.online/2222</i>.
+          Nastavte adresu Loggeru v jeho Vlastnostech na <i>/dev/udp/domecek.online/{port}</i>.
         </p>
         <img className="rounded mx-auto d-block" src={loxone_3} width="480" />
 
