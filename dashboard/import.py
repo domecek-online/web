@@ -64,7 +64,10 @@ for org in r.json():
             if not template.endswith(".json"):
                 continue
             with open(template) as f:
-                dashboard = json.loads(f.read().replace("bucket: \\\"Doma\\\"", f"bucket: \\\"{org['name']}\\\""))
+                d = f.read()
+                d = d.replace("bucket: \\\"Doma\\\"", f"bucket: \\\"{org['name']}\\\"")
+                d = d.replace("bucket: \\\"Kalužovi\\\"", f"bucket: \\\"{org['name']}\\\"")
+                dashboard = json.loads(d)
                 del dashboard["id"]
                 del dashboard["uid"]
                 for panel in dashboard["panels"]:
