@@ -71,9 +71,14 @@ def filter_panels(client, dashboard):
     dashboard["panels"] = new_panels
     return dashboard
 
+org_to_check = None
+if len(sys.argv) == 2:
+    org_to_check = sys.argv[1]
 
 r = requests.get(f'http://localhost:3000/api/orgs', auth=grafana_auth)
 for org in r.json():
+    if org_to_check and org["name"] != org_to_check:
+        continue
     print(f"Importing Dashboards to organization {org['name']}")
     headers = {
         "X-Grafana-Org-Id": str(org["id"]),
