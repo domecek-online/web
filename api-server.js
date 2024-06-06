@@ -72,9 +72,9 @@ function influx_api(cmd, res) {
     }
 }
 
-function import_dashboards(res) {
+function import_dashboards(res, home_name) {
     try {
-      stdout = execSync("cd dashboard; python3 import.py");
+      stdout = execSync(`cd dashboard; python3 import.py '${home_name}'`);
       return stdout;
     }
     catch (err){
@@ -233,7 +233,7 @@ app.post("/api/1/homes", checkJwt, jsonParser, async (req, res) => {
   var resp = await grafana_api('post', `/api/datasources`, data, orgId);
   console.log(resp.body);
 
-  var stdout = import_dashboards(res)
+  var stdout = import_dashboards(res, home_name)
   if (!stdout) {
     return;
   }
