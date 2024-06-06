@@ -9,6 +9,7 @@ import Home from "./views/Home";
 import Profile from "./views/Profile";
 import Homes from "./views/Homes";
 import Loxone from "./views/Loxone";
+import Public from "./views/Public";
 import Notifications from "./views/Notifications";
 import { useAuth0 } from "@auth0/auth0-react";
 import history from "./utils/history";
@@ -38,6 +39,7 @@ const App = () => {
         <Container fluid>
           <Switch>
             <Route path="/" exact component={Home} />
+            <Route path="/public" exact component={Public} />
             <Route path="/profile" component={Profile} />
             <Route path="/homes" component={Homes} />
             <Route path="/loxone" exact component={Loxone} />

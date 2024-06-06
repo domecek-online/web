@@ -96,9 +96,11 @@ async function grafana_api(method, api, data=null, orgId=null) {
     password: apiConfig.grafana_password,
     rejectUnauthorized: false
   }
+  console.log(orgId);
   if (orgId) {
     options.headers = {"X-Grafana-Org-Id": orgId};
   }
+  console.log(options);
   var resp = await needle(method, `${grafana_url}${api}`, data, options);
   console.log(resp.body);
   return resp;
@@ -429,6 +431,29 @@ app.delete("/api/1/homes/:homeId/notifications/:n_id", checkJwt, jsonParser, (re
       });
     });
   });
+});
+
+app.get("/api/1/public_dashboards", jsonParser, async (req, res) => {
+  db.all('SELECT grafana_org_id, name FROM homes', async (err, rows) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send('Internal server error');
+      return;
+    } else if (!rows) {
+      res.status(404).send('Homes not found');
+      return;
+    }
+
+    ret = {}
+    for (const row of rows) {
+      var resp = await grafana_api('get', '/api/dashboards/public-dashboards', null, row["grafana_org_id"]);
+      if (resp.body["publicDashboards"].length != 0) {
+        ret[row.name] = resp.body["publicDashboards"];
+      }
+    }
+    res.send(ret);
+  });
+
 });
 
 app.listen(port, () => console.log(`API Server listening on port ${port}`));

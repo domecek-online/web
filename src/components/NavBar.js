@@ -58,6 +58,16 @@ const NavBar = () => {
                   Domů
                 </NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink
+                  tag={RouterNavLink}
+                  to="/public"
+                  exact
+                  activeClassName="router-link-exact-active"
+                >
+                  Veřejné nástěnky
+                </NavLink>
+              </NavItem>
               {isAuthenticated && (
                 <NavItem>
                   <NavLink
