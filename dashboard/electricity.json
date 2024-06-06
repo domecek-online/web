@@ -328,45 +328,45 @@
     },
     {
       "datasource": {
-        "type": "influxdb",
-        "uid": "fdns6aanef1moa"
+        "uid": "fdns6aanef1moa",
+        "type": "influxdb"
       },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
           "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
             "drawStyle": "bars",
+            "lineInterpolation": "linear",
+            "barAlignment": 0,
+            "lineWidth": 0,
             "fillOpacity": 100,
             "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
+            "spanNulls": false,
             "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 0,
+            "showPoints": "auto",
             "pointSize": 6,
+            "stacking": {
+              "mode": "normal",
+              "group": "A"
+            },
+            "axisPlacement": "auto",
+            "axisLabel": "",
+            "axisColorMode": "text",
+            "axisBorderShow": false,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
+            "axisCenteredZero": false,
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
             },
             "thresholdsStyle": {
               "mode": "off"
             }
+          },
+          "color": {
+            "mode": "palette-classic"
           },
           "mappings": [],
           "thresholds": {
@@ -394,16 +394,16 @@
       },
       "id": 5,
       "options": {
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none",
+          "maxHeight": 600
+        },
         "legend": {
-          "calcs": [],
+          "showLegend": true,
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "maxHeight": 600,
-          "mode": "multi",
-          "sort": "none"
+          "calcs": []
         }
       },
       "pluginVersion": "10.3.3",
@@ -411,7 +411,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "eac86481-cbe7-4042-bd50-91724d24f6c2"
+            "uid": "fdns6aanef1moa"
           },
           "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -30d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Měřič.*/ and r[\"_measurement\"] != \"Měřič Grid\" and r[\"_measurement\"] != \"Měřič FVE\" and r[\"_measurement\"] != \"Měřič Dům\" and r[\"_measurement\"] != \"Měřič baterie\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r._measurement }))\n  \n",
           "refId": "A"
@@ -419,10 +419,10 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "eac86481-cbe7-4042-bd50-91724d24f6c2"
+            "uid": "fdns6aanef1moa"
           },
           "hide": false,
-          "query": "import \"timezone\"\nimport \"regexp\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nspotrebice = from(bucket: \"Kalužovi\")\n  |> range(start: -30d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Měřič.*/ and r[\"_measurement\"] != \"Měřič Grid\" and r[\"_measurement\"] != \"Měřič FVE\" and r[\"_measurement\"] != \"Měřič Dům\" and r[\"_measurement\"] != \"Měřič výbíjení baterie\" and r[\"_measurement\"] != \"Měřič nabíjení baterie\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"], mode:\"by\")\n  |> sum()\n  |> findColumn(fn: (key) => true, column: \"_value\")// Returns [-2, 10, 7, 17, 15, 4]\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -30d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Měřič Dům\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"], mode:\"by\")\n  |> pivot(rowKey: [\"_time\"], columnKey: [\"_measurement\"], valueColumn: \"_value\")\n  |> map(fn: (r) => ({ r with _value: r[\"Měřič Dům\"] - spotrebice[0]}))\n  |> group()\n  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r._measurement }))\n",
+          "query": "import \"timezone\"\nimport \"regexp\"\nimport \"join\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nspotrebice = from(bucket: \"Kalužovi\")\n  |> range(start: -30d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Měřič.*/ and r[\"_measurement\"] != \"Měřič Grid\" and r[\"_measurement\"] != \"Měřič FVE\" and r[\"_measurement\"] != \"Měřič Dům\" and r[\"_measurement\"] != \"Měřič výbíjení baterie\" and r[\"_measurement\"] != \"Měřič nabíjení baterie\" and r[\"_measurement\"] != \"Měřič baterie\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"], mode:\"by\")\n  |> sum()\n\nostatni = from(bucket: \"Kalužovi\")\n  |> range(start: -30d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Měřič Dům\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"], mode:\"by\")\n\n//spotrebice\njoin.time(method: \"left\", left: spotrebice, right: ostatni, as: (l, r) => ({l with _value: r._value - l._value}))\n  |> group()",
           "refId": "B"
         }
       ],
