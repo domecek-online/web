@@ -1,0 +1,608 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 99,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 8,
+      "panels": [],
+      "title": "Počasí",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fdns6aanef1moa"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "hideTimeOverride": false,
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdns6aanef1moa"
+          },
+          "hide": false,
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Teplota venku\" and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: max, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> rename(columns: {_value: \"Maximální teplota\"})\n  |> keep(columns : [\"_time\",\"Maximální teplota\"])\n\n",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdns6aanef1moa"
+          },
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -30d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Teplota venku\" and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: mean, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> rename(columns: {_value: \"Průměrná teplota\"})\n  |> keep(columns : [\"_time\",\"Průměrná teplota\"])\n",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdns6aanef1moa"
+          },
+          "hide": false,
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -30d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Teplota venku\" and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: min, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> rename(columns: {_value: \"Minimální teplota\"})\n  |> keep(columns : [\"_time\",\"Minimální teplota\"])\n",
+          "refId": "C"
+        }
+      ],
+      "timeFrom": "1d",
+      "title": "Dnešní teplota",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fdns6aanef1moa"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "hideTimeOverride": false,
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdns6aanef1moa"
+          },
+          "hide": false,
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Teplota venku\" and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: max, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> mean()\n  |> rename(columns: {_value: \"Maximální teplota\"})\n  |> keep(columns : [\"_time\",\"Maximální teplota\"])\n\n",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdns6aanef1moa"
+          },
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Teplota venku\" and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: mean, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> mean()\n  |> rename(columns: {_value: \"Průměrná teplota\"})\n  |> keep(columns : [\"_time\",\"Průměrná teplota\"])\n",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdns6aanef1moa"
+          },
+          "hide": false,
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Teplota venku\" and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: min, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> mean()\n  |> rename(columns: {_value: \"Minimální teplota\"})\n  |> keep(columns : [\"_time\",\"Minimální teplota\"])\n",
+          "refId": "C"
+        }
+      ],
+      "timeFrom": "7d",
+      "title": "Průměrná denní teplota za posledních 7 dní",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 9,
+      "panels": [],
+      "title": "Elektřina",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fdns6aanef1moa"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 7
+      },
+      "id": 1,
+      "options": {
+        "displayLabels": [
+          "name",
+          "value"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "value",
+            "percent"
+          ]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdns6aanef1moa"
+          },
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Měřič.*/ and r[\"_measurement\"] != \"Měřič Grid\" and r[\"_measurement\"] != \"Měřič FVE\" and r[\"_measurement\"] != \"Měřič Dům\" and r[\"_measurement\"] != \"Měřič baterie\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r._measurement }))\n  \n",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdns6aanef1moa"
+          },
+          "hide": false,
+          "query": "import \"timezone\"\nimport \"regexp\"\nimport \"join\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nspotrebice = from(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Měřič.*/ and r[\"_measurement\"] != \"Měřič Grid\" and r[\"_measurement\"] != \"Měřič FVE\" and r[\"_measurement\"] != \"Měřič Dům\" and r[\"_measurement\"] != \"Měřič výbíjení baterie\" and r[\"_measurement\"] != \"Měřič nabíjení baterie\" and r[\"_measurement\"] != \"Měřič baterie\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"], mode:\"by\")\n  |> sum()\n\nostatni = from(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Měřič Dům\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"], mode:\"by\")\n\n//spotrebice\njoin.time(method: \"left\", left: spotrebice, right: ostatni, as: (l, r) => ({l with _value: r._value - l._value}))\n  |> group()",
+          "refId": "B"
+        }
+      ],
+      "timeFrom": "1d",
+      "title": "Dnešní spotřeba elektřiny",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "Měřič (.*)",
+            "renamePattern": "$1"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "Value",
+            "renamePattern": "Ostatní"
+          }
+        }
+      ],
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fdns6aanef1moa"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 7
+      },
+      "id": 3,
+      "options": {
+        "displayLabels": [
+          "name",
+          "value"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "value",
+            "percent"
+          ]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdns6aanef1moa"
+          },
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Měřič.*/ and r[\"_measurement\"] != \"Měřič Grid\" and r[\"_measurement\"] != \"Měřič FVE\" and r[\"_measurement\"] != \"Měřič Dům\" and r[\"_measurement\"] != \"Měřič baterie\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> mean()\n  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r._measurement }))\n  \n",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdns6aanef1moa"
+          },
+          "hide": false,
+          "query": "import \"timezone\"\nimport \"regexp\"\nimport \"join\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nspotrebice = from(bucket: \"Kalužovi\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Měřič.*/ and r[\"_measurement\"] != \"Měřič Grid\" and r[\"_measurement\"] != \"Měřič FVE\" and r[\"_measurement\"] != \"Měřič Dům\" and r[\"_measurement\"] != \"Měřič výbíjení baterie\" and r[\"_measurement\"] != \"Měřič nabíjení baterie\" and r[\"_measurement\"] != \"Měřič baterie\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"], mode:\"by\")\n  |> sum()\n\nostatni = from(bucket: \"Kalužovi\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Měřič Dům\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"], mode:\"by\")\n\n//spotrebice\njoin.time(method: \"left\", left: spotrebice, right: ostatni, as: (l, r) => ({l with _value: r._value - l._value}))\n  |> group()",
+          "refId": "B"
+        }
+      ],
+      "timeFrom": "7d",
+      "title": "Průměrná denní spotřeba za posledních 7 dní",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "_value Měřič (.*)",
+            "renamePattern": "$1"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "Value",
+            "renamePattern": "Ostatní"
+          }
+        }
+      ],
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fdns6aanef1moa"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 15
+      },
+      "id": 4,
+      "options": {
+        "displayLabels": [
+          "name",
+          "value"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "value",
+            "percent"
+          ]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdns6aanef1moa"
+          },
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Měřič FVE\" or r[\"_measurement\"] == \"Měřič Grid\" or r[\"_measurement\"] == \"Měřič baterie\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r._measurement }))\n  ",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": "1d",
+      "title": "Dnešní zdroje elektřiny",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "Měřič (.*)",
+            "renamePattern": "$1"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "Grid",
+            "renamePattern": "Síť"
+          }
+        }
+      ],
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fdns6aanef1moa"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 15
+      },
+      "id": 5,
+      "options": {
+        "displayLabels": [
+          "name",
+          "value"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "value",
+            "percent"
+          ]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdns6aanef1moa"
+          },
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Měřič FVE\" or r[\"_measurement\"] == \"Měřič Grid\" or r[\"_measurement\"] == \"Měřič baterie\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> mean()\n  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r._measurement }))\n  ",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": "7d",
+      "title": "Průměr denních zdrojů za posledních 7 dnů.",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "_value Měřič (.*)",
+            "renamePattern": "$1"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "Grid",
+            "renamePattern": "Síť"
+          }
+        }
+      ],
+      "type": "piechart"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "2024-06-06T00:48:17.101Z",
+    "to": "2024-06-06T12:48:17.103Z"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Hlášení - dnes",
+  "uid": "fdny9zjwxupz4b",
+  "version": 5,
+  "weekStart": ""
+}

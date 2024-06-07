@@ -377,6 +377,37 @@ app.post("/api/1/homes/:homeId/notifications/", checkJwt, jsonParser, async (req
 });
 
 
+app.patch("/api/1/homes/:homeId/notifications/:n_id", checkJwt, jsonParser, async (req, res) => {
+  var username = req.auth.payload.sub;
+  const { homeId, n_id } = req.params;
+  var message_types = req.body.message_types;
+
+  db.all('SELECT * FROM homes WHERE id = ? AND username = ?', [homeId, username], (err, rows) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send({msg: 'Internal Server Error'});
+      return;
+    } else if (!rows) {
+      res.status(404).send({msg: 'Dům neexituje'})
+      return;
+    }
+
+    message_types = message_types.join(",");
+    const sql = 'UPDATE notifications SET message_types=? WHERE id = ?';
+    db.run(sql, [message_types, n_id], function(err) {
+      if (err) {
+        console.error(err.message);
+        res.send('Internal server error');
+        return;
+      }
+      res.send({
+        msg: "",
+      });
+    });
+  });
+});
+
+
 app.get("/api/1/homes/:homeId/notifications", checkJwt, jsonParser, (req, res) => {
   const { homeId } = req.params;
   var username = req.auth.payload.sub;
@@ -398,7 +429,17 @@ app.get("/api/1/homes/:homeId/notifications", checkJwt, jsonParser, (req, res) =
       } else if (!rows) {
         res.status(404).send('Homes not found');
       } else {
-        res.send(rows);
+        ret = []
+        for (const row of rows) {
+          if (row.message_types) {
+            row.message_types = row.message_types.split(",");
+          }
+          else {
+            row.message_types = []
+          }
+          ret.push(row);
+        }
+        res.send(ret);
       }
     });
   });

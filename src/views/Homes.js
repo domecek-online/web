@@ -228,7 +228,7 @@ export const HomesComponent = () => {
                 <th>Jméno domu</th>
                 <th>Loxone token</th>
                 <th>Konfigurace Loxone</th>
-                <th>Konfigurace Upozornění</th>
+                <th>Konfigurace Notifikací</th>
                 <th>Grafana</th>
                 <th>Odstranit</th>
               </tr>
@@ -237,7 +237,7 @@ export const HomesComponent = () => {
                   <td>{home.name}</td>
                   <td>{home.loxone_token}</td>
                   <td><Link to={{pathname: `/loxone/${home.id}`}}>Konfigurace Loxone</Link></td>
-                  <td><Link to={{pathname: `/notifications/${home.id}`}}>Konfigurace Upozornění</Link></td>
+                  <td><Link to={{pathname: `/notifications/${home.id}`}}>Konfigurace Notifikací</Link></td>
                   <td><a href={`https://grafana.domecek.online/?orgId=${home.grafana_org_id}`}>Otevřít Grafanu</a></td>
                   <td>
                     <Button

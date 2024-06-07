@@ -14,5 +14,6 @@ CREATE TABLE notifications (
   id INTEGER PRIMARY KEY,
   grafana_org_id TEXT NOT NULL,
   type TEXT NOT NULL,
-  value TEXT NOT NULL
+  value TEXT NOT NULL,
+  message_types TEXT DEFAULT ''
 );

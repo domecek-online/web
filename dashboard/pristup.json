@@ -1,0 +1,259 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 100,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fdns6aanef1moa"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "Otevřeno"
+                },
+                "1": {
+                  "index": 0,
+                  "text": "Zavřeno"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 7,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdns6aanef1moa"
+          },
+          "query": "import \"timezone\"\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -30d, stop:-1s)\n  |> filter(fn: (r) => (r[\"_measurement\"] =~ /Vrata.*zavřena/))\n  |> last()\n  \n  \n  \n",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": "30d",
+      "title": "Stav vrat",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "Time",
+            "renamePattern": "Datum a čas"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "value Loxone",
+            "renamePattern": "Stav"
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fdns6aanef1moa"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "index": 1,
+                  "text": "Otevřeno"
+                },
+                "1": {
+                  "index": 0,
+                  "text": "Zavřeno"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatt"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "_time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 168
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 17,
+        "x": 7,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 1,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Datum a čas"
+          }
+        ]
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdns6aanef1moa"
+          },
+          "query": "import \"timezone\"\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -30d, stop:-1s)\n  |> filter(fn: (r) => (r[\"_measurement\"] =~ /Vrata.*zavřena/))\n  \n  \n  \n",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": "30d",
+      "title": "Stav vrat",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "Time",
+            "renamePattern": "Datum a čas"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "value Loxone",
+            "renamePattern": "Stav"
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Přístup (Vrata, Dveře, Okna)",
+  "uid": "bdo1xci29l2bka",
+  "version": 2,
+  "weekStart": ""
+}

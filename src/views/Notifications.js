@@ -125,6 +125,41 @@ export const HomesComponent = () => {
     }
   }
 
+  const updateNotification = async (n_id, message_types, message_type) => {
+    try {
+      setLoading(true);
+      const token = await getAccessTokenSilently();
+
+      var data = message_types;
+      if (message_types.includes(message_type)) {
+        data = data.filter(e => e !== message_type);
+      }
+      else {
+        data.push(message_type)
+      }
+
+      const response = await fetch(`${apiOrigin}/api/1/homes/${homeId}/notifications/${n_id}`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          'message_types': data,
+        })
+      });
+
+      const responseData = await response.json();
+
+      fetchNotifications();
+    } catch (error) {
+      setState({
+        ...state,
+        error: error.error,
+      });
+    }
+  }
+
   const removeNotification = async (n_id) => {
     try {
       setLoading(true);
@@ -185,6 +220,7 @@ export const HomesComponent = () => {
       });
 
       const responseData = await response.json();
+      console.log(responseData);
 
       setNotifications(responseData)
       setLoading(false);
@@ -232,10 +268,24 @@ export const HomesComponent = () => {
         )}
 
         <h1 className="my-5 text-center" id="konfigurace">
-          Konfigurace upozornění {homeName ? (<>pro dům: {homeName}</>) : (<></>)}
+          Konfigurace notifikací {homeName ? (<>pro dům: {homeName}</>) : (<></>)}
         </h1>
         <p className="lead">
-          Zde můžete nastavit, kam bude Domeček.online zasílat upozornění na nenadálé situace a poruchy.
+          Zde můžete nastavit, kam bude Domeček.online zasílat Upozornění na nenadálé situace a poruchy a pravidelná Hlášení.
+        </p>
+        <p>
+          Rozdíl mezi Upozorněním a Hlášením:<br/><br/>
+          <ul>
+            <li><b>Upozornění</b> - Upozornění je krátká zpráva odeslána při nenadálé události.
+              <ul><li>Například únik vody, otevřená vrata, nízká teplota v domě, ...</li></ul>
+            </li>
+            <li><b>Hlášení</b> - Hlášení jsou pravidelné zprávy obsahující statistiky.
+              <ul>
+                <li>Například informace o spotřebované a vyrobené elektrické energie za daný den, týden, měsíc, rok, ...</li>
+                <li>Hlášení nelze odesílat pomocí SMS.</li>
+              </ul>
+            </li>
+          </ul>
         </p>
 
       {loading ? (
@@ -248,12 +298,47 @@ export const HomesComponent = () => {
               <tr>
                 <th>Typ upozornění</th>
                 <th>Hodnota</th>
+                <th>Upozornění</th>
+                <th>Denní hlášení</th>
                 <th>Odstranit</th>
               </tr>
               {notifications.map(n => (
                 <tr key={n.id}>
                   <td>{n.type}</td>
                   <td>{n.value}</td>
+                  <td>
+                    <Button
+                      color="primary"
+                      type="submit"
+                      onClick={() => updateNotification(n.id, n.message_types, "alerts")}
+                    >
+                      {n.message_types.includes("alerts") ? (
+                        <>Vypnout zasílání Upozornění</>
+                      ) : (
+                        <>Zapnout zasílání Upozornění</>
+                      )}
+                    </Button>
+                  </td>
+                  {n.type != "sms" ? (
+                    <td>
+                      <Button
+                        color="primary"
+                        type="submit"
+                        onClick={() => updateNotification(n.id, n.message_types, "reports")}
+                      >
+                        {n.message_types.includes("reports") ? (
+                          <>Vypnout zasílání Denních Hlášení</>
+                        ) : (
+                          <>Zapnout zasílání Denních Hlášení</>
+                        )}
+
+                      </Button>
+                    </td>
+                  ) : (
+                    <td>
+                        Nelze zasílat pomocí SMS
+                    </td>
+                  )}
                   <td>
                     <Button
                       color="primary"
