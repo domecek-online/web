@@ -670,7 +670,7 @@
             "type": "influxdb",
             "uid": "fdns6aanef1moa"
           },
-          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Měřič.*/ and r[\"_measurement\"] != \"Měřič Grid\" and r[\"_measurement\"] != \"Měřič FVE\" and r[\"_measurement\"] != \"Měřič Dům\" and r[\"_measurement\"] != \"Měřič baterie\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r._measurement }))\n  \n",
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Měřič.*/ and r[\"_measurement\"] != \"Měřič Grid\" and r[\"_measurement\"] != \"Měřič FVE\" and r[\"_measurement\"] != \"Měřič Dům\" and r[\"_measurement\"] != \"Měřič baterie\" and r[\"_measurement\"] != \"Měřič vody\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r._measurement }))\n  \n",
           "refId": "A"
         },
         {
@@ -679,7 +679,7 @@
             "uid": "fdns6aanef1moa"
           },
           "hide": false,
-          "query": "import \"timezone\"\nimport \"regexp\"\nimport \"join\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nspotrebice = from(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Měřič.*/ and r[\"_measurement\"] != \"Měřič Grid\" and r[\"_measurement\"] != \"Měřič FVE\" and r[\"_measurement\"] != \"Měřič Dům\" and r[\"_measurement\"] != \"Měřič výbíjení baterie\" and r[\"_measurement\"] != \"Měřič nabíjení baterie\" and r[\"_measurement\"] != \"Měřič baterie\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"], mode:\"by\")\n  |> sum()\n\nostatni = from(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Měřič Dům\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"], mode:\"by\")\n\n//spotrebice\njoin.time(method: \"left\", left: spotrebice, right: ostatni, as: (l, r) => ({l with _value: r._value - l._value}))\n  |> group()",
+          "query": "import \"timezone\"\nimport \"regexp\"\nimport \"join\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nspotrebice = from(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Měřič.*/ and r[\"_measurement\"] != \"Měřič Grid\" and r[\"_measurement\"] != \"Měřič FVE\" and r[\"_measurement\"] != \"Měřič Dům\" and r[\"_measurement\"] != \"Měřič výbíjení baterie\" and r[\"_measurement\"] != \"Měřič nabíjení baterie\" and r[\"_measurement\"] != \"Měřič baterie\" and r[\"_measurement\"] != \"Měřič vody\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"], mode:\"by\")\n  |> sum()\n\nostatni = from(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Měřič Dům\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"], mode:\"by\")\n\n//spotrebice\njoin.time(method: \"left\", left: spotrebice, right: ostatni, as: (l, r) => ({l with _value: r._value - l._value}))\n  |> group()",
           "refId": "B"
         }
       ],
@@ -767,7 +767,7 @@
             "type": "influxdb",
             "uid": "fdns6aanef1moa"
           },
-          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Měřič.*/ and r[\"_measurement\"] != \"Měřič Grid\" and r[\"_measurement\"] != \"Měřič FVE\" and r[\"_measurement\"] != \"Měřič Dům\" and r[\"_measurement\"] != \"Měřič baterie\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> mean()\n  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r._measurement }))\n  \n",
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Měřič.*/ and r[\"_measurement\"] != \"Měřič Grid\" and r[\"_measurement\"] != \"Měřič FVE\" and r[\"_measurement\"] != \"Měřič Dům\" and r[\"_measurement\"] != \"Měřič baterie\" and r[\"_measurement\"] != \"Měřič vody\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> mean()\n  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r._measurement }))\n  \n",
           "refId": "A"
         },
         {
@@ -776,7 +776,7 @@
             "uid": "fdns6aanef1moa"
           },
           "hide": false,
-          "query": "import \"timezone\"\nimport \"regexp\"\nimport \"join\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nspotrebice = from(bucket: \"Kalužovi\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Měřič.*/ and r[\"_measurement\"] != \"Měřič Grid\" and r[\"_measurement\"] != \"Měřič FVE\" and r[\"_measurement\"] != \"Měřič Dům\" and r[\"_measurement\"] != \"Měřič výbíjení baterie\" and r[\"_measurement\"] != \"Měřič nabíjení baterie\" and r[\"_measurement\"] != \"Měřič baterie\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"], mode:\"by\")\n  |> sum()\n\nostatni = from(bucket: \"Kalužovi\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Měřič Dům\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"], mode:\"by\")\n\n//spotrebice\njoin.time(method: \"left\", left: spotrebice, right: ostatni, as: (l, r) => ({l with _value: r._value - l._value}))\n  |> group()",
+          "query": "import \"timezone\"\nimport \"regexp\"\nimport \"join\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nspotrebice = from(bucket: \"Kalužovi\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Měřič.*/ and r[\"_measurement\"] != \"Měřič Grid\" and r[\"_measurement\"] != \"Měřič FVE\" and r[\"_measurement\"] != \"Měřič Dům\" and r[\"_measurement\"] != \"Měřič výbíjení baterie\" and r[\"_measurement\"] != \"Měřič nabíjení baterie\" and r[\"_measurement\"] != \"Měřič baterie\" and r[\"_measurement\"] != \"Měřič vody\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"], mode:\"by\")\n  |> sum()\n\nostatni = from(bucket: \"Kalužovi\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Měřič Dům\")\n  |> aggregateWindow(every: 1d, offset: 3m, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"], mode:\"by\")\n\n//spotrebice\njoin.time(method: \"left\", left: spotrebice, right: ostatni, as: (l, r) => ({l with _value: r._value - l._value}))\n  |> group()",
           "refId": "B"
         }
       ],
@@ -992,6 +992,6 @@
   "timezone": "browser",
   "title": "Hlášení - dnes",
   "uid": "fdny9zjwxupz4b",
-  "version": 17,
+  "version": 20,
   "weekStart": ""
 }
