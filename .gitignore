@@ -23,7 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 auth_config.json
-db*
+db.db*
+db_path
 *.kate-swp
 api_config.json
 
