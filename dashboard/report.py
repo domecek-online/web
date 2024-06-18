@@ -245,4 +245,11 @@ for org in r.json():
 </html>"""
     print(html)
     print(emails)
-    #send_email("kaluza@seznam.cz", f"Domeček.online - Denní hlášení: {org['name']}", "Obrazek", html, images)
+    for email in emails:
+        send_email(
+            email,
+            f"Domeček.online - Denní hlášení: {org['name']}",
+            "Pro zobrazení emailu musíte povolit zobrazování HTML",
+            html,
+            images
+        )
