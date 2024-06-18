@@ -403,7 +403,7 @@
             "uid": "fdns6aanef1moa"
           },
           "hide": false,
-          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Auto dojezd.*/ and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> rename(columns: {_value: \"Srážky\"})\n  |> keep(columns : [\"_time\",\"Srážky\"])\n\n",
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Auto dojezd.*/ and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> rename(columns: {_value: \"Dojezd\"})\n  |> keep(columns : [\"_time\",\"Dojezd\"])\n\n",
           "refId": "B"
         }
       ],
@@ -468,7 +468,7 @@
             "uid": "fdns6aanef1moa"
           },
           "hide": false,
-          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Auto tachometr.*/ and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> rename(columns: {_value: \"Najeto\"})\n  |> keep(columns : [\"_time\",\"Najeto\"])\n\n",
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Auto tachometr.*/ and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> rename(columns: {_value: \"Najeto za den\"})\n  |> keep(columns : [\"_time\",\"Najeto za den\"])\n\n",
           "refId": "A"
         },
         {
@@ -477,7 +477,7 @@
             "uid": "fdns6aanef1moa"
           },
           "hide": false,
-          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Auto tachometr.*/ and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> rename(columns: {_value: \"Najeto za den\"})\n  |> keep(columns : [\"_time\",\"Najeto za den\"])\n\n",
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Auto tachometr.*/ and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> rename(columns: {_value: \"Stav tachometru\"})\n  |> keep(columns : [\"_time\",\"Stav tachometru\"])\n\n",
           "refId": "B"
         }
       ],
@@ -871,6 +871,6 @@
   "timezone": "browser",
   "title": "Hlášení - dnes",
   "uid": "fdny9zjwxupz4b",
-  "version": 11,
+  "version": 12,
   "weekStart": ""
 }
