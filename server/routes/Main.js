@@ -26,24 +26,19 @@ const checkJwt = auth({
 
 var jsonParser = bodyParser.json()
 
-const asyncHandler = fn => (req, res, next) => {
-  return Promise
-      .resolve(fn(req, res, next))
-      .catch(next);
-};
-
 const router = Router();
 
-router.get("/api/1/homes/:homeId", checkJwt, jsonParser, asyncHandler(homes.get_home));
-router.get("/api/1/homes", checkJwt, jsonParser, asyncHandler(homes.get_homes));
-router.delete("/api/1/homes/:homeId", checkJwt, jsonParser, asyncHandler(homes.delete_home));
-router.post("/api/1/homes", checkJwt, jsonParser, asyncHandler(homes.create_home));
 
-router.delete("/api/1/homes/:homeId/notifications/:n_id", checkJwt, jsonParser, asyncHandler(notifications.delete_notification));
-router.get("/api/1/homes/:homeId/notifications", checkJwt, jsonParser, asyncHandler(notifications.get_notifications));
-router.patch("/api/1/homes/:homeId/notifications/:n_id", checkJwt, jsonParser, asyncHandler(notifications.update_notification));
-router.post("/api/1/homes/:homeId/notifications/", checkJwt, jsonParser, asyncHandler(notifications.create_notification));
+router.get("/api/1/homes/:homeId", checkJwt, jsonParser, homes.get_home);
+router.get("/api/1/homes", checkJwt, jsonParser, homes.get_homes);
+router.delete("/api/1/homes/:homeId", checkJwt, jsonParser, homes.delete_home);
+router.post("/api/1/homes", checkJwt, jsonParser, homes.create_home);
 
-router.get("/api/1/public_dashboards", jsonParser, asyncHandler(public_dashboards.get_public_dashboards));
+router.delete("/api/1/homes/:homeId/notifications/:n_id", checkJwt, jsonParser, notifications.delete_notification);
+router.get("/api/1/homes/:homeId/notifications", checkJwt, jsonParser, notifications.get_notifications);
+router.patch("/api/1/homes/:homeId/notifications/:n_id", checkJwt, jsonParser, notifications.update_notification);
+router.post("/api/1/homes/:homeId/notifications/", checkJwt, jsonParser, notifications.create_notification);
 
-module.exports = {router, asyncHandler}
+router.get("/api/1/public_dashboards", jsonParser, public_dashboards.get_public_dashboards);
+
+module.exports = {router}
