@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Button, Alert } from "reactstrap";
-import {Link, useParams} from 'react-router-dom';
+import {Link, useParams, useHistory} from 'react-router-dom';
 
-import Highlight from "../components/Highlight";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { getConfig } from "../config";
 import Loading from "../components/Loading";
 
-export const HomesComponent = () => {
+export const NotificationsComponent = () => {
   const { apiOrigin, audience } = getConfig();
   const {homeId} = useParams();
+  const history = useHistory();
   const [homeName, setHomeName] = useState("");
 
   const [type, setType] = useState("email");
@@ -19,82 +19,12 @@ export const HomesComponent = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const [state, setState] = useState({
-    showResult: false,
-    apiMessage: "",
-    error: null,
-  });
-
   const {
     getAccessTokenSilently,
     loginWithPopup,
     getAccessTokenWithPopup,
     user
   } = useAuth0();
-
-  const handleConsent = async () => {
-    try {
-      await getAccessTokenWithPopup();
-      setState({
-        ...state,
-        error: null,
-      });
-    } catch (error) {
-      setState({
-        ...state,
-        error: error.error,
-      });
-    }
-
-    await callApi();
-  };
-
-  const handleLoginAgain = async () => {
-    try {
-      await loginWithPopup();
-      setState({
-        ...state,
-        error: null,
-      });
-    } catch (error) {
-      setState({
-        ...state,
-        error: error.error,
-      });
-    }
-
-    await callApi();
-  };
-
-  const callApi = async () => {
-    try {
-      const token = await getAccessTokenSilently();
-
-      const response = await fetch(`${apiOrigin}/api/external`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const responseData = await response.json();
-
-      setState({
-        ...state,
-        showResult: true,
-        apiMessage: responseData,
-      });
-    } catch (error) {
-      setState({
-        ...state,
-        error: error.error,
-      });
-    }
-  };
-
-  const handle = (e, fn) => {
-    e.preventDefault();
-    fn();
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -118,10 +48,10 @@ export const HomesComponent = () => {
 
       fetchNotifications();
     } catch (error) {
-      setState({
-        ...state,
-        error: error.error,
-      });
+      console.log(error)
+    }
+    finally {
+      setLoading(false);
     }
   }
 
@@ -153,10 +83,9 @@ export const HomesComponent = () => {
 
       fetchNotifications();
     } catch (error) {
-      setState({
-        ...state,
-        error: error.error,
-      });
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -176,10 +105,9 @@ export const HomesComponent = () => {
 
       fetchNotifications();
     } catch (error) {
-      setState({
-        ...state,
-        error: error.error,
-      });
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -195,15 +123,17 @@ export const HomesComponent = () => {
       });
 
       const responseData = await response.json();
-      if (responseData.length == 0) {
-        setHomeName("");
+      if (!response.ok) {
+        history.push("/homes");
         return;
       }
 
-      setHomeName(responseData[0].name);
+      setHomeName(responseData.name);
 
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -220,53 +150,31 @@ export const HomesComponent = () => {
       });
 
       const responseData = await response.json();
-      console.log(responseData);
-
       setNotifications(responseData)
-      setLoading(false);
     } catch (error) {
-      setState({
-        ...state,
-        error: error.error,
-      });
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
 
   useEffect(() => {
-    fetchHome();
-    fetchNotifications();
+    if (!homeId) {
+      history.push("/homes");
+    }
+    else {
+      fetchHome();
+      fetchNotifications();
+    }
   }, [])
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
-    <>
-        <div className="mensi">
+    <div className="mensi">
       <div className="mb-5">
-        {state.error === "consent_required" && (
-          <Alert color="warning">
-            You need to{" "}
-            <a
-              href="#/"
-              class="alert-link"
-              onClick={(e) => handle(e, handleConsent)}
-            >
-              consent to get access to users api
-            </a>
-          </Alert>
-        )}
-
-        {state.error === "login_required" && (
-          <Alert color="warning">
-            You need to{" "}
-            <a
-              href="#/"
-              class="alert-link"
-              onClick={(e) => handle(e, handleLoginAgain)}
-            >
-              log in again
-            </a>
-          </Alert>
-        )}
-
         <h1 className="my-5 text-center" id="konfigurace">
           Konfigurace notifikací {homeName ? (<>pro dům: {homeName}</>) : (<></>)}
         </h1>
@@ -275,26 +183,22 @@ export const HomesComponent = () => {
         </p>
         <p>
           Rozdíl mezi Upozorněním a Hlášením:<br/><br/>
-          <ul>
-            <li><b>Upozornění</b> - Upozornění je krátká zpráva odeslána při nenadálé události.
-              <ul><li>Například únik vody, otevřená vrata, nízká teplota v domě, ...</li></ul>
-            </li>
-            <li><b>Hlášení</b> - Hlášení jsou pravidelné zprávy obsahující statistiky.
-              <ul>
-                <li>Například informace o spotřebované a vyrobené elektrické energie za daný den, týden, měsíc, rok, ...</li>
-                <li>Hlášení nelze odesílat pomocí SMS.</li>
-              </ul>
-            </li>
-          </ul>
         </p>
+        <ul>
+          <li key="upozorneni"><b>Upozornění</b> - Upozornění je krátká zpráva odeslána při nenadálé události.
+            <ul><li key="unik-vody">Například únik vody, otevřená vrata, nízká teplota v domě, ...</li></ul>
+          </li>
+          <li key="hlaseni"><b>Hlášení</b> - Hlášení jsou pravidelné zprávy obsahující statistiky.
+            <ul>
+              <li key="elektrina">Například informace o spotřebované a vyrobené elektrické energie za daný den, týden, měsíc, rok, ...</li>
+              <li key="sms">Hlášení nelze odesílat pomocí SMS.</li>
+            </ul>
+          </li>
+        </ul>
 
-      {loading ? (
-        <div>Nahrávám...</div>
-      ) : (
-        notifications.length == 0 ? (<div>Nemáte nastavená žádná upozornění.</div>)
-        : (
-          <>
-            <table border={1}>
+        {(notifications.length == 0 ? (<div>Nemáte nastavená žádná upozornění.</div>) : (
+          <table border={1}>
+            <thead>
               <tr>
                 <th>Typ upozornění</th>
                 <th>Hodnota</th>
@@ -302,6 +206,8 @@ export const HomesComponent = () => {
                 <th>Denní hlášení</th>
                 <th>Odstranit</th>
               </tr>
+            </thead>
+            <tbody>
               {notifications.map(n => (
                 <tr key={n.id}>
                   <td>{n.type}</td>
@@ -350,79 +256,74 @@ export const HomesComponent = () => {
                   </td>
                 </tr>
               ))}
-            </table>
-          </>
-        )
-      )}
-      <br/>
-                <h1>Přidat nový typ upozornění</h1>
+            </tbody>
+          </table>
+        ))}
 
+        <br/>
 
-              <form onSubmit={handleSubmit}>
-                <div class="form-group">
-                  <label>Zasílat upozornění na:</label>
-                  <select class="form-control" onChange={(e) => setType(e.target.value)}>
-                    <option value="email">Email</option>
-                    <option value="sms">SMS</option>
-                  </select>
-                  <small class="form-text text-muted">Vyberte kam chcete upozornění zasílat.</small>
-                </div>
+        <h1>Přidat nový typ upozornění</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Zasílat upozornění na:</label>
+            <select className="form-control" onChange={(e) => setType(e.target.value)} data-testid="notification_type">
+              <option key="email" value="email">Email</option>
+              <option key="sms" value="sms">SMS</option>
+            </select>
+            <small className="form-text text-muted">Vyberte kam chcete upozornění zasílat.</small>
+          </div>
 
-            {type === "email" &&
-                <div class="form-group">
-                  <label>Emailová adresa:</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Emailová adresa"
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                  />
-                  <small class="form-text text-muted">Upozornění Vám budeme posílat na tuto emailovou adresu.</small>
-                </div>
-            }
-            {type === "sms" &&
-                <div class="form-group">
-                  <label>Telefonní číslo:</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Telefonní číslo"
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                  />
-                  <small class="form-text text-muted">Upozornění Vám budeme posílat na pomocí SMS na toto telefonní číslo.</small>
-                </div>
-            }
+          {type === "email" &&
+            <div className="form-group">
+              <label>Emailová adresa:</label>
+              <input
+                type="text"
+                data-testid="email"
+                className="form-control"
+                placeholder="Emailová adresa"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+              />
+              <small className="form-text text-muted">Upozornění Vám budeme posílat na tuto emailovou adresu.</small>
+            </div>
+          }
 
+          {type === "sms" &&
+            <div className="form-group">
+              <label>Telefonní číslo:</label>
+              <input
+                type="text"
+                data-testid="sms"
+                className="form-control"
+                placeholder="Telefonní číslo"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+              />
+              <small className="form-text text-muted">Upozornění Vám budeme posílat na pomocí SMS na toto telefonní číslo.</small>
+            </div>
+          }
 
-                {!message ? (
-                  <div></div>
-                ): (
-                  <div class="alert alert-danger" role="alert">
-                  {message}
-                  </div>
-                )}
+          {!message ? (
+            <div></div>
+          ): (
+            <div className="alert alert-danger" role="alert">
+            {message}
+            </div>
+          )}
 
-                    <Button
-                    color="primary"
-                    className="mt-5"
-                    type="submit"
-                  >
-                    Přidat nový typ upozornění
-                  </Button>
-              </form>
-
-
-
+              <Button
+              color="primary"
+              className="mt-5"
+              type="submit"
+            >
+              Přidat nový typ upozornění
+            </Button>
+        </form>
       </div>
-      </div>
-
-
-    </>
+    </div>
   );
 };
 
-export default withAuthenticationRequired(HomesComponent, {
+export default withAuthenticationRequired(NotificationsComponent, {
   onRedirecting: () => <Loading />,
 });

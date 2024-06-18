@@ -23,16 +23,12 @@ const PublicContent = () => {
       });
 
       const responseData = await response.json();
-      if (responseData.length == 0) {
-        setLoading(false);
-        return;
-      }
-
       setDashboards(responseData)
-      setLoading(false);
 
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -47,25 +43,24 @@ const PublicContent = () => {
   return (
     <div className="next-steps my-5">
       <h1 className="my-5 text-center" id="konfigurace">Veřejné nástěnky</h1>
-        <p>
-          Na této stránce najdete nástěnky domů uživatelů Domeček.online, kteří se rozhodli informace o svém domě sdílet veřejně.
-        </p>
+      <p>
+        Na této stránce najdete nástěnky domů uživatelů Domeček.online, kteří se rozhodli informace o svém domě sdílet veřejně.
+      </p>
 
-          <ul>
-
-    {Object.keys(dashboards).map((keyName, i) => (
-        <>
-          <li>{keyName}</li>
-          <ul>
-          {dashboards[keyName].map(dashboard => (
-              <li><a href={`https://grafana.domecek.online/public-dashboards/${dashboard.accessToken}`}>{dashboard.title}</a></li>
+      {(Object.keys(dashboards).length == 0 ? (<div>Neexistují žádné Veřejné Nástěnky.</div>) : (
+        <ul>
+          {Object.keys(dashboards).map((keyName, i) => (
+            <li key={keyName}>{keyName}
+            <ul>
+            {dashboards[keyName].map(dashboard => (
+                <li key={dashboard.accessToken}><a href={`https://grafana.domecek.online/public-dashboards/${dashboard.accessToken}`}>{dashboard.title}</a></li>
+            ))}
+            </ul>
+            </li>
           ))}
-          </ul>
-        </>
-    ))}
-  </ul>
-
-            </div>
+        </ul>
+      ))}
+    </div>
   );
 }
 

@@ -4,16 +4,17 @@
   "private": true,
   "scripts": {
     "start": "npm-run-all --aggregate-output --parallel spa api-server",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build": "react-scripts build && yarn sentry:sourcemaps",
+    "test": "jest",
     "eject": "react-scripts eject",
     "spa": "PORT=4000 react-scripts start",
     "server": "node server.js",
     "server:dev": "nodemon server.js",
-    "api-server": "node api-server.js",
-    "api-server:dev": "nodemon api-server.js",
+    "api-server": "node server/app.js",
+    "api-server:dev": "nodemon server/app.js",
     "dev": "npm-run-all --parallel spa api-server:dev",
-    "prod": "npm-run-all --parallel server api-server"
+    "prod": "npm-run-all --parallel server api-server",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org domecekonline --project domecek-web ./build && sentry-cli sourcemaps upload --org domecekonline --project domecek-web ./build"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.0",
@@ -23,7 +24,10 @@
     "@fortawesome/fontawesome-svg-core": "^1.2",
     "@fortawesome/free-solid-svg-icons": "^5.8",
     "@fortawesome/react-fontawesome": "^0.2",
+    "@sentry/cli": "^2.32.1",
+    "@sentry/react": "^8.8.0",
     "autoprefixer": "^10.4",
+    "better-sqlite3": "^11.0.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8",
     "express": "^4.18",
@@ -44,11 +48,16 @@
     "typescript": "^4.9"
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^5.17",
     "@testing-library/react": "^14.1",
+    "@testing-library/user-event": "^14.5.2",
     "jest-environment-jsdom": "^27.0",
     "jest-fetch-mock": "^3.0",
-    "nodemon": "^2.0"
+    "jest-svg-transformer": "^1.0.0",
+    "jest-transform-stub": "^2.0.0",
+    "nodemon": "^2.0",
+    "supertest": "^7.0.0"
   },
   "eslintConfig": {
     "extends": "react-app"

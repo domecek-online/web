@@ -27,7 +27,7 @@ const LoxoneContent = () => {
   const [token, setToken] = useState();
   const [homeName, setHomeName] = useState();
   const {homeId} = useParams();
-  const port = 2221 + Number(homeId);
+  const [port, setPort] = useState(2221 + Number(homeId));
   const { apiOrigin, audience } = getConfig();
   const {
     getAccessTokenSilently,
@@ -37,6 +37,12 @@ const LoxoneContent = () => {
   } = useAuth0();
 
   const fetchHome = async () => {
+    if (!homeId) {
+        setToken("hodnota_vašeho_loxone_tokenu");
+        setHomeName("")
+        setPort("hodnota_portu")
+    }
+
     try {
       const token = await getAccessTokenSilently();
 
@@ -48,16 +54,15 @@ const LoxoneContent = () => {
       });
 
       const responseData = await response.json();
-      if (responseData.length == 0) {
+      if (!response.ok) {
         setToken("hodnota_vašeho_loxone_tokenu");
         setHomeName("");
+        setPort("hodnota_portu")
         return;
       }
 
-      console.log(responseData);
-      setToken(responseData[0].loxone_token);
-      console.log(homeName);
-      setHomeName(responseData[0].name);
+      setToken(responseData.loxone_token);
+      setHomeName(responseData.name);
 
     } catch (error) {
       console.log(error);
@@ -66,7 +71,7 @@ const LoxoneContent = () => {
 
   useEffect(() => {
     fetchHome();
-  });
+  }, [])
 
   return (
     <div className="next-steps my-5">
@@ -103,9 +108,7 @@ const LoxoneContent = () => {
         <p>
           Jako Logger vyberte Logger vytvořený v první části tohoto dokumentu. Pole "Zpráva při zapnutí/změně analogové hodnoty" a "Zpráva při vypnutí" nastavte následovně:
         </p>
-        <code>
-        &lt;v.1&gt;;{token}
-        </code>
+        <code>&lt;v.1&gt;;{token}</code>
         <br/><br/>
         <img className="rounded mx-auto d-block" src={loxone_4} width="480" />
         <p>

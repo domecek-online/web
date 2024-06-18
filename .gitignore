@@ -23,6 +23,9 @@ yarn-debug.log*
 yarn-error.log*
 
 auth_config.json
-db.db
+db*
 *.kate-swp
 api_config.json
+
+# Sentry Config File
+.sentryclirc

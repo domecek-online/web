@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 
 import PublicContent from "../components/PublicContent";
 
-const Public = () => (
+export const Public = () => (
   <Fragment>
     <div className="mensi">
       <PublicContent/>

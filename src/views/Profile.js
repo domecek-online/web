@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 
-import Highlight from "../components/Highlight";
 import Loading from "../components/Loading";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
@@ -24,7 +23,7 @@ export const ProfileComponent = () => {
         </Col>
       </Row>
       <Row>
-        <Highlight>{JSON.stringify(user, null, 2)}</Highlight>
+        <code>{JSON.stringify(user, null, 2)}</code>
       </Row>
     </Container>
   );
