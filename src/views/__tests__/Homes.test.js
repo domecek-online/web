@@ -170,7 +170,7 @@ describe("The Homes component", () => {
 
     await waitFor(() => screen.getByTestId("list-of-homes"));
 
-    expect(fetch.mock.calls[1][0]).toEqual('http://localhost:3001/api/1/homes/Test');
+    expect(fetch.mock.calls[1][0]).toEqual('http://localhost:3001/api/1/homes/1');
     expect(fetch.mock.calls[1][1]["method"]).toEqual('DELETE');
 
     expect(screen.queryByText("Test")).toBeInTheDocument();

@@ -17,9 +17,15 @@ class Database {
     stmt.run([username, home_name, bucket_id, bucket_token, bucket_auth_id, loxone_token, orgId, userId]);
   }
 
-  get_homes() {
-    const stmt = this.db.prepare('SELECT * FROM homes');
-    return stmt.all()
+  get_homes(username) {
+    if (username) {
+      const stmt = this.db.prepare('SELECT * FROM homes WHERE username = ?');
+      return stmt.all(username);
+    }
+    else {
+      const stmt = this.db.prepare('SELECT * FROM homes');
+      return stmt.all();
+    }
   }
 
   get_home(id, username) {

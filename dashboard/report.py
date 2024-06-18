@@ -1,3 +1,4 @@
+import sqlite3
 import sys
 import os
 import json
@@ -13,9 +14,36 @@ from smtplib import SMTP_SSL
 import configparser
 from collections import OrderedDict
 from operator import itemgetter
+import sentry_sdk
+
+sentry_sdk.init(
+    dsn="https://541a774b82e334af40d4aff7eecbb930@o4507392194969600.ingest.de.sentry.io/4507452178890832",
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    traces_sample_rate=1.0,
+    # Set profiles_sample_rate to 1.0 to profile 100%
+    # of sampled transactions.
+    # We recommend adjusting this value in production.
+    profiles_sample_rate=1.0,
+)
 
 config = configparser.ConfigParser()
 config.read('/etc/grafana/grafana.ini')
+
+
+def get_notification_emails(org_id):
+    if os.path.exists("/root/domecek/web/db.db"):
+        con = sqlite3.connect("/root/domecek/web/db.db")
+    else:
+        con = sqlite3.connect("/home/jkaluza/domecek-online/web/db.db")
+    cur = con.cursor()
+    res = cur.execute("select value from notifications where grafana_org_id=? and type=\"email\" and message_types like '%reports%'", [org_id])
+    res = res.fetchone()
+    if not res:
+        con.close()
+        return None
+    con.close()
+    return res
 
 
 def send_email(receiver, subject, message_plain='', message_html='', images=None):
@@ -78,6 +106,20 @@ def dashboard_to_text(client, dashboard):
         if "targets" not in panel:
             continue
         data[panel["title"]] = OrderedDict()
+
+        u = panel["fieldConfig"]["defaults"]["unit"]
+        try:
+            u  = {
+                "suffix:km": " km",
+                "kwatth": " kWh",
+                "celsius": " °C",
+                "lengthmm": " mm",
+                "lengthkm": " km",
+                "percent": " %",
+            }[u]
+        except:
+            u = ""
+        data[panel["title"]]["__unit__"] = u
         for target in panel["targets"]:
             query = str(target["query"])
             query = query.replace("v.timeRangeStart", '-7d')
@@ -108,12 +150,12 @@ def dashboard_to_text(client, dashboard):
         title = title.replace("Dnešní", 'Včerejší')
         t += f"    <li>{title}\n"
         t += f"        <ul>\n"
+        unit = d["__unit__"]
         for k, v in d.items():
+            if k.startswith("__"):
+                continue
             v = round(v, 2)
             k = k.replace("Měřič ", "").replace("Grid", "Síť").replace("Value", "Ostatní")
-            unit = " kWh"
-            if "teplota" in title:
-                unit = " °C"
             t += f"            <li><b>{k}</b>: {v}{unit}</li>\n"
         t += f"        </ul>\n"
         t += f"    </li>\n"
@@ -131,6 +173,11 @@ with open("../api_config.json") as f:
 
 r = requests.get(f'https://grafana.domecek.online/api/orgs', auth=grafana_auth)
 for org in r.json():
+    print(org["name"], org["id"])
+    emails = get_notification_emails(org["id"])
+    if not emails:
+        continue
+
     headers = {
         "X-Grafana-Org-Id": str(org["id"]),
         "Content-Type": "application/json",
@@ -185,7 +232,7 @@ for org in r.json():
     Dobrý den,
     </p>
     <p>
-    Zasíláme Vám denní statistiky Vašeho domu ''{org["name"]}'.
+    Zasíláme Vám denní statistiky Vašeho domu ''{org["name"]}' za včerejší den.
     </p>
     {stats}
     <img src="cid:today_temp.png"/><br/>
@@ -197,4 +244,5 @@ for org in r.json():
 </body>
 </html>"""
     print(html)
-    send_email("kaluza@seznam.cz", f"Domeček.online - Denní hlášení: {org['name']}", "Obrazek", html, images)
+    print(emails)
+    #send_email("kaluza@seznam.cz", f"Domeček.online - Denní hlášení: {org['name']}", "Obrazek", html, images)

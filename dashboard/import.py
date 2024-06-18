@@ -6,6 +6,19 @@ from requests.auth import HTTPBasicAuth
 from pprint import pprint
 import time
 from influxdb_client import InfluxDBClient
+import sentry_sdk
+
+sentry_sdk.init(
+    dsn="https://59752e68fbb0f1ee8f6b95f8250fb248@o4507392194969600.ingest.de.sentry.io/4507452156805200",
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    traces_sample_rate=1.0,
+    # Set profiles_sample_rate to 1.0 to profile 100%
+    # of sampled transactions.
+    # We recommend adjusting this value in production.
+    profiles_sample_rate=1.0,
+)
+
 dbuser = "grafana"
 
 if os.path.exists("/root/domecek/web/db.db"):

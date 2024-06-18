@@ -76,6 +76,7 @@ describe("The Homes API", () => {
 
   it("gets homes", async () => {
     db.add_home("auth0|deadbeef", "Test", "b_id", "b_token", "b_auth_id", "l_token", 2, 2);
+    db.add_home("auth0|deadbeef2", "Test2", "b_id", "b_token", "b_auth_id", "l_token", 3, 3);
     const res = await request(app).get('/api/1/homes')
     expect(res.header['content-type']).toBe('application/json; charset=utf-8');
     expect(res.statusCode).toBe(200);
