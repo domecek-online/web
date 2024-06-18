@@ -14,6 +14,7 @@ from smtplib import SMTP_SSL
 import configparser
 from collections import OrderedDict
 from operator import itemgetter
+from datetime import datetime
 import sentry_sdk
 
 sentry_sdk.init(
@@ -26,6 +27,9 @@ sentry_sdk.init(
     # We recommend adjusting this value in production.
     profiles_sample_rate=1.0,
 )
+
+
+current_date = datetime.now().strftime("%d. %m. %Y")
 
 config = configparser.ConfigParser()
 config.read('/etc/grafana/grafana.ini')
@@ -262,7 +266,7 @@ for org in r.json():
     for email in emails:
         send_email(
             email,
-            f"Domeček.online - Denní hlášení: {org['name']}",
+            f"Domeček.online - Denní hlášení: {org['name']} ({current_date})",
             "Pro zobrazení emailu musíte povolit zobrazování HTML",
             html,
             images
