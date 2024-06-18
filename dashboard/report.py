@@ -102,6 +102,7 @@ client = InfluxDBClient(url="http://vps.kaluzovi.eu:8086", token=dbuser_code, or
 def dashboard_to_text(client, dashboard):
     data = OrderedDict()
     query_api = client.query_api()
+    have_some_data = False
     for panel in dashboard["panels"]:
         if "targets" not in panel:
             continue
@@ -125,12 +126,16 @@ def dashboard_to_text(client, dashboard):
             query = query.replace("v.timeRangeStart", '-7d')
             query = query.replace("v.timeRangeStop", '-1s')
             query = query.replace("v.windowPeriod", '1h')
-            # try:
-            result = query_api.query(query=query)
-            # except:
-                # result = None
+            try:
+                result = query_api.query(query=query)
+            except Exception as e:
+                if "could not find bucket" in str(e):
+                    result = None
+                else:
+                    raise
             if not result:
                 continue
+            have_some_data = True
             for table in result:
                 for record in table.records:
                     v = record.values
@@ -144,6 +149,9 @@ def dashboard_to_text(client, dashboard):
                         data[panel["title"]].update(v)
                     else:
                         data[panel["title"]]["Value"] = v["_value"]
+
+    if not have_some_data:
+        return ""
 
     t = "<ul>\n"
     for title, d in data.items():
@@ -171,11 +179,15 @@ with open("../api_config.json") as f:
     grafana_password = cfg["grafana_password"]
     grafana_auth = HTTPBasicAuth(grafana_username, grafana_password)
 
+test = False
+if len(sys.argv) == 2 and sys.argv[1] == "--test":
+    test = True
+
 r = requests.get(f'https://grafana.domecek.online/api/orgs', auth=grafana_auth)
 for org in r.json():
     print(org["name"], org["id"])
-    emails = get_notification_emails(org["id"])
-    if not emails:
+    emails = get_notification_emails(org["id"]) or []
+    if not emails and not test:
         continue
 
     headers = {
@@ -201,7 +213,9 @@ for org in r.json():
         dashboard = json.loads(d)
         stats = dashboard_to_text(client, dashboard)
 
-
+    if not stats:
+        print("No data to send")
+        continue
 
     uri = daily_report["url"].replace("/d/", "")
     panels = {
