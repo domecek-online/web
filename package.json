@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "npm-run-all --aggregate-output --parallel spa api-server",
-    "build": "react-scripts build && yarn sentry:sourcemaps",
+    "build": "react-scripts build && npm run sentry:sourcemaps",
     "test": "jest",
     "eject": "react-scripts eject",
     "spa": "PORT=4000 react-scripts start",
