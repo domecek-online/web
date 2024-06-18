@@ -137,9 +137,10 @@ for org in r.json():
                 del dashboard["uid"]
                 dashboard = filter_panels(client, dashboard)
                 for panel in dashboard["panels"]:
-                    panel["datasource"]["uid"] = datasource_uid
-                    for target in panel.get("targets", []):
-                        target["datasource"]["uid"] = datasource_uid
+                    if "datasource" in panel:
+                        panel["datasource"]["uid"] = datasource_uid
+                        for target in panel.get("targets", []):
+                            target["datasource"]["uid"] = datasource_uid
                     if "options" in panel and "folderUID" in panel["options"]:
                         if panel["title"].startswith("Vlastn"):
                             panel["options"]["folderUID"] = folder_custom_uid
