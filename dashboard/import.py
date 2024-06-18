@@ -127,6 +127,7 @@ for org in r.json():
         for template in os.listdir("."):
             if not template.endswith(".json"):
                 continue
+            print(f"Importing template {template}")
             with open(template) as f:
                 d = f.read()
                 d = d.replace("bucket: \\\"Doma\\\"", f"bucket: \\\"{org['name']}\\\"")
