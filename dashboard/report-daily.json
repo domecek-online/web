@@ -432,7 +432,7 @@
               }
             ]
           },
-          "unit": "suffix:km"
+          "unit": "lengthkm"
         },
         "overrides": []
       },
@@ -441,6 +441,71 @@
         "w": 12,
         "x": 12,
         "y": 10
+      },
+      "hideTimeOverride": false,
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdns6aanef1moa"
+          },
+          "hide": false,
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Auto dojezd.*/ and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> rename(columns: {_value: \"Dojezd\"})\n  |> keep(columns : [\"_time\",\"Dojezd\"])\n\n",
+          "refId": "B"
+        }
+      ],
+      "timeFrom": "1d",
+      "title": "Elektromobil - dojezd",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fdns6aanef1moa"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "litre"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 15
       },
       "hideTimeOverride": false,
       "id": 13,
@@ -468,21 +533,77 @@
             "uid": "fdns6aanef1moa"
           },
           "hide": false,
-          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Auto tachometr.*/ and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: spread, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> rename(columns: {_value: \"Najeto za den\"})\n  |> keep(columns : [\"_time\",\"Najeto za den\"])\n\n",
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Měřič vody\" and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: max, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> rename(columns: {_value: \"Spotřeba vody\"})\n  |> keep(columns : [\"_time\",\"Spotřeba vody\"])\n\n",
           "refId": "A"
+        }
+      ],
+      "timeFrom": "1d",
+      "title": "Spotřeba vody",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fdns6aanef1moa"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "litre"
         },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 15
+      },
+      "hideTimeOverride": false,
+      "id": 15,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
         {
           "datasource": {
             "type": "influxdb",
             "uid": "fdns6aanef1moa"
           },
           "hide": false,
-          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] =~ /Auto tachometr.*/ and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> rename(columns: {_value: \"Stav tachometru\"})\n  |> keep(columns : [\"_time\",\"Stav tachometru\"])\n\n",
-          "refId": "B"
+          "query": "import \"timezone\"\n\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Kalužovi\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Měřič vody\" and r._value != 0)\n  |> aggregateWindow(every: 1d, fn: max, createEmpty: false, timeSrc: \"_start\")\n  |> fill(column: \"_value\", usePrevious: true)\n  |> rename(columns: {_value: \"Spotřeba vody\"})\n  |> keep(columns : [\"_time\",\"Spotřeba vody\"])\n\n",
+          "refId": "A"
         }
       ],
       "timeFrom": "1d",
-      "title": "Elektromobil - nájezd",
+      "title": "Průměrná denní spotřeba vody za posledních 7 dní",
       "type": "stat"
     },
     {
@@ -511,7 +632,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 15
+        "y": 20
       },
       "id": 1,
       "options": {
@@ -608,7 +729,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 15
+        "y": 20
       },
       "id": 3,
       "options": {
@@ -705,7 +826,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 23
+        "y": 28
       },
       "id": 4,
       "options": {
@@ -793,7 +914,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 23
+        "y": 28
       },
       "id": 5,
       "options": {
@@ -871,6 +992,6 @@
   "timezone": "browser",
   "title": "Hlášení - dnes",
   "uid": "fdny9zjwxupz4b",
-  "version": 12,
+  "version": 17,
   "weekStart": ""
 }

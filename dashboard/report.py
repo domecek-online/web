@@ -121,6 +121,7 @@ def dashboard_to_text(client, dashboard):
                 "lengthmm": " mm",
                 "lengthkm": " km",
                 "percent": " %",
+                "litre": " l",
             }[u]
         except:
             u = ""

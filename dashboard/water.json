@@ -215,7 +215,7 @@
             "uid": "fdn5d77g8x1xcf"
           },
           "hide": false,
-          "query": "import \"timezone\"\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Doma\")\n  |> range(start: -30d)\n  |> filter(fn: (r) => (r[\"_measurement\"] == \"Spotřeba vody - Virtuální status\"))\n  |> aggregateWindow(fn: spread, every: 1d)\n  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r._measurement }))\n  \n",
+          "query": "import \"timezone\"\noption location = timezone.location(name: \"Europe/Prague\")\n\nfrom(bucket: \"Doma\")\n  |> range(start: -30d)\n  |> filter(fn: (r) => (r[\"_measurement\"] == \"Měřič vody\"))\n  |> aggregateWindow(fn: spread, every: 1d)\n  |> map(fn: (r) => ({ _value:r._value, _time:r._time, _field:r._measurement }))\n  \n",
           "refId": "B"
         }
       ],
