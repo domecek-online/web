@@ -71,6 +71,7 @@ def filter_panels(client, dashboard):
         query = query.replace("v.timeRangeStart", '-7d')
         query = query.replace("v.timeRangeStop", '-1s')
         query = query.replace("v.windowPeriod", '1h')
+        query = query.replace("-1d", "-7d")
         try:
             result = query_api.query(query=query)
         except:
