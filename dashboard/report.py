@@ -42,7 +42,7 @@ def get_notification_emails(org_id):
         con = sqlite3.connect("/home/jkaluza/domecek-online/web/db.db")
     cur = con.cursor()
     res = cur.execute("select value from notifications where grafana_org_id=? and type=\"email\" and message_types like '%reports%'", [org_id])
-    res = res.fetchone()
+    res = res.fetchall()
     if not res:
         con.close()
         return None
