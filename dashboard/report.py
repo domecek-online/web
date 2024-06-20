@@ -266,7 +266,7 @@ for org in r.json():
     print(emails)
     for email in emails:
         send_email(
-            email,
+            email[0],
             f"Domeček.online - Denní hlášení: {org['name']} ({current_date})",
             "Pro zobrazení emailu musíte povolit zobrazování HTML",
             html,
