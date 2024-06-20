@@ -265,10 +265,13 @@ for org in r.json():
     print(html)
     print(emails)
     for email in emails:
-        send_email(
-            email[0],
-            f"Domeček.online - Denní hlášení: {org['name']} ({current_date})",
-            "Pro zobrazení emailu musíte povolit zobrazování HTML",
-            html,
-            images
-        )
+        if test:
+            print(f"Would send email to {email[0]}")
+        else:
+            send_email(
+                email[0],
+                f"Domeček.online - Denní hlášení: {org['name']} ({current_date})",
+                "Pro zobrazení emailu musíte povolit zobrazování HTML",
+                html,
+                images
+            )
