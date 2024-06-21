@@ -82,7 +82,7 @@ const NavBar = () => {
               )}
               <NavItem>
                 <NavLink
-                  to={{patchname: "https://domecek.atlassian.net/servicedesk/customer/portal/1"}}
+                  to={{patchname: "https://domecek.atlassian.net/servicedesk/customer/portals"}}
                   target="_blank"
                 >
                   <a style={{display: "table-cell"}} href="https://domecek.atlassian.net/servicedesk/customer/portal/1" target="_blank" rel="noopener noreferrer">
