@@ -119,12 +119,12 @@ for org in r.json():
     folder_uid = None
     folder_id = None
     for folder in r.json():
-        if folder["title"] == "Standardní nástěnky":
+        if folder["title"] == "Automaticky generované nástěnky":
             folder_uid = folder["uid"]
             folder_id = folder["id"]
     if not folder_uid:
         # Create folder
-        data = {"title": "Standardní nástěnky"}
+        data = {"title": "Automaticky generované nástěnky"}
         r = requests.post(f'http://localhost:3000/api/folders', auth=grafana_auth, headers=headers, json=data)
         folder_uid = r.json()["uid"]
         folder_id = r.json()["id"]
@@ -149,7 +149,6 @@ for org in r.json():
                 dashboard = json.loads(d)
                 del dashboard["id"]
                 del dashboard["uid"]
-                dashboard = filter_panels(client, dashboard)
                 for panel in dashboard["panels"]:
                     if "datasource" in panel:
                         panel["datasource"]["uid"] = datasource_uid
@@ -162,6 +161,24 @@ for org in r.json():
                         else:
                             panel["options"]["folderUID"] = folder_uid
                             panel["options"]["folderId"] = folder_id
+
+                    data = {
+                        "name": panel["title"],
+                        "model": panel,
+                        "kind": 1
+                    }
+
+                    r = requests.get(f'http://localhost:3000/api/library-elements/name/{panel["title"]}', auth=grafana_auth, headers=headers)
+                    if r.status_code == 404:
+                        r = requests.post(f'http://localhost:3000/api/library-elements', auth=grafana_auth, headers=headers, json=data)
+                        pprint(r.json())
+                    else:
+                        existing_panel = r.json()["result"][0]
+                        data["version"] = existing_panel["version"]
+                        r = requests.patch(f'http://localhost:3000/api/library-elements/{existing_panel["uid"]}', auth=grafana_auth, headers=headers, json=data)
+                        pprint(r.json())
+
+                dashboard = filter_panels(client, dashboard)
 
             data = {
                 "dashboard": dashboard,

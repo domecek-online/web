@@ -80,6 +80,26 @@ const NavBar = () => {
                   </NavLink>
                 </NavItem>
               )}
+              <NavItem>
+                <NavLink
+                  to={{patchname: "https://domecek.atlassian.net/servicedesk/customer/portal/1"}}
+                  target="_blank"
+                >
+                  <a style={{display: "table-cell"}} href="https://domecek.atlassian.net/servicedesk/customer/portal/1" target="_blank" rel="noopener noreferrer">
+                    Podpora
+                  </a>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+              <NavLink
+                  to={{patchname: "https://domecek.atlassian.net/servicedesk/customer/portal/1"}}
+                  target="_blank"
+                >
+                  <a style={{display: "table-cell"}} href="https://domecek.atlassian.net/wiki/" target="_blank" rel="noopener noreferrer">
+                    Dokumentace
+                  </a>
+                </NavLink>
+              </NavItem>
             </Nav>
             <Nav className="d-none d-md-block" navbar>
               {!isAuthenticated && (

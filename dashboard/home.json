@@ -39,7 +39,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "# Vítejte v Grafaně na Domeček.online\n\nV Nástěnkách pod tímto textem můžete vidět statistiky Vašeho domu.\n\n> **Pokud jste tak ještě neudělali, nakonfigurujte svůj Loxone Miniserver podle návodu na https://domecek.online/loxone.**\n\n> **Pokročilí uživatelé mohou v nástěnkách provádět úpravy.** Pokud chcete úpravy provádět, je potřeba je provádět v sekci Vlastní nástěnky. Pokud budete editovat Stadardní nástěnky níže, budou Vaše změny při další aktualizaci přepsány.\n\n",
+        "content": "# Vítejte v Grafaně na Domeček.online\n\nV Nástěnkách pod tímto textem můžete vidět statistiky Vašeho domu.\n\n> **Pokud jste tak ještě neudělali, nakonfigurujte svůj Loxone Miniserver podle návodu na https://domecek.online/loxone.**\n\n> **Pokročilí uživatelé mohou v nástěnkách provádět úpravy.** Pokud chcete úpravy provádět, je potřeba je provádět v sekci Vlastní nástěnky. Pokud budete editovat Automaticky generované nástěnky níže, budou Vaše změny při další aktualizaci přepsány.\n\n",
         "mode": "markdown"
       },
       "pluginVersion": "10.4.1",
@@ -71,7 +71,7 @@
         "tags": []
       },
       "pluginVersion": "10.4.1",
-      "title": "Standardní předdefinované nástěnky",
+      "title": "Automaticky generované nástěnky",
       "type": "dashlist"
     },
     {
