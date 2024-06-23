@@ -30,3 +30,4 @@ api_config.json
 
 # Sentry Config File
 .sentryclirc
+__pycache__

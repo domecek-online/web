@@ -43,6 +43,9 @@ with open("../api_config.json") as f:
 r = requests.get(f'https://grafana.domecek.online/api/orgs', auth=grafana_auth)
 for org in r.json():
     print(org["name"], org["id"])
+    org_dir = os.path.join(sys.argv[1], str(org["id"]))
+    if not os.path.exists(org_dir):
+        os.makedirs(org_dir)
 
     headers = {
         "X-Grafana-Org-Id": str(org["id"]),
@@ -59,7 +62,7 @@ for org in r.json():
         d_uri = dashboard["url"].replace("/d/", "")
         r = requests.get(f'https://grafana.domecek.online/api/dashboards/uid/{d_uid}', auth=grafana_auth, headers=headers)
         d = r.json()
-        
+
         for panel in d["dashboard"]["panels"]:
             i = panel["id"]
             f = int(time.time()) - 3600
@@ -67,7 +70,10 @@ for org in r.json():
             url = f"https://grafana.domecek.online/render/d-solo/{d_uri}?from={f}&to={t}&panelId={i}"
             print("Downloading", url)
             r = requests.get(url, auth=grafana_auth, headers=headers)
-            fn = os.path.join(sys.argv[1], f'{d_uid}_{i}.png')
+            fn = os.path.join(org_dir, f'{d_uid}_{i}.png')
             print(f"Saving as {fn}")
             with open(fn, "wb") as f:
                 f.write(r.content)
+            fn = os.path.join(org_dir, f'{d_uid}_{i}.json')
+            with open(fn, "w") as f:
+                json.dump(panel, f)

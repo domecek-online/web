@@ -135,6 +135,7 @@ export const HomesComponent = () => {
                   <td>{home.loxone_token}</td>
                   <td><Link to={{pathname: `/loxone/${home.id}`}}>Konfigurace Loxone</Link></td>
                   <td><Link to={{pathname: `/notifications/${home.id}`}}>Konfigurace Notifikací</Link></td>
+                  <td><Link to={{pathname: `/panel_images/${home.id}`}}>Obrázky panelů</Link></td>
                   <td><a href={`https://grafana.domecek.online/?orgId=${home.grafana_org_id}`}>Otevřít Grafanu</a></td>
                   <td>
                     <Button
