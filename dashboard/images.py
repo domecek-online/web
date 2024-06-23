@@ -67,7 +67,9 @@ for org in r.json():
             i = panel["id"]
             f = int(time.time()) - 3600
             t = int(time.time())
-            url = f"https://grafana.domecek.online/render/d-solo/{d_uri}?from={f}&to={t}&panelId={i}"
+            width = int(800 / 24 * panel["gridPos"]["w"])
+            height = int(panel["gridPos"]["h"] * 30)
+            url = f"https://grafana.domecek.online/render/d-solo/{d_uri}?from={f}&to={t}&panelId={i}&width={width}&height={height}"
             print("Downloading", url)
             r = requests.get(url, auth=grafana_auth, headers=headers)
             fn = os.path.join(org_dir, f'{d_uid}_{i}.png')
