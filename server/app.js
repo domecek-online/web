@@ -13,18 +13,18 @@ const Sentry = require("@sentry/node");
 const { nodeProfilingIntegration } = require("@sentry/profiling-node");
 
 
-Sentry.init({
-  dsn: "https://1e187b10b124fe5be05f85642e2b9b78@o4507392194969600.ingest.de.sentry.io/4507451490893904",
-  integrations: [
-    nodeProfilingIntegration(),
-  ],
-  // Performance Monitoring
-  tracesSampleRate: 1.0, //  Capture 100% of the transactions
+// Sentry.init({
+//   dsn: "https://1e187b10b124fe5be05f85642e2b9b78@o4507392194969600.ingest.de.sentry.io/4507451490893904",
+//   integrations: [
+//     nodeProfilingIntegration(),
+//   ],
+//   // Performance Monitoring
+//   tracesSampleRate: 1.0, //  Capture 100% of the transactions
 
-  // Set sampling rate for profiling - this is relative to tracesSampleRate
-  profilesSampleRate: 1.0,
-  enabled: apiConfig.sentry_enabled,
-});
+//   // Set sampling rate for profiling - this is relative to tracesSampleRate
+//   profilesSampleRate: 1.0,
+//   enabled: apiConfig.sentry_enabled,
+// });
 
 
 const grafana_url = 'http://localhost:3000'

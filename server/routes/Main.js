@@ -3,6 +3,7 @@ const homes = require('./Homes.js');
 const notifications = require('./Notifications.js');
 const public_dashboards = require('./PublicDashboards.js');
 const panels = require('./Panels.js');
+const ai = require('./AI.js');
 const bodyParser = require('body-parser')
 const authConfig = require("../../src/auth_config.json");
 const { auth } = require("express-oauth2-jwt-bearer");
@@ -43,5 +44,7 @@ router.post("/api/1/homes/:homeId/notifications/", checkJwt, jsonParser, notific
 router.get("/api/1/public_dashboards", jsonParser, public_dashboards.get_public_dashboards);
 
 router.get("/api/1/homes/:homeId/panels", checkJwt, jsonParser, panels.get_panels);
+
+router.post("/api/1/homes/:homeId/ai", checkJwt, jsonParser, ai.query_influxdb);
 
 module.exports = {router}

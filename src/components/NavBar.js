@@ -80,6 +80,18 @@ const NavBar = () => {
                   </NavLink>
                 </NavItem>
               )}
+              {isAuthenticated && (
+                <NavItem>
+                  <NavLink
+                    tag={RouterNavLink}
+                    to="/ai"
+                    exact
+                    activeClassName="router-link-exact-active"
+                  >
+                    Zeptejte se domu
+                  </NavLink>
+                </NavItem>
+              )}
               <NavItem>
                 <NavLink
                   to={{patchname: "https://domecek.atlassian.net/servicedesk/customer/portals"}}

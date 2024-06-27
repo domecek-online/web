@@ -13,6 +13,7 @@ import Public from "./views/Public";
 import Notifications from "./views/Notifications";
 import PanelImages from "./views/PanelImages";
 import { useAuth0 } from "@auth0/auth0-react";
+import AIComponent from "./views/AI";
 import history from "./utils/history";
 import * as Sentry from "@sentry/react";
 // Import Swiper React components
@@ -78,6 +79,8 @@ const App = () => {
             <Route path="/notifications/:homeId" component={Notifications} />
             <Route path="/panel_images" exact component={PanelImages} />
             <Route path="/panel_images/:homeId" component={PanelImages} />
+            <Route path="/ai" exact component={AIComponent} />
+            <Route path="/ai/:homeId" component={AIComponent} />
           </Switch>
         </Container>
         <Footer />
